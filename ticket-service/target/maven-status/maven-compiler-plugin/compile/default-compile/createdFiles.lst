@@ -1,0 +1,14 @@
+com\epam\training\ticketservice\dataaccess\entity\MovieEntity.class
+com\epam\training\ticketservice\service\AdminService.class
+com\epam\training\ticketservice\dataaccess\configuration\JpaConfiguration.class
+com\epam\training\ticketservice\dataaccess\dao\MovieDao.class
+com\epam\training\ticketservice\presentation\TicketServicePromptProvider.class
+com\epam\training\ticketservice\presentation\CliApplication.class
+com\epam\training\ticketservice\repository\AdminRepository.class
+com\epam\training\ticketservice\presentation\handler\AdminCommandHandler.class
+com\epam\training\ticketservice\dataaccess\dao\RoomDao.class
+com\epam\training\ticketservice\dataaccess\entity\RoomEntity.class
+com\epam\training\ticketservice\dataaccess\init\AdminInitializer.class
+com\epam\training\ticketservice\dataaccess\dao\AdminDao.class
+com\epam\training\ticketservice\dataaccess\entity\AdminEntity.class
+com\epam\training\ticketservice\repository\impl\JpaAdminRepository.class

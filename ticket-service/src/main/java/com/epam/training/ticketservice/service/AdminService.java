@@ -15,12 +15,16 @@ public class AdminService {
     }
 
     public AdminEntity checkAccount(String name, String password) {
-        AdminEntity adminEntity = adminRepository.findAdmin(name);
-        if (adminEntity.getPassword().matches(password)) {
-            adminRepository.updatePriviliged(name, true);
-            currentAdmin = adminRepository.findAdmin(name);
+        try {
+            AdminEntity adminEntity = adminRepository.findAdminByName(name);
+            if (adminEntity.getPassword().matches(password)) {
+                adminRepository.updatePriviliged(name, true);
+                currentAdmin = adminRepository.findAdminByName(name);
+            }
+            return adminEntity;
+        } catch (NullPointerException e) {
+            throw new NullPointerException("There is no such name.");
         }
-        return adminEntity;
     }
 
     public boolean loggedAdmin() {
@@ -29,5 +33,16 @@ public class AdminService {
         } else {
             return false;
         }
+    }
+
+    public void signOut() {
+        try {
+            AdminEntity adminEntity = adminRepository.findAdminByName(currentAdmin.getName());
+            adminRepository.updatePriviliged(adminEntity.getName(), false);
+            currentAdmin = adminRepository.findAdminByName(adminEntity.getName());
+        } catch (NullPointerException e) {
+            throw new NullPointerException("Something wrong");
+        }
+
     }
 }

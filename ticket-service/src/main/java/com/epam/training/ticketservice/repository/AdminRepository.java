@@ -4,7 +4,7 @@ import com.epam.training.ticketservice.dataaccess.entity.AdminEntity;
 
 public interface AdminRepository {
 
-    AdminEntity findAdmin(String name);
+    AdminEntity findAdminByName(String name);
 
     void updatePriviliged(String name, boolean priviliged);
 }

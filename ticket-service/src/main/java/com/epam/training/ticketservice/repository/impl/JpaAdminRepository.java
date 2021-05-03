@@ -18,9 +18,8 @@ public class JpaAdminRepository implements AdminRepository {
     }
 
     @Override
-    public AdminEntity findAdmin(String name) {
-        AdminEntity adminEntity = adminDao.findByName(name);
-        return adminEntity;
+    public AdminEntity findAdminByName(String name) {
+        return adminDao.findByName(name);
     }
 
     @Override

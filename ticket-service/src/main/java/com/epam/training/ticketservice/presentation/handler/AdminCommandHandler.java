@@ -23,4 +23,10 @@ public class AdminCommandHandler {
         AdminEntity adminEntity = adminService.checkAccount(name, password);
         return "Signed in with privileged account " + name;
     }
+
+    @ShellMethod(value = "Admin sign out", key = "sign out")
+    public String adminLogout() {
+        adminService.signOut();
+        return "Logged out";
+    }
 }

@@ -1,4 +1,5 @@
 com\epam\training\ticketservice\dataaccess\entity\MovieEntity.class
+com\epam\training\ticketservice\presentation\configuration\CliConfiguration.class
 com\epam\training\ticketservice\service\AdminService.class
 com\epam\training\ticketservice\dataaccess\configuration\JpaConfiguration.class
 com\epam\training\ticketservice\dataaccess\dao\MovieDao.class

@@ -2,10 +2,10 @@ package com.epam.training.ticketservice.service;
 
 import com.epam.training.ticketservice.dataaccess.entity.MovieEntity;
 import com.epam.training.ticketservice.repository.MovieRepository;
-import com.epam.training.ticketservice.service.ServiceException.InCorrectParameterException;
+import com.epam.training.ticketservice.service.ServiceException.MovieAlreadyExistsException;
+import com.epam.training.ticketservice.service.ServiceException.MovieNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.security.InvalidParameterException;
 import java.util.List;
 
 @Service
@@ -17,32 +17,28 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
-    public void addMovie(String title, String genre, int runtime) throws InCorrectParameterException {
-        try {
-            MovieEntity movie = new MovieEntity(title, genre, runtime);
-            movieRepository.createMovie(movie);
-        } catch (Exception err) {
-            if (title.isEmpty() || genre.isEmpty() || runtime < 0) {
-                throw new InCorrectParameterException("Incorrect parameter(s)", err);
-            } else {
-                throw err;
-            }
-        }
+    public void addMovie(String title, String genre, int runtime) throws MovieAlreadyExistsException {
+        MovieEntity movie = new MovieEntity(title, genre, runtime);
+        movieRepository.createMovie(movie);
     }
 
     public List<MovieEntity> getAllMovie() {
         return movieRepository.getAllMovie();
     }
 
-    public MovieEntity updateMovie(String title, String genre, int runtime) {
+    public MovieEntity updateMovie(String title, String genre, int runtime) throws MovieNotFoundException {
         MovieEntity getMovie = findMovie(title);
         movieRepository.updateMovie(getMovie.getTitle(), genre, runtime);
         return getMovie;
     }
 
-    public MovieEntity deleteMovie(String title) {
+    public MovieEntity deleteMovie(String title) throws MovieNotFoundException {
         MovieEntity getMovie = findMovie(title);
-        movieRepository.deleteMovie(getMovie.getTitle());
+        try {
+            movieRepository.deleteMovie(getMovie.getTitle());
+        } catch (com.epam.training.ticketservice.service.ServiceException.MovieNotFoundException e) {
+            e.printStackTrace();
+        }
         return getMovie;
     }
 

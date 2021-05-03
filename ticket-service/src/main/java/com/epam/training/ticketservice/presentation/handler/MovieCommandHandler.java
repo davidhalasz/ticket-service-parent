@@ -3,7 +3,9 @@ package com.epam.training.ticketservice.presentation.handler;
 import com.epam.training.ticketservice.dataaccess.entity.MovieEntity;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.MovieService;
-import com.epam.training.ticketservice.service.ServiceException.InCorrectParameterException;
+import com.epam.training.ticketservice.service.ServiceException.MovieAlreadyExistsException;
+import com.epam.training.ticketservice.service.ServiceException.MovieNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
@@ -12,6 +14,7 @@ import org.springframework.shell.standard.ShellMethod;
  */
 
 @ShellComponent
+@Slf4j
 public class MovieCommandHandler {
 
     private MovieService movieService;
@@ -24,13 +27,19 @@ public class MovieCommandHandler {
 
 
     @ShellMethod(value = "Create a new movie", key = "create movie")
-    public String createMovie(String title, String genre, int runtime) throws InCorrectParameterException {
-        if (adminService.loggedAdmin()) {
-            movieService.addMovie(title, genre, runtime);
-            return "Movie added";
-        } else {
-            return "You are not signed in";
+    public String createMovie(String title, String genre, int runtime) throws MovieAlreadyExistsException {
+        String result;
+        try {
+            if (adminService.loggedAdmin()) {
+                movieService.addMovie(title, genre, runtime);
+                result = "Movie added";
+            } else {
+                result = "You are not signed in";
+            }
+        } catch (MovieAlreadyExistsException e) {
+            result = e.getMessage();
         }
+        return result;
     }
 
     @ShellMethod(value = "List all movie", key = "list movies")
@@ -48,23 +57,35 @@ public class MovieCommandHandler {
     }
 
     @ShellMethod(value = "Update a movie", key = "update movie")
-    public String updateMovie(String title, String genre, int runtime) {
-        if (adminService.loggedAdmin()) {
-            MovieEntity movie = movieService.updateMovie(title, genre, runtime);
-            return "Movie updated.";
-        } else {
-            return "You are not signed in";
+    public String updateMovie(String title, String genre, int runtime) throws MovieNotFoundException {
+        String result;
+        try {
+            if (adminService.loggedAdmin()) {
+                movieService.updateMovie(title, genre, runtime);
+                result = "Movie updated.";
+            } else {
+                result = "You are not signed in";
+            }
+        } catch (MovieNotFoundException e) {
+            result = e.getMessage();
         }
+        return result;
     }
 
     @ShellMethod(value = "Delete a movie.", key = "delete movie")
-    public String deleteMovie(String title) {
-        if (adminService.loggedAdmin()) {
-            MovieEntity movie = movieService.deleteMovie(title);
-            return "Movie deleted.";
-        } else {
-            return "You are not signed in";
+    public String deleteMovie(String title) throws MovieNotFoundException {
+        String result;
+        try {
+            if (adminService.loggedAdmin()) {
+                movieService.deleteMovie(title);
+                result = "Movie deleted.";
+            } else {
+                result = "You are not signed in";
+            }
+        } catch (MovieNotFoundException e) {
+            result = e.getMessage();
         }
+        return result;
     }
 
 }

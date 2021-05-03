@@ -1,5 +1,7 @@
 package com.epam.training.ticketservice.dataaccess.entity;
 
+import com.epam.training.ticketservice.repository.RoomRepository;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,6 +21,10 @@ public class RoomEntity {
         this.name = name;
         this.rows = rows;
         this.columns = columns;
+    }
+
+    public RoomEntity() {
+        
     }
 
     public String getName() {

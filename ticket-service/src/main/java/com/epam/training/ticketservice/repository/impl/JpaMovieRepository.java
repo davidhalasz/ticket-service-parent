@@ -23,7 +23,7 @@ public class JpaMovieRepository implements MovieRepository {
     @Override
     public void createMovie(MovieEntity movie) throws MovieAlreadyExistsException, InvalidRuntimeException {
         if(isMovieExists(movie.getTitle())) {
-            throw new MovieAlreadyExistsException(("Movie already exists"));
+            throw new MovieAlreadyExistsException("Movie already exists");
         } else {
             if (movie.getRuntime() < 1) {
                 throw new InvalidRuntimeException("Runtime is invalid");

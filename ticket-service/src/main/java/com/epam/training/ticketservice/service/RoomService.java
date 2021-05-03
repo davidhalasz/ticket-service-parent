@@ -5,6 +5,10 @@ import com.epam.training.ticketservice.repository.RoomRepository;
 import com.epam.training.ticketservice.service.ServiceException.RoomAlreadyExistsException;
 import com.epam.training.ticketservice.service.ServiceException.RoomNotFoundException;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.stylesheets.LinkStyle;
+
+import java.util.Collection;
+import java.util.List;
 
 @Service
 public class RoomService {
@@ -27,5 +31,9 @@ public class RoomService {
 
     public RoomEntity deleteRoom(String name) throws RoomNotFoundException {
         return roomRepository.deleteRoom(name);
+    }
+
+    public List<RoomEntity> getAllRoom() {
+        return roomRepository.getAllRoom();
     }
 }

@@ -8,6 +8,7 @@ import com.epam.training.ticketservice.service.ServiceException.RoomAlreadyExist
 import com.epam.training.ticketservice.service.ServiceException.RoomNotFoundException;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -56,6 +57,12 @@ public class JpaRoomRepository implements RoomRepository {
             roomDao.delete(roomEntity);
         }
         return null;
+    }
+
+    @Override
+    public List<RoomEntity> getAllRoom() {
+        List<RoomEntity> roomEntities = roomDao.findAll();
+        return roomEntities;
     }
 
 

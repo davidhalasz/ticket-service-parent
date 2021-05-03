@@ -56,6 +56,6 @@ public class RoomEntity {
         return "Room " + name + " with "
                 + rows*columns + " seats, "
                 + rows + " rows and "
-                + columns + " columns";
+                + columns + " columns\n";
     }
 }

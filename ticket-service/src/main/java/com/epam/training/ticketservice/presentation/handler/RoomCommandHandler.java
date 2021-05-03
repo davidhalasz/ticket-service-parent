@@ -73,4 +73,17 @@ public class RoomCommandHandler {
         }
         return result;
     }
+
+    @ShellMethod(value = "List all room", key = "list rooms")
+    public String listRooms() {
+        StringBuilder builder = new StringBuilder();
+        if (roomService.getAllRoom().isEmpty()) {
+            return "There are no rooms at the moment";
+        } else {
+            for (RoomEntity room : roomService.getAllRoom()) {
+                builder.append(room);
+            }
+            return builder.toString();
+        }
+    }
 }

@@ -47,6 +47,17 @@ public class JpaRoomRepository implements RoomRepository {
         return null;
     }
 
+    @Override
+    public RoomEntity deleteRoom(String name) throws RoomNotFoundException {
+        if (!isRoomExists(name)) {
+            throw new RoomNotFoundException("Room not found");
+        } else  {
+            RoomEntity roomEntity = roomDao.findByName(name);
+            roomDao.delete(roomEntity);
+        }
+        return null;
+    }
+
 
     private boolean isRoomExists(String name) {
         Optional<RoomEntity> roomEntity = Optional.ofNullable(roomDao.findByName(name));

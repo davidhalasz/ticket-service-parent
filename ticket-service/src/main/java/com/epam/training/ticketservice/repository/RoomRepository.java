@@ -10,4 +10,6 @@ public interface RoomRepository {
     void createRoom(RoomEntity room) throws RoomAlreadyExistsException;
 
     RoomEntity updateRoom(String name, int rows, int columns) throws RoomNotFoundException;
+
+    RoomEntity deleteRoom(String name) throws RoomNotFoundException;
 }

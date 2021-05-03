@@ -57,4 +57,20 @@ public class RoomCommandHandler {
         }
         return result;
     }
+
+    @ShellMethod(value = "Delete a room", key = "delete room")
+    public String deleteRoom(String name) throws RoomNotFoundException{
+        String result;
+        try {
+            if (adminService.loggedAdmin()) {
+                RoomEntity roomEntity = roomService.deleteRoom(name);
+                result = "Room deleted";
+            } else {
+                result = "You are not signed in";
+            }
+        } catch (RoomNotFoundException e) {
+            result = e.getMessage();
+        }
+        return result;
+    }
 }

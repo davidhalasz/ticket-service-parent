@@ -24,4 +24,8 @@ public class RoomService {
     public RoomEntity updateRoom(String name, int rows, int columns) throws RoomNotFoundException {
         return roomRepository.updateRoom(name, rows, columns);
     }
+
+    public RoomEntity deleteRoom(String name) throws RoomNotFoundException {
+        return roomRepository.deleteRoom(name);
+    }
 }

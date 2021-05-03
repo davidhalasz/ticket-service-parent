@@ -9,4 +9,6 @@ public interface MovieRepository{
     void createMovie(MovieEntity movie);
 
     List<MovieEntity> getAllMovie();
+
+    void updateMovie(String title, String genre, int runtime);
 }

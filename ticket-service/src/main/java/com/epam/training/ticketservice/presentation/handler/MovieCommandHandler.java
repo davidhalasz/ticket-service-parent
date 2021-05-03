@@ -47,4 +47,14 @@ public class MovieCommandHandler {
         }
     }
 
+    @ShellMethod(value = "Update a movie", key = "update movie")
+    public String updateMovie(String title, String genre, int runtime) {
+        if (adminService.loggedAdmin()) {
+            MovieEntity movie = movieService.updateMovie(title, genre, runtime);
+            return "Movie updated.";
+        } else {
+            return "You are not signed in";
+        }
+    }
+
 }

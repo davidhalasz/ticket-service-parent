@@ -33,4 +33,13 @@ public class MovieService {
     public List<MovieEntity> getAllMovie() {
         return movieRepository.getAllMovie();
     }
+
+    public MovieEntity updateMovie(String title, String genre, int runtime) {
+        MovieEntity getMovie = movieRepository.getAllMovie().stream()
+                .filter(currentMovie -> currentMovie.getTitle().equals(title))
+                .findFirst()
+                .orElseThrow(() ->new IllegalArgumentException("There is no such title"));
+        movieRepository.updateMovie(getMovie.getTitle(), genre, runtime);
+        return getMovie;
+    }
 }

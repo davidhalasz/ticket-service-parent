@@ -28,4 +28,13 @@ public class JpaMovieRepository implements MovieRepository {
         return movieEntities;
     }
 
+    @Override
+    public void updateMovie(String title, String genre, int runtime) {
+        MovieEntity movieEntity = movieDao.findMovieByTitle(title);
+        movieEntity.setTitle(title);
+        movieEntity.setGenre(genre);
+        movieEntity.setRuntime(runtime);
+        movieDao.save(movieEntity);
+    }
+
 }

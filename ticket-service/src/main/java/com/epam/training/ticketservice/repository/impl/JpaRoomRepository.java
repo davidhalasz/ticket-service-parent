@@ -5,6 +5,7 @@ import com.epam.training.ticketservice.dataaccess.dao.RoomDao;
 import com.epam.training.ticketservice.dataaccess.entity.RoomEntity;
 import com.epam.training.ticketservice.repository.RoomRepository;
 import com.epam.training.ticketservice.service.ServiceException.RoomAlreadyExistsException;
+import com.epam.training.ticketservice.service.ServiceException.RoomNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -30,6 +31,20 @@ public class JpaRoomRepository implements RoomRepository {
             roomEntity.setColumns(room.getColumns());
             roomDao.save(roomEntity);
         }
+    }
+
+    @Override
+    public RoomEntity updateRoom(String name, int rows, int columns) throws RoomNotFoundException {
+        if (!isRoomExists(name)) {
+            throw new RoomNotFoundException("Room not found");
+        } else  {
+            RoomEntity roomEntity = new RoomEntity();
+            roomEntity.setName(name);
+            roomEntity.setRows(rows);
+            roomEntity.setColumns(columns);
+            roomDao.save(roomEntity);
+        }
+        return null;
     }
 
 

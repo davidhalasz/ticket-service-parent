@@ -3,6 +3,7 @@ package com.epam.training.ticketservice.service;
 import com.epam.training.ticketservice.dataaccess.entity.RoomEntity;
 import com.epam.training.ticketservice.repository.RoomRepository;
 import com.epam.training.ticketservice.service.ServiceException.RoomAlreadyExistsException;
+import com.epam.training.ticketservice.service.ServiceException.RoomNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,4 +21,7 @@ public class RoomService {
         return room;
     }
 
+    public RoomEntity updateRoom(String name, int rows, int columns) throws RoomNotFoundException {
+        return roomRepository.updateRoom(name, rows, columns);
+    }
 }

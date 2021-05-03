@@ -5,6 +5,7 @@ import com.epam.training.ticketservice.dataaccess.entity.RoomEntity;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.RoomService;
 import com.epam.training.ticketservice.service.ServiceException.RoomAlreadyExistsException;
+import com.epam.training.ticketservice.service.ServiceException.RoomNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -40,5 +41,20 @@ public class RoomCommandHandler {
         }
         return result;
     }
-    
+
+    @ShellMethod(value = "Update a room", key = "update room")
+    public String updateRoom(String name, int rows, int columns) throws RoomNotFoundException {
+        String result;
+        try {
+            if (adminService.loggedAdmin()) {
+                RoomEntity roomEntity = roomService.updateRoom(name, rows, columns);
+                result = "Room updated";
+            } else {
+                result = "You are not signed in";
+            }
+        } catch (RoomNotFoundException e) {
+            result = e.getMessage();
+        }
+        return result;
+    }
 }

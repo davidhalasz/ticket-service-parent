@@ -97,3 +97,13 @@
 1620071142380:sign out
 1620071154100:create room roo 10 10
 1620071158128:exit
+1620072907925:sign in priviliged admin admin
+1620072921422:create room alma 10 10
+1620072969891:create room alma 15 15
+1620072974274:exit
+1620073008452:sign in priviliged admin admin
+1620073017432:create room alma 10 10
+1620073030057:update ama 15 15
+1620073040162:update room alm 15 15
+1620073049609:update room alma 10 15
+1620073052723:exit

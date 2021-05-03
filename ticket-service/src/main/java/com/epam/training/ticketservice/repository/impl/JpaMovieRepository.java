@@ -37,4 +37,10 @@ public class JpaMovieRepository implements MovieRepository {
         movieDao.save(movieEntity);
     }
 
+    @Override
+    public void deleteMovie(String title) {
+        MovieEntity movieEntity = movieDao.findMovieByTitle(title);
+        movieDao.delete(movieEntity);
+    }
+
 }

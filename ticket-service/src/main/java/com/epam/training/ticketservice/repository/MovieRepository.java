@@ -11,4 +11,6 @@ public interface MovieRepository{
     List<MovieEntity> getAllMovie();
 
     void updateMovie(String title, String genre, int runtime);
+
+    void deleteMovie(String title);
 }

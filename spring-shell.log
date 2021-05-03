@@ -40,3 +40,13 @@
 1620050576126:create movie alma al 120
 1620050585413:list movies
 1620050590356:exit
+1620051187723:sign in priviliged admin admin
+1620051196599:create movie alma al 120
+1620051207004:create korte kor 220
+1620051219110:create movie korte kor 220
+1620051223879:list movies
+1620051244959:update movie korte kerte 100
+1620051248970:list movies
+1620051256755:delete movie korte
+1620051260230:list movies
+1620051264458:exit

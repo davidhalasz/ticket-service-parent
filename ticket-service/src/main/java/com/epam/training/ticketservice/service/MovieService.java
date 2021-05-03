@@ -35,11 +35,21 @@ public class MovieService {
     }
 
     public MovieEntity updateMovie(String title, String genre, int runtime) {
-        MovieEntity getMovie = movieRepository.getAllMovie().stream()
+        MovieEntity getMovie = findMovie(title);
+        movieRepository.updateMovie(getMovie.getTitle(), genre, runtime);
+        return getMovie;
+    }
+
+    public MovieEntity deleteMovie(String title) {
+        MovieEntity getMovie = findMovie(title);
+        movieRepository.deleteMovie(getMovie.getTitle());
+        return getMovie;
+    }
+
+    public MovieEntity findMovie(String title) {
+        return movieRepository.getAllMovie().stream()
                 .filter(currentMovie -> currentMovie.getTitle().equals(title))
                 .findFirst()
                 .orElseThrow(() ->new IllegalArgumentException("There is no such title"));
-        movieRepository.updateMovie(getMovie.getTitle(), genre, runtime);
-        return getMovie;
     }
 }

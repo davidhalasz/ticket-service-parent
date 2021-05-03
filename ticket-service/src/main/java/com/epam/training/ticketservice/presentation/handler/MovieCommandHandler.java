@@ -57,4 +57,14 @@ public class MovieCommandHandler {
         }
     }
 
+    @ShellMethod(value = "Delete a movie.", key = "delete movie")
+    public String deleteMovie(String title) {
+        if (adminService.loggedAdmin()) {
+            MovieEntity movie = movieService.deleteMovie(title);
+            return "Movie deleted.";
+        } else {
+            return "You are not signed in";
+        }
+    }
+
 }

@@ -5,6 +5,8 @@ import com.epam.training.ticketservice.dataaccess.entity.MovieEntity;
 import com.epam.training.ticketservice.repository.MovieRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class JpaMovieRepository implements MovieRepository {
 
@@ -19,5 +21,11 @@ public class JpaMovieRepository implements MovieRepository {
         MovieEntity newMovie = new MovieEntity(movie.getTitle(), movie.getGenre(), movie.getRuntime());
         movieDao.save(newMovie);
     }
-    
+
+    @Override
+    public List<MovieEntity> getAllMovie() {
+        List<MovieEntity> movieEntities = movieDao.findAll();
+        return movieEntities;
+    }
+
 }

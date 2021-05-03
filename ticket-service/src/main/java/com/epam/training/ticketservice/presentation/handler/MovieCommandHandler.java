@@ -3,6 +3,7 @@ package com.epam.training.ticketservice.presentation.handler;
 import com.epam.training.ticketservice.dataaccess.entity.MovieEntity;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.MovieService;
+import com.epam.training.ticketservice.service.ServiceException.InCorrectParameterException;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
@@ -23,12 +24,26 @@ public class MovieCommandHandler {
 
 
     @ShellMethod(value = "Create a new movie", key = "create movie")
-    public String createMovie(String title, String genre, int runtime) {
+    public String createMovie(String title, String genre, int runtime) throws InCorrectParameterException {
         if (adminService.loggedAdmin()) {
-            MovieEntity movie = movieService.addMovie(title, genre, runtime);
+            movieService.addMovie(title, genre, runtime);
             return "Movie added";
         } else {
             return "You are not signed in";
+        }
+    }
+
+    @ShellMethod(value = "List all movie", key = "list movies")
+    public String listMovies() {
+        StringBuilder builder = new StringBuilder();
+
+        if (movieService.getAllMovie().isEmpty()) {
+            return "There are no movies at the moment";
+        } else {
+            for (MovieEntity value : movieService.getAllMovie()) {
+                builder.append(value);
+            }
+            return builder.toString();
         }
     }
 

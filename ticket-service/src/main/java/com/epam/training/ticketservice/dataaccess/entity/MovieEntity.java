@@ -21,6 +21,10 @@ public class MovieEntity {
         this.runtime = runtime;
     }
 
+    public MovieEntity() {
+
+    }
+
     public String getTitle() {
         return title;
     }

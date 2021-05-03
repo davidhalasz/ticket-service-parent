@@ -9,3 +9,26 @@
 1620047142889:create movie "alma" "drama" 120
 1620047159138:sign in priviliged admin admin
 1620047173607:create movie "alma" "al" 120
+1620047572312:sign in priviliged admin admin
+1620047580333:create movie alma al 120
+1620047591042:create korte kor 200
+1620047620017:create
+1620047629893:create movie korte kor 200
+1620047636003:list movies
+1620047967822:sign in priviliged admin admin
+1620047975004:create movie alma al 120
+1620047983115:create movie körte kor 220
+1620047986320:list movies
+1620048002056:exit
+1620048336123:sign in priviliged admin admin
+1620048344594:create movie alma al
+1620048355091:exit
+1620049477746:sign in priviliged admin admin
+1620049485976:create movie alma al
+1620049500076:create movie alma al 120
+1620049504069:list movies
+1620049661330:sign in priviliged admin admin
+1620049669150:create movie al alma
+1620049676066:exit
+1620049737355:sign in priviliged admin admin
+1620049742773:create movie alma al

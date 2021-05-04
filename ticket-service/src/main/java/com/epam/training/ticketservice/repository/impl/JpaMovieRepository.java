@@ -80,6 +80,15 @@ public class JpaMovieRepository implements MovieRepository {
         return null;
     }
 
+    @Override
+    public Movie findMovieByTitle(String title) {
+        if(isMovieExists(title)) {
+            return mapMovieEntity(movieDao.findMovieByTitle(title));
+        } else {
+            return null;
+        }
+    }
+
     private boolean isMovieExists(String title) {
         Optional<MovieEntity> movieEntity = Optional.ofNullable(movieDao.findMovieByTitle(title));
         return movieEntity.isPresent();

@@ -16,7 +16,6 @@ import org.springframework.shell.standard.ShellMethod;
  */
 
 @ShellComponent
-@Slf4j
 public class MovieCommandHandler {
 
     private MovieService movieService;

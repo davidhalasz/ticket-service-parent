@@ -22,8 +22,14 @@ public class AdminCommandHandler {
 
     @ShellMethod(value = "Admin sign in", key = "sign in priviliged")
     public String adminLogIn(String name, String password) throws AdminAccountNotExistsException, InvalidPasswordException {
-        Admin Admin = adminService.checkAccount(name, password);
-        return "Signed in with privileged account " + name;
+        String result;
+        try {
+            Admin Admin = adminService.checkAccount(name, password);
+            result = "Signed in with privileged account " + name;
+        } catch (AdminAccountNotExistsException | InvalidPasswordException e) {
+            result = e.getMessage();
+        }
+        return result;
     }
 
     @ShellMethod(value = "Admin sign out", key = "sign out")

@@ -21,7 +21,7 @@ public class JpaRoomRepository implements RoomRepository {
     private RoomDao roomDao;
 
 
-    public JpaRoomRepository(RoomDao roomDao, AdminDao adminDao) {
+    public JpaRoomRepository(RoomDao roomDao) {
         this.roomDao = roomDao;
     }
 
@@ -67,6 +67,15 @@ public class JpaRoomRepository implements RoomRepository {
     public List<Room> getAllRoom() {
         List<RoomEntity> roomEntities = roomDao.findAll();
         return mapRoomEntities(roomEntities);
+    }
+
+    @Override
+    public Room FindRoomByName(String name) {
+        if (isRoomExists(name)) {
+            return mapRoomEntity(roomDao.findByName(name));
+        } else {
+            return null;
+        }
     }
 
     private List<Room> mapRoomEntities(List<RoomEntity> roomEntities) {

@@ -15,4 +15,6 @@ public interface RoomRepository {
     Room deleteRoom(String name) throws RoomNotFoundException;
 
     List<Room> getAllRoom();
+
+    Room FindRoomByName(String name);
 }

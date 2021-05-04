@@ -7,16 +7,20 @@ import com.epam.training.ticketservice.repository.MovieRepository;
 import com.epam.training.ticketservice.service.ServiceException.InvalidRuntimeException;
 import com.epam.training.ticketservice.service.ServiceException.MovieAlreadyExistsException;
 import com.epam.training.ticketservice.service.ServiceException.MovieNotFoundException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
 @Repository
+@Slf4j
 public class JpaMovieRepository implements MovieRepository {
 
-    private MovieDao movieDao;
+    private final MovieDao movieDao;
 
     public JpaMovieRepository(MovieDao movieDao) {
         this.movieDao = movieDao;
@@ -58,7 +62,6 @@ public class JpaMovieRepository implements MovieRepository {
             throw new InvalidRuntimeException("Runtime cannot be null");
         } else if (isMovieExists(title)) {
             MovieEntity movieEntity = movieDao.findMovieByTitle(title);
-            movieEntity.setTitle(title);
             movieEntity.setGenre(genre);
             movieEntity.setRuntime(runtime);
             movieDao.save(movieEntity);
@@ -90,7 +93,7 @@ public class JpaMovieRepository implements MovieRepository {
     }
 
     private boolean isMovieExists(String title) {
-        Optional<MovieEntity> movieEntity = Optional.ofNullable(movieDao.findMovieByTitle(title));
+        Optional<MovieEntity> movieEntity = movieDao.findById(title);
         return movieEntity.isPresent();
     }
 

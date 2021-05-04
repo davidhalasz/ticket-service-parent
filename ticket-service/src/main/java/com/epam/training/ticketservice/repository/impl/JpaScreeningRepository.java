@@ -9,6 +9,7 @@ import com.epam.training.ticketservice.domain.Room;
 import com.epam.training.ticketservice.domain.Screening;
 import com.epam.training.ticketservice.repository.MapperRepository;
 import com.epam.training.ticketservice.repository.ScreeningRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -18,8 +19,8 @@ import java.util.stream.Collectors;
 @Repository
 public class JpaScreeningRepository implements ScreeningRepository {
 
-    private ScreeningDao screeningDao;
-    private MapperRepository mapperRepository;
+    private final ScreeningDao screeningDao;
+    private final MapperRepository mapperRepository;
 
     public JpaScreeningRepository(ScreeningDao screeningDao, MapperRepository mapperRepository) {
         this.mapperRepository = mapperRepository;

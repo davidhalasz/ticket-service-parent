@@ -1,41 +1,16 @@
 package com.epam.training.ticketservice.domain;
 
+import lombok.Getter;
+
+@Getter
 public class Admin {
-    private String name;
-    private String password;
-    private boolean priviliged;
+    private final String name;
+    private final String password;
+    private final boolean priviliged;
 
     public Admin(String name, String password, boolean priviliged) {
         this.name = name;
         this.password = password;
-        this.priviliged = priviliged;
-    }
-
-    public Admin() {
-
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isPriviliged() {
-        return priviliged;
-    }
-
-    public void setPriviliged(boolean priviliged) {
         this.priviliged = priviliged;
     }
 

@@ -6,9 +6,11 @@ import com.epam.training.ticketservice.dataaccess.entity.MovieEntity;
 import com.epam.training.ticketservice.dataaccess.entity.RoomEntity;
 import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.domain.Room;
+import com.epam.training.ticketservice.repository.MapperRepository;
 import com.epam.training.ticketservice.repository.RoomRepository;
 import com.epam.training.ticketservice.service.ServiceException.RoomAlreadyExistsException;
 import com.epam.training.ticketservice.service.ServiceException.RoomNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,11 +20,13 @@ import java.util.stream.Collectors;
 @Repository
 public class JpaRoomRepository implements RoomRepository {
 
-    private RoomDao roomDao;
+    private final RoomDao roomDao;
+    private final MapperRepository mapperRepository;
 
 
-    public JpaRoomRepository(RoomDao roomDao) {
+    public JpaRoomRepository(RoomDao roomDao, MapperRepository mapperRepository) {
         this.roomDao = roomDao;
+        this.mapperRepository = mapperRepository;
     }
 
     @Override
@@ -30,11 +34,7 @@ public class JpaRoomRepository implements RoomRepository {
         if (isRoomExists(room.getName())) {
             throw new RoomAlreadyExistsException("Room already exists");
         } else  {
-            RoomEntity roomEntity = new RoomEntity();
-            roomEntity.setName(room.getName());
-            roomEntity.setRows(room.getRows());
-            roomEntity.setColumns(room.getColumns());
-            roomDao.save(roomEntity);
+            roomDao.save(mapperRepository.mapperRoom(room));
         }
     }
 
@@ -43,8 +43,7 @@ public class JpaRoomRepository implements RoomRepository {
         if (!isRoomExists(name)) {
             throw new RoomNotFoundException("Room not found");
         } else  {
-            RoomEntity roomEntity = new RoomEntity();
-            roomEntity.setName(name);
+            RoomEntity roomEntity = roomDao.findByName(name);
             roomEntity.setRows(rows);
             roomEntity.setColumns(columns);
             roomDao.save(roomEntity);

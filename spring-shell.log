@@ -181,3 +181,72 @@
 1620156804741:create movie alma al 120
 1620156811867:create room szoba 10 10
 1620156842327:create screening alma szoba "2021-05-04 17:00"
+1620157065782:create screening alma szoba "2021-05-04 17:20"
+1620157112450:create screening alma szoba "2022-05-04 17_00"
+1620157135966:create screening alma szoba "2022-05-04 17:00"
+1620157181984:create szoba majom
+1620157190569:create room majom
+1620157211568:create room majom 10 10
+1620157237235:create screening alma majom "2020-04-10 17:00"
+1620157270299:stacktrace
+1620157517998:sign in priviliged admin admin
+1620157536741:create movie alma al 120
+1620157544411:create room szoba 10 10
+1620157578384:create screening alma szoba "2021-05-04 17:00"
+1620157602433:create screening alma szoba "2022-04-05 14:00"
+1620157620849:exit
+1620157905493:sign in priviliged admin admin
+1620157916819:create room szoba 10 10
+1620157926448:create movie alma al 120
+1620157951428:create screening alma szoba "2014-01-01 17:00"
+1620157988812:create screening alma szoba "2020-04-01 14:00"
+1620158225989:sign in priviliged admin admin
+1620158237979:create room szoba 10 10
+1620158247532:create movie alma al 120
+1620158273301:create screening alma szoba "2021-05-04 17:00"
+1620158300103:create screening alma szoba "2022-01-01 14:00"
+1620160063171:sign in priviliged
+1620160071681:sign in priviliged admin admin
+1620160080720:create movie alma al 120
+1620160101576:create room szoba 0 10
+1620160113526:sign out
+1620160119750:list movies
+1620160566065:create movie alma al 12
+1620160575826:sign in priviliged admin admin
+1620160584452:create movie alma la 120
+1620160600728:stacktrace
+1620161084418:sign in priviliged admin admin
+1620161091266:create movie al al 120
+1620161227189:sign in priviliged admin admin
+1620161233891:create movie alma al 120
+1620161441285:sign in priviliged admin admin
+1620161449674:create movie alma al 120
+1620161457877:list movies
+1620161553631:sign in priviliged admin admin
+1620161561940:create movie alma al 120
+1620161568684:create room szoba 10 10
+1620161575605:exit
+1620161739842:sign in priviliged admin admin
+1620161748639:create movie alma al 120
+1620161774746:update movie alma alma 222
+1620161779578:list movies
+1620161791260:create room szoba 10 10
+1620161804767:update room szoba 12 12
+1620161808810:list rooms
+1620161849575:create screening alma szoba "2021-10-10 14:00"
+1620162177928:sign in priviliged dmin admin
+1620162188412:sign in priviliged admin admin
+1620162197862:create room alma al 120
+1620162222994:create movie alma al 120
+1620162232649:create room 10 10
+1620162241931:create room szoba 10 10
+1620162262778:create screening alma szoba "2021-10-10 14:10"
+1620162343359:create screening alma szoba "2022-10-10 10:10"
+1620162370314:create screening alma szoba "2022-10-10 10:30"
+1620162414950:create movie korte 30
+1620162428343:create movie korte ko 30
+1620162507263:create screening korte szoba "2022-10-10 10:41"
+1620162565507:create screening korte szoba "2022-10-10 10:55"
+1620162627239:create screening korte szoba "2022-10-10 12:00"
+1620162658070:create screening korte szoba "2022-10-10 19:00"
+1620162671238:exit

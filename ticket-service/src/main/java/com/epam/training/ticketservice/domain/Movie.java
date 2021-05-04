@@ -1,5 +1,8 @@
 package com.epam.training.ticketservice.domain;
 
+import lombok.Getter;
+
+@Getter
 public class Movie {
 
     private String title;
@@ -9,30 +12,6 @@ public class Movie {
     public Movie(String title, String genre, int runtime) {
         this.title = title;
         this.genre = genre;
-        this.runtime = runtime;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public int getRuntime() {
-        return runtime;
-    }
-
-    public void setRuntime(int runtime) {
         this.runtime = runtime;
     }
 

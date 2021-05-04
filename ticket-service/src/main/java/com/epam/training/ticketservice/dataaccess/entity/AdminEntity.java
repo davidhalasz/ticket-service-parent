@@ -1,51 +1,29 @@
 package com.epam.training.ticketservice.dataaccess.entity;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.UUID;
 
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class AdminEntity {
 
     @Id
-    @GeneratedValue
-    private UUID id;
     private String name;
     private String password;
+    @Setter
     private boolean priviliged;
 
     public AdminEntity(String name, String password, boolean priviliged) {
         this.name = name;
         this.password = password;
-        this.priviliged = priviliged;
-    }
-
-    protected AdminEntity() {
-
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isPriviliged() {
-        return priviliged;
-    }
-
-    public void setPriviliged(boolean priviliged) {
         this.priviliged = priviliged;
     }
 }

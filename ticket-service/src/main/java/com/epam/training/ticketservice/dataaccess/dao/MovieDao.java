@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface MovieDao extends JpaRepository<MovieEntity, UUID> {
+public interface MovieDao extends JpaRepository<MovieEntity, String> {
     MovieEntity findMovieByTitle(String title);
 }

@@ -1,10 +1,13 @@
 package com.epam.training.ticketservice.domain;
 
+import lombok.Getter;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
+@Getter
 public class Screening {
 
     private UUID uuid;
@@ -23,39 +26,6 @@ public class Screening {
         this.uuid = uuid;
         this.movie = movie;
         this.room = room;
-        this.startDate = startDate;
-    }
-
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
-
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
-
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-
-    public LocalDateTime getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 

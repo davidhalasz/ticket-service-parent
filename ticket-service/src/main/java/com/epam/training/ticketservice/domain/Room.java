@@ -1,5 +1,8 @@
 package com.epam.training.ticketservice.domain;
 
+import lombok.Getter;
+
+@Getter
 public class Room {
     private String name;
     private int rows;
@@ -9,30 +12,6 @@ public class Room {
         this.name = name;
         this.rows = rows;
         this.columns = columns;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setRows(int rows) {
-        this.rows = rows;
-    }
-
-    public void setColumns(int columns) {
-        this.columns = columns;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getRows() {
-        return rows;
-    }
-
-    public int getColumns() {
-        return columns;
     }
 
     @Override

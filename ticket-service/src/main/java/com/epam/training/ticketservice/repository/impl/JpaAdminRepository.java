@@ -3,16 +3,13 @@ package com.epam.training.ticketservice.repository.impl;
 
 import com.epam.training.ticketservice.dataaccess.dao.AdminDao;
 import com.epam.training.ticketservice.dataaccess.entity.AdminEntity;
-import com.epam.training.ticketservice.dataaccess.entity.MovieEntity;
 import com.epam.training.ticketservice.domain.Admin;
-import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.repository.AdminRepository;
+import com.epam.training.ticketservice.service.ServiceException.AdminAccountNotExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Repository
 public class JpaAdminRepository implements AdminRepository {
@@ -25,9 +22,14 @@ public class JpaAdminRepository implements AdminRepository {
     }
 
     @Override
-    public Admin findAdminByName(String name) {
+    public Admin findAdminByName(String name) throws AdminAccountNotExistsException {
         Optional<AdminEntity> adminEntity = Optional.ofNullable(adminDao.findByName((name)));
-        return mapAdmin(adminEntity.get());
+        if (!adminEntity.isEmpty()) {
+            return mapAdmin(adminEntity.get());
+        } else {
+            throw new AdminAccountNotExistsException("There is no such name");
+        }
+
     }
 
     private Admin mapAdmin(AdminEntity adminEntity) {

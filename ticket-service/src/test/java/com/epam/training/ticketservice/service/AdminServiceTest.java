@@ -3,6 +3,10 @@ package com.epam.training.ticketservice.service;
 import com.epam.training.ticketservice.dataaccess.entity.AdminEntity;
 import com.epam.training.ticketservice.domain.Admin;
 import com.epam.training.ticketservice.repository.AdminRepository;
+import com.epam.training.ticketservice.service.ServiceException.AdminAccountNotExistsException;
+import com.epam.training.ticketservice.service.ServiceException.InvalidPasswordException;
+import com.epam.training.ticketservice.service.ServiceException.InvalidRuntimeException;
+import com.epam.training.ticketservice.service.ServiceException.MovieAlreadyExistsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -10,10 +14,12 @@ import org.mockito.MockitoAnnotations;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+import static org.mockito.Mockito.doThrow;
 
 
 class AdminServiceTest {
@@ -41,7 +47,7 @@ class AdminServiceTest {
     }
 
     @Test
-    public void testCheckAccountShouldReturnLoggedAdmin() {
+    public void testCheckAccountShouldReturnLoggedAdmin() throws AdminAccountNotExistsException, InvalidPasswordException {
         // Given
         given(adminRepository.findAdminByName(NAME)).willReturn(PRIVILIGED_ADMIN);
 
@@ -53,14 +59,21 @@ class AdminServiceTest {
     }
 
     @Test
-    public void testCheckAccountShouldReturnExceptionWhenLogInWithNonExistingAccount() {
+    public void testCheckAccountShouldReturnExceptionWhenLogInWithNonExistingAccount() throws AdminAccountNotExistsException {
         // Given
-        given(adminRepository.findAdminByName(NAME)).willThrow(NullPointerException.class);
+        doThrow(AdminAccountNotExistsException.class).when(adminRepository).findAdminByName(anyString());
+        Exception exception = null;
+
+        // When
+        try {
+            adminRepository.findAdminByName(INVALID_NAME);
+        } catch (AdminAccountNotExistsException e) {
+            exception = e;
+        }
 
         // Then
-        assertThrows(NullPointerException.class, () -> {
-            // When
-            underTest.checkAccount(INVALID_NAME, PASSWORD);
-        });
+        assertNotNull(exception);
     }
+
+    
 }

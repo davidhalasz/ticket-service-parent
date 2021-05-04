@@ -3,6 +3,8 @@ package com.epam.training.ticketservice.service;
 import com.epam.training.ticketservice.dataaccess.entity.AdminEntity;
 import com.epam.training.ticketservice.domain.Admin;
 import com.epam.training.ticketservice.repository.AdminRepository;
+import com.epam.training.ticketservice.service.ServiceException.AdminAccountNotExistsException;
+import com.epam.training.ticketservice.service.ServiceException.InvalidPasswordException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,17 +17,15 @@ public class AdminService {
         this.adminRepository = adminRepository;
     }
 
-    public Admin checkAccount(String name, String password) {
-        try {
-            Admin admin = adminRepository.findAdminByName(name);
-            if (admin.getPassword().matches(password)) {
-                adminRepository.updatePriviliged(name, true);
-                currentAdmin = adminRepository.findAdminByName(name);
-            }
-            return admin;
-        } catch (NullPointerException e) {
-            throw new NullPointerException("There is no such name.");
+    public Admin checkAccount(String name, String password) throws AdminAccountNotExistsException, InvalidPasswordException {
+        Admin admin = adminRepository.findAdminByName(name);
+        if (admin.getPassword().matches(password)) {
+            adminRepository.updatePriviliged(name, true);
+            currentAdmin = adminRepository.findAdminByName(name);
+        } else {
+            throw new InvalidPasswordException("Invalid password");
         }
+        return admin;
     }
 
     public boolean loggedAdmin() {
@@ -36,11 +36,11 @@ public class AdminService {
         }
     }
 
-    public void signOut() {
+    public void signOut() throws AdminAccountNotExistsException{
         try {
             Admin admin = adminRepository.findAdminByName(currentAdmin.getName());
             adminRepository.updatePriviliged(admin.getName(), false);
-            currentAdmin = adminRepository.findAdminByName(admin.getName());
+            currentAdmin = null;
         } catch (NullPointerException e) {
             throw new NullPointerException("Something wrong");
         }

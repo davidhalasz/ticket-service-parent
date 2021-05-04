@@ -150,3 +150,10 @@
 1620125864173:create movie alma alma 120
 1620125867529:list movies
 1620125875456:exit
+1620129898504:sign in priviliged admin ad
+1620129918788:sign in priviliged ad admin
+1620129935069:sign in priviliged admin admin
+1620129943629:create room add 12 12
+1620129947200:list rooms
+1620129963490:sign out
+1620129970841:exit

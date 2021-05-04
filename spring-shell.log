@@ -116,3 +116,37 @@
 1620073807708:delete room aa
 1620073811932:list rooms
 1620073816468:exit
+1620116973079:sign in priviliged admin admin
+1620116981066:create movie alma alma 10
+1620116991162:create movie korte koret 20
+1620116994747:list movies
+1620117004038:exit
+1620117054055:create movie alma alma 120
+1620117063530:sign in priviliged admin admin
+1620117072923:create movie alma alma 120
+1620117080924:create movie orte korte 20
+1620117084349:list movies
+1620117090731:sign out
+1620117093150:exit
+1620117404367:sign in priviliged admin admin
+1620117414595:create movie alma alma 120
+1620117422401:create korte korte 220
+1620117430869:create movie korte korte 220
+1620117437032:list movies
+1620117450676:update movie korte feher 100
+1620117454305:list movies
+1620117462077:delete movie korte
+1620117465754:list movies
+1620117468653:exit
+1620124908330:create movie alma alma 120
+1620124917663:sign in priviliged admin admin
+1620124992812:exit
+1620125814665:sign in priviliged admin admin
+1620125824403:create movie alma alma 120
+1620125828500:list movies
+1620125839276:update movie alma korte 10
+1620125843235:list movies
+1620125853997:sign out
+1620125864173:create movie alma alma 120
+1620125867529:list movies
+1620125875456:exit

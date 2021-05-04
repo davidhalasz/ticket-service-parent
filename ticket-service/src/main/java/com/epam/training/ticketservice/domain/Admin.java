@@ -11,8 +11,12 @@ public class Admin {
         this.priviliged = priviliged;
     }
 
-    public String getName(String name) {
-        return this.name;
+    public Admin() {
+
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
@@ -43,4 +47,5 @@ public class Admin {
                 ", priviliged=" + priviliged +
                 '}';
     }
+
 }

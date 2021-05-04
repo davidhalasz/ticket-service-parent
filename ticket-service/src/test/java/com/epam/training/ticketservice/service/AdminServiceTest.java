@@ -13,15 +13,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.BDDMockito.given;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+
 
 
 class AdminServiceTest {
     private AdminService underTest;
     private final static String NAME = "admin";
     private final static String PASSWORD = "admin";
-    private static final AdminEntity ADMIN = new AdminEntity(NAME, PASSWORD, false);
-    private static final AdminEntity PRIVILIGED_ADMIN = new AdminEntity(NAME, PASSWORD, true);
+    private static final Admin ADMIN = new Admin(NAME, PASSWORD, false);
+    private static final Admin PRIVILIGED_ADMIN = new Admin(NAME, PASSWORD, true);
     private final static String INVALID_NAME = "Skywalker";
 
     @Mock
@@ -46,7 +46,7 @@ class AdminServiceTest {
         given(adminRepository.findAdminByName(NAME)).willReturn(PRIVILIGED_ADMIN);
 
         // When
-        AdminEntity result = underTest.checkAccount(NAME, PASSWORD);
+        Admin result = underTest.checkAccount(NAME, PASSWORD);
 
         // Then
         assertThat(result, equalTo(PRIVILIGED_ADMIN));

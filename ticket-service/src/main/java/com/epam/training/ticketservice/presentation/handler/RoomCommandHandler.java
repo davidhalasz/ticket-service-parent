@@ -2,6 +2,7 @@ package com.epam.training.ticketservice.presentation.handler;
 
 
 import com.epam.training.ticketservice.dataaccess.entity.RoomEntity;
+import com.epam.training.ticketservice.domain.Room;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.RoomService;
 import com.epam.training.ticketservice.service.ServiceException.RoomAlreadyExistsException;
@@ -31,7 +32,7 @@ public class RoomCommandHandler {
         String result;
         try {
             if (adminService.loggedAdmin()) {
-                RoomEntity room = roomService.createRoom(name, rows, columns);
+                roomService.createRoom(name, rows, columns);
                 result = "Room added";
             } else {
                 result = "You are not signed in";
@@ -47,7 +48,7 @@ public class RoomCommandHandler {
         String result;
         try {
             if (adminService.loggedAdmin()) {
-                RoomEntity roomEntity = roomService.updateRoom(name, rows, columns);
+                roomService.updateRoom(name, rows, columns);
                 result = "Room updated";
             } else {
                 result = "You are not signed in";
@@ -63,7 +64,7 @@ public class RoomCommandHandler {
         String result;
         try {
             if (adminService.loggedAdmin()) {
-                RoomEntity roomEntity = roomService.deleteRoom(name);
+                roomService.deleteRoom(name);
                 result = "Room deleted";
             } else {
                 result = "You are not signed in";
@@ -80,7 +81,7 @@ public class RoomCommandHandler {
         if (roomService.getAllRoom().isEmpty()) {
             return "There are no rooms at the moment";
         } else {
-            for (RoomEntity room : roomService.getAllRoom()) {
+            for (Room room : roomService.getAllRoom()) {
                 builder.append(room);
             }
             return builder.toString();

@@ -1,6 +1,7 @@
 package com.epam.training.ticketservice.presentation.handler;
 
 import com.epam.training.ticketservice.dataaccess.entity.MovieEntity;
+import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.MovieService;
 import com.epam.training.ticketservice.service.ServiceException.InvalidRuntimeException;
@@ -50,7 +51,7 @@ public class MovieCommandHandler {
         if (movieService.getAllMovie().isEmpty()) {
             return "There are no movies at the moment";
         } else {
-            for (MovieEntity value : movieService.getAllMovie()) {
+            for (Movie value : movieService.getAllMovie()) {
                 builder.append(value);
             }
             return builder.toString();

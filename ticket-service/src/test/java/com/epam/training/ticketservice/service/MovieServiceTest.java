@@ -1,7 +1,6 @@
 package com.epam.training.ticketservice.service;
 
-import com.epam.training.ticketservice.dataaccess.entity.AdminEntity;
-import com.epam.training.ticketservice.dataaccess.entity.MovieEntity;
+import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.repository.MovieRepository;
 import com.epam.training.ticketservice.service.ServiceException.InvalidRuntimeException;
 import com.epam.training.ticketservice.service.ServiceException.MovieAlreadyExistsException;
@@ -19,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.mockito.BDDMockito.willThrow;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.*;
 
@@ -28,19 +26,14 @@ class MovieServiceTest {
     private MovieService underTest;
     private final static String TITLE1 = "Satantango";
     private final static String TITLE2 = "Cim 2";
-    private final static String TITLE3 = "Cim 3";
     private final static String GENRE = "Drama";
-    private final static String GENRE2 = "Comedy";
     private static final int RUNTIME = 120;
     private static final int INVALID_RUNTIME = 0;
-    private final static String NAME = "admin";
-    private final static String PASSWORD = "admin";
 
-    private static final AdminEntity PRIVILIGED_ADMIN = new AdminEntity(NAME, PASSWORD, true);
-    private static final MovieEntity MOVIE_ENTITY1 =  new MovieEntity(TITLE1, GENRE, RUNTIME);
-    private static final MovieEntity MOVIE_ENTITY2 =  new MovieEntity(TITLE2, GENRE, RUNTIME);
-    private static final MovieEntity INVALID_MOVIE =  new MovieEntity(TITLE2, GENRE, INVALID_RUNTIME);
-    private static final List<MovieEntity> MOVIES = List.of(MOVIE_ENTITY1, MOVIE_ENTITY2);
+
+    private static final Movie MOVIE1 =  new Movie(TITLE1, GENRE, RUNTIME);
+    private static final Movie MOVIE2 =  new Movie(TITLE2, GENRE, RUNTIME);
+    private static final List<Movie> MOVIES = List.of(MOVIE1, MOVIE2);
 
 
     @Mock
@@ -61,7 +54,7 @@ class MovieServiceTest {
         given(movieRepository.getAllMovie()).willReturn(MOVIES);
 
         // When
-        List<MovieEntity> current = underTest.getAllMovie();
+        List<Movie> current = underTest.getAllMovie();
 
         // Then
         assertThat(current, equalTo(MOVIES));

@@ -1,6 +1,7 @@
 package com.epam.training.ticketservice.service;
 
 import com.epam.training.ticketservice.dataaccess.entity.RoomEntity;
+import com.epam.training.ticketservice.domain.Room;
 import com.epam.training.ticketservice.repository.RoomRepository;
 import com.epam.training.ticketservice.service.ServiceException.RoomAlreadyExistsException;
 import com.epam.training.ticketservice.service.ServiceException.RoomNotFoundException;
@@ -19,21 +20,21 @@ public class RoomService {
         this.roomRepository = roomRepository;
     }
 
-    public RoomEntity createRoom(String name, int rows, int columns) throws RoomAlreadyExistsException {
-        RoomEntity room = new RoomEntity(name, rows, columns);
+    public Room createRoom(String name, int rows, int columns) throws RoomAlreadyExistsException {
+        Room room = new Room(name, rows, columns);
         roomRepository.createRoom(room);
         return room;
     }
 
-    public RoomEntity updateRoom(String name, int rows, int columns) throws RoomNotFoundException {
+    public Room updateRoom(String name, int rows, int columns) throws RoomNotFoundException {
         return roomRepository.updateRoom(name, rows, columns);
     }
 
-    public RoomEntity deleteRoom(String name) throws RoomNotFoundException {
+    public Room deleteRoom(String name) throws RoomNotFoundException {
         return roomRepository.deleteRoom(name);
     }
 
-    public List<RoomEntity> getAllRoom() {
+    public List<Room> getAllRoom() {
         return roomRepository.getAllRoom();
     }
 }

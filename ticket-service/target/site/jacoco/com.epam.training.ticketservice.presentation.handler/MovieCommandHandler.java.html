@@ -19,34 +19,34 @@ public class MovieCommandHandler {
     private MovieService movieService;
     private AdminService adminService;
 
-<span class="nc" id="L22">    public MovieCommandHandler(MovieService movieService, AdminService adminService) {</span>
-<span class="nc" id="L23">        this.movieService = movieService;</span>
-<span class="nc" id="L24">        this.adminService = adminService;</span>
-<span class="nc" id="L25">    }</span>
+<span class="fc" id="L22">    public MovieCommandHandler(MovieService movieService, AdminService adminService) {</span>
+<span class="fc" id="L23">        this.movieService = movieService;</span>
+<span class="fc" id="L24">        this.adminService = adminService;</span>
+<span class="fc" id="L25">    }</span>
 
 
     @ShellMethod(value = &quot;Create a new movie&quot;, key = &quot;create movie&quot;)
     public String createMovie(String title, String genre, int runtime) throws MovieAlreadyExistsException, InvalidRuntimeException {
         String result;
         try {
-<span class="nc bnc" id="L32" title="All 2 branches missed.">            if (adminService.loggedAdmin()) {</span>
-<span class="nc" id="L33">                movieService.addMovie(title, genre, runtime);</span>
-<span class="nc" id="L34">                result = &quot;Movie added&quot;;</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">            if (adminService.loggedAdmin()) {</span>
+<span class="fc" id="L33">                movieService.addMovie(title, genre, runtime);</span>
+<span class="fc" id="L34">                result = &quot;Movie added&quot;;</span>
             } else {
-<span class="nc" id="L36">                result = &quot;You are not signed in&quot;;</span>
+<span class="fc" id="L36">                result = &quot;You are not signed in&quot;;</span>
             }
-<span class="nc" id="L38">        } catch (MovieAlreadyExistsException | InvalidRuntimeException e) {</span>
-<span class="nc" id="L39">            result = e.getMessage();</span>
-<span class="nc" id="L40">        }</span>
-<span class="nc" id="L41">        return result;</span>
+<span class="fc" id="L38">        } catch (MovieAlreadyExistsException | InvalidRuntimeException e) {</span>
+<span class="fc" id="L39">            result = e.getMessage();</span>
+<span class="fc" id="L40">        }</span>
+<span class="fc" id="L41">        return result;</span>
     }
 
     @ShellMethod(value = &quot;List all movie&quot;, key = &quot;list movies&quot;)
     public String listMovies() {
-<span class="nc" id="L46">        StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L46">        StringBuilder builder = new StringBuilder();</span>
 
-<span class="nc bnc" id="L48" title="All 2 branches missed.">        if (movieService.getAllMovie().isEmpty()) {</span>
-<span class="nc" id="L49">            return &quot;There are no movies at the moment&quot;;</span>
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">        if (movieService.getAllMovie().isEmpty()) {</span>
+<span class="fc" id="L49">            return &quot;There are no movies at the moment&quot;;</span>
         } else {
 <span class="nc bnc" id="L51" title="All 2 branches missed.">            for (Movie value : movieService.getAllMovie()) {</span>
 <span class="nc" id="L52">                builder.append(value);</span>
@@ -59,32 +59,32 @@ public class MovieCommandHandler {
     public String updateMovie(String title, String genre, int runtime) throws MovieNotFoundException, InvalidRuntimeException {
         String result;
         try {
-<span class="nc bnc" id="L62" title="All 2 branches missed.">            if (adminService.loggedAdmin()) {</span>
-<span class="nc" id="L63">                movieService.updateMovie(title, genre, runtime);</span>
-<span class="nc" id="L64">                result = &quot;Movie updated.&quot;;</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">            if (adminService.loggedAdmin()) {</span>
+<span class="fc" id="L63">                movieService.updateMovie(title, genre, runtime);</span>
+<span class="fc" id="L64">                result = &quot;Movie updated&quot;;</span>
             } else {
-<span class="nc" id="L66">                result = &quot;You are not signed in&quot;;</span>
+<span class="fc" id="L66">                result = &quot;You are not signed in&quot;;</span>
             }
-<span class="nc" id="L68">        } catch (MovieNotFoundException | InvalidRuntimeException e) {</span>
-<span class="nc" id="L69">            result = e.getMessage();</span>
-<span class="nc" id="L70">        }</span>
-<span class="nc" id="L71">        return result;</span>
+<span class="fc" id="L68">        } catch (MovieNotFoundException | InvalidRuntimeException e) {</span>
+<span class="fc" id="L69">            result = e.getMessage();</span>
+<span class="fc" id="L70">        }</span>
+<span class="fc" id="L71">        return result;</span>
     }
 
     @ShellMethod(value = &quot;Delete a movie.&quot;, key = &quot;delete movie&quot;)
     public String deleteMovie(String title) throws MovieNotFoundException {
         String result;
         try {
-<span class="nc bnc" id="L78" title="All 2 branches missed.">            if (adminService.loggedAdmin()) {</span>
-<span class="nc" id="L79">                movieService.deleteMovie(title);</span>
-<span class="nc" id="L80">                result = &quot;Movie deleted.&quot;;</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">            if (adminService.loggedAdmin()) {</span>
+<span class="fc" id="L79">                movieService.deleteMovie(title);</span>
+<span class="fc" id="L80">                result = &quot;Movie deleted&quot;;</span>
             } else {
-<span class="nc" id="L82">                result = &quot;You are not signed in&quot;;</span>
+<span class="fc" id="L82">                result = &quot;You are not signed in&quot;;</span>
             }
 <span class="nc" id="L84">        } catch (MovieNotFoundException e) {</span>
 <span class="nc" id="L85">            result = e.getMessage();</span>
-<span class="nc" id="L86">        }</span>
-<span class="nc" id="L87">        return result;</span>
+<span class="fc" id="L86">        }</span>
+<span class="fc" id="L87">        return result;</span>
     }
 
 }

@@ -19,17 +19,17 @@ public class JpaAdminRepository implements AdminRepository {
     private AdminDao adminDao;
 
     @Autowired
-<span class="nc" id="L22">    public JpaAdminRepository(AdminDao adminDao) {</span>
-<span class="nc" id="L23">        this.adminDao = adminDao;</span>
-<span class="nc" id="L24">    }</span>
+<span class="fc" id="L22">    public JpaAdminRepository(AdminDao adminDao) {</span>
+<span class="fc" id="L23">        this.adminDao = adminDao;</span>
+<span class="fc" id="L24">    }</span>
 
     @Override
-    public Admin findAdminByName(String name) throws AdminAccountNotExistsException {
-<span class="nc" id="L28">        Optional&lt;AdminEntity&gt; adminEntity = Optional.ofNullable(adminDao.findByName((name)));</span>
-<span class="nc bnc" id="L29" title="All 2 branches missed.">        if (!adminEntity.isEmpty()) {</span>
+    public Admin getAdminByName(String name) throws AdminAccountNotExistsException {
+<span class="fc" id="L28">        Optional&lt;AdminEntity&gt; adminEntity = Optional.ofNullable(adminDao.findByName((name)));</span>
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">        if (!adminEntity.isEmpty()) {</span>
 <span class="nc" id="L30">            return mapAdmin(adminEntity.get());</span>
         } else {
-<span class="nc" id="L32">            throw new AdminAccountNotExistsException(&quot;There is no such name&quot;);</span>
+<span class="fc" id="L32">            throw new AdminAccountNotExistsException(&quot;There is no such name&quot;);</span>
         }
 
     }

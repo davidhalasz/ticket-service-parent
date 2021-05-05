@@ -61,7 +61,7 @@ public class MovieCommandHandler {
         try {
             if (adminService.loggedAdmin()) {
                 movieService.updateMovie(title, genre, runtime);
-                result = "Movie updated.";
+                result = "Movie updated";
             } else {
                 result = "You are not signed in";
             }
@@ -77,7 +77,7 @@ public class MovieCommandHandler {
         try {
             if (adminService.loggedAdmin()) {
                 movieService.deleteMovie(title);
-                result = "Movie deleted.";
+                result = "Movie deleted";
             } else {
                 result = "You are not signed in";
             }

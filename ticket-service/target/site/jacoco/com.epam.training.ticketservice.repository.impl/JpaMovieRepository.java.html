@@ -33,67 +33,71 @@ public class JpaMovieRepository implements MovieRepository {
 <span class="nc bnc" id="L33" title="All 2 branches missed.">            if (movie.getRuntime() &lt; 1) {</span>
 <span class="nc" id="L34">                throw new InvalidRuntimeException(&quot;Runtime is invalid&quot;);</span>
             } else {
-<span class="nc" id="L36">                MovieEntity newMovie = new MovieEntity(movie.getTitle(), movie.getGenre(), movie.getRuntime());</span>
-<span class="nc" id="L37">                movieDao.save(newMovie);</span>
+<span class="nc" id="L36">                MovieEntity newMovie = new MovieEntity(</span>
+<span class="nc" id="L37">                        movie.getTitle(),</span>
+<span class="nc" id="L38">                        movie.getGenre(),</span>
+<span class="nc" id="L39">                        movie.getRuntime()</span>
+                );
+<span class="nc" id="L41">                movieDao.save(newMovie);</span>
             }
         }
-<span class="nc" id="L40">    }</span>
+<span class="nc" id="L44">    }</span>
 
     @Override
     public List&lt;Movie&gt; getAllMovie() {
-<span class="nc" id="L44">        List&lt;MovieEntity&gt; movieEntities = movieDao.findAll();</span>
-<span class="nc" id="L45">        return mapMovieEntities(movieEntities);</span>
+<span class="nc" id="L48">        List&lt;MovieEntity&gt; movieEntities = movieDao.findAll();</span>
+<span class="nc" id="L49">        return mapMovieEntities(movieEntities);</span>
     }
 
     private List&lt;Movie&gt; mapMovieEntities(List&lt;MovieEntity&gt; movieEntities) {
-<span class="nc" id="L49">        return movieEntities.stream()</span>
-<span class="nc" id="L50">                .map(this::mapMovieEntity)</span>
-<span class="nc" id="L51">                .collect(Collectors.toList());</span>
+<span class="nc" id="L53">        return movieEntities.stream()</span>
+<span class="nc" id="L54">                .map(this::mapMovieEntity)</span>
+<span class="nc" id="L55">                .collect(Collectors.toList());</span>
     }
 
     private Movie mapMovieEntity(MovieEntity movieEntity) {
-<span class="nc" id="L55">        return new Movie(movieEntity.getTitle(), movieEntity.getGenre(), movieEntity.getRuntime());</span>
+<span class="nc" id="L59">        return new Movie(movieEntity.getTitle(), movieEntity.getGenre(), movieEntity.getRuntime());</span>
     }
 
     @Override
     public Movie updateMovie(String title, String genre, int runtime) throws MovieNotFoundException, InvalidRuntimeException {
-<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (runtime &lt; 0) {</span>
-<span class="nc" id="L61">            throw new InvalidRuntimeException(&quot;Runtime cannot be null&quot;);</span>
-<span class="nc bnc" id="L62" title="All 2 branches missed.">        } else if (isMovieExists(title)) {</span>
-<span class="nc" id="L63">            MovieEntity movieEntity = movieDao.findMovieByTitle(title);</span>
-<span class="nc" id="L64">            movieEntity.setGenre(genre);</span>
-<span class="nc" id="L65">            movieEntity.setRuntime(runtime);</span>
-<span class="nc" id="L66">            movieDao.save(movieEntity);</span>
-<span class="nc" id="L67">        } else {</span>
-<span class="nc" id="L68">            throw new MovieNotFoundException(&quot;Movie not found&quot;);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (runtime &lt; 0) {</span>
+<span class="nc" id="L65">            throw new InvalidRuntimeException(&quot;Runtime cannot be null&quot;);</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        } else if (isMovieExists(title)) {</span>
+<span class="nc" id="L67">            MovieEntity movieEntity = movieDao.findMovieByTitle(title);</span>
+<span class="nc" id="L68">            movieEntity.setGenre(genre);</span>
+<span class="nc" id="L69">            movieEntity.setRuntime(runtime);</span>
+<span class="nc" id="L70">            movieDao.save(movieEntity);</span>
+<span class="nc" id="L71">        } else {</span>
+<span class="nc" id="L72">            throw new MovieNotFoundException(&quot;Movie not found&quot;);</span>
         }
 
-<span class="nc" id="L71">        return null;</span>
+<span class="nc" id="L75">        return null;</span>
     }
 
     @Override
     public Movie deleteMovie(String title) throws MovieNotFoundException {
-<span class="nc bnc" id="L76" title="All 2 branches missed.">        if (isMovieExists(title)) {</span>
-<span class="nc" id="L77">            MovieEntity movieEntity = movieDao.findMovieByTitle(title);</span>
-<span class="nc" id="L78">            movieDao.delete(movieEntity);</span>
-<span class="nc" id="L79">        } else {</span>
-<span class="nc" id="L80">            throw new MovieNotFoundException(&quot;Movie not found&quot;);</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if (isMovieExists(title)) {</span>
+<span class="nc" id="L81">            MovieEntity movieEntity = movieDao.findMovieByTitle(title);</span>
+<span class="nc" id="L82">            movieDao.delete(movieEntity);</span>
+<span class="nc" id="L83">        } else {</span>
+<span class="nc" id="L84">            throw new MovieNotFoundException(&quot;Movie not found&quot;);</span>
         }
-<span class="nc" id="L82">        return null;</span>
+<span class="nc" id="L86">        return null;</span>
     }
 
     @Override
     public Movie findMovieByTitle(String title) throws MovieNotFoundException{
-<span class="nc bnc" id="L87" title="All 2 branches missed.">        if(isMovieExists(title)) {</span>
-<span class="nc" id="L88">            return mapMovieEntity(movieDao.findMovieByTitle(title));</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">        if(isMovieExists(title)) {</span>
+<span class="nc" id="L92">            return mapMovieEntity(movieDao.findMovieByTitle(title));</span>
         } else {
-<span class="nc" id="L90">            throw new MovieNotFoundException(&quot;There is no such movie&quot;);</span>
+<span class="nc" id="L94">            throw new MovieNotFoundException(&quot;There is no such movie&quot;);</span>
         }
     }
 
     private boolean isMovieExists(String title) {
-<span class="nc" id="L95">        Optional&lt;MovieEntity&gt; movieEntity = movieDao.findById(title);</span>
-<span class="nc" id="L96">        return movieEntity.isPresent();</span>
+<span class="nc" id="L99">        Optional&lt;MovieEntity&gt; movieEntity = movieDao.findById(title);</span>
+<span class="nc" id="L100">        return movieEntity.isPresent();</span>
     }
 
 }

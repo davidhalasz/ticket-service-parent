@@ -24,11 +24,11 @@ public class ScreeningService {
 
     public ScreeningService(ScreeningRepository screeningRepository,
                             MovieRepository movieRepository,
-<span class="nc" id="L27">                            RoomRepository roomRepository) {</span>
-<span class="nc" id="L28">        this.screeningRepository = screeningRepository;</span>
-<span class="nc" id="L29">        this.movieRepository = movieRepository;</span>
-<span class="nc" id="L30">        this.roomRepository = roomRepository;</span>
-<span class="nc" id="L31">    }</span>
+<span class="fc" id="L27">                            RoomRepository roomRepository) {</span>
+<span class="fc" id="L28">        this.screeningRepository = screeningRepository;</span>
+<span class="fc" id="L29">        this.movieRepository = movieRepository;</span>
+<span class="fc" id="L30">        this.roomRepository = roomRepository;</span>
+<span class="fc" id="L31">    }</span>
 
     public void createScreening(String movieTitle, String roomName, LocalDateTime startDateTime) throws
             OverlappingException,
@@ -86,9 +86,8 @@ public class ScreeningService {
 <span class="nc" id="L86">        screeningRepository.deleteScreening(movieTitle, roomName, startDateTime);</span>
 <span class="nc" id="L87">    }</span>
 
-
     public List&lt;Screening&gt; getAllScreening() {
-<span class="nc" id="L91">        return screeningRepository.getAllScreening();</span>
+<span class="nc" id="L90">        return screeningRepository.getAllScreening();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

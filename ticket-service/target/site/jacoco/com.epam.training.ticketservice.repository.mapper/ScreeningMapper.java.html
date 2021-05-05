@@ -10,23 +10,39 @@ import com.epam.training.ticketservice.repository.MapperRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
-<span class="nc" id="L15">public class ScreeningMapper implements MapperRepository {</span>
+<span class="nc" id="L17">public class ScreeningMapper implements MapperRepository {</span>
 
     @Override
     public MovieEntity mapperMovie(Movie movie) {
-<span class="nc" id="L19">        return new MovieEntity(movie.getTitle(), movie.getGenre(), movie.getRuntime());</span>
+<span class="nc" id="L21">        return new MovieEntity(movie.getTitle(), movie.getGenre(), movie.getRuntime());</span>
     }
 
     @Override
     public RoomEntity mapperRoom(Room room) {
-<span class="nc" id="L24">        return new RoomEntity(room.getName(), room.getRows(), room.getColumns());</span>
+<span class="nc" id="L26">        return new RoomEntity(room.getName(), room.getRows(), room.getColumns());</span>
     }
 
     @Override
     public ScreeningEntity mapperScreening(Movie movie, Room room, LocalDateTime startDateTime) {
-<span class="nc" id="L29">        return new ScreeningEntity(mapperMovie(movie), mapperRoom(room), startDateTime);</span>
+<span class="nc" id="L31">        return new ScreeningEntity(mapperMovie(movie), mapperRoom(room), startDateTime);</span>
     }
+
+    @Override
+    public Movie mapMovieEntity(MovieEntity movieEntity) {
+<span class="nc" id="L36">        return new Movie(movieEntity.getTitle(), movieEntity.getGenre(), movieEntity.getRuntime());</span>
+    }
+
+
+    @Override
+    public List&lt;Movie&gt; mapMovieEntities(List&lt;MovieEntity&gt; movieEntities) {
+<span class="nc" id="L42">        return movieEntities.stream()</span>
+<span class="nc" id="L43">                .map(this::mapMovieEntity)</span>
+<span class="nc" id="L44">                .collect(Collectors.toList());</span>
+    }
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -17,10 +17,10 @@ public class AdminService {
 <span class="fc" id="L17">    }</span>
 
     public Admin checkAccount(String name, String password) throws AdminAccountNotExistsException, InvalidPasswordException {
-<span class="fc" id="L20">        Admin admin = adminRepository.findAdminByName(name);</span>
+<span class="fc" id="L20">        Admin admin = adminRepository.getAdminByName(name);</span>
 <span class="pc bpc" id="L21" title="1 of 2 branches missed.">        if (admin.getPassword().matches(password)) {</span>
 <span class="fc" id="L22">            adminRepository.updatePriviliged(name, true);</span>
-<span class="fc" id="L23">            currentAdmin = adminRepository.findAdminByName(name);</span>
+<span class="fc" id="L23">            currentAdmin = adminRepository.getAdminByName(name);</span>
         } else {
 <span class="nc" id="L25">            throw new InvalidPasswordException(&quot;Invalid password&quot;);</span>
         }
@@ -37,7 +37,7 @@ public class AdminService {
 
     public void signOut() throws AdminAccountNotExistsException{
         try {
-<span class="nc" id="L40">            Admin admin = adminRepository.findAdminByName(currentAdmin.getName());</span>
+<span class="nc" id="L40">            Admin admin = adminRepository.getAdminByName(currentAdmin.getName());</span>
 <span class="nc" id="L41">            adminRepository.updatePriviliged(admin.getName(), false);</span>
 <span class="nc" id="L42">            currentAdmin = null;</span>
 <span class="nc" id="L43">        } catch (NullPointerException e) {</span>

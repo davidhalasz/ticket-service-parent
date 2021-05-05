@@ -16,26 +16,26 @@ public class AdminCommandHandler {
 
     private AdminService adminService;
 
-<span class="nc" id="L19">    public AdminCommandHandler(AdminService adminService) {</span>
-<span class="nc" id="L20">        this.adminService = adminService;</span>
-<span class="nc" id="L21">    }</span>
+<span class="fc" id="L19">    public AdminCommandHandler(AdminService adminService) {</span>
+<span class="fc" id="L20">        this.adminService = adminService;</span>
+<span class="fc" id="L21">    }</span>
 
     @ShellMethod(value = &quot;Admin sign in&quot;, key = &quot;sign in priviliged&quot;)
     public String adminLogIn(String name, String password) throws AdminAccountNotExistsException, InvalidPasswordException {
         String result;
         try {
-<span class="nc" id="L27">            Admin Admin = adminService.checkAccount(name, password);</span>
-<span class="nc" id="L28">            result = &quot;Signed in with privileged account &quot; + name;</span>
-<span class="nc" id="L29">        } catch (AdminAccountNotExistsException | InvalidPasswordException e) {</span>
-<span class="nc" id="L30">            result = e.getMessage();</span>
-<span class="nc" id="L31">        }</span>
-<span class="nc" id="L32">        return result;</span>
+<span class="fc" id="L27">            Admin Admin = adminService.checkAccount(name, password);</span>
+<span class="fc" id="L28">            result = &quot;Signed in with privileged account &quot; + name;</span>
+<span class="fc" id="L29">        } catch (AdminAccountNotExistsException | InvalidPasswordException e) {</span>
+<span class="fc" id="L30">            result = e.getMessage();</span>
+<span class="fc" id="L31">        }</span>
+<span class="fc" id="L32">        return result;</span>
     }
 
     @ShellMethod(value = &quot;Admin sign out&quot;, key = &quot;sign out&quot;)
     public String adminLogout() throws AdminAccountNotExistsException {
-<span class="nc" id="L37">        adminService.signOut();</span>
-<span class="nc" id="L38">        return &quot;Logged out&quot;;</span>
+<span class="fc" id="L37">        adminService.signOut();</span>
+<span class="fc" id="L38">        return &quot;Logged out&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

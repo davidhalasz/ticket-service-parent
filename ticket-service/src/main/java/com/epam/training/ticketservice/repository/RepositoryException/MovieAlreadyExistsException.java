@@ -1,4 +1,4 @@
-package com.epam.training.ticketservice.service.ServiceException;
+package com.epam.training.ticketservice.repository.RepositoryException;
 
 public class MovieAlreadyExistsException extends Exception{
     public MovieAlreadyExistsException(String errorMsg) {

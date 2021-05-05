@@ -1,10 +1,9 @@
 package com.epam.training.ticketservice.repository;
 
-import com.epam.training.ticketservice.dataaccess.entity.MovieEntity;
 import com.epam.training.ticketservice.domain.Movie;
-import com.epam.training.ticketservice.service.ServiceException.InvalidRuntimeException;
-import com.epam.training.ticketservice.service.ServiceException.MovieAlreadyExistsException;
-import com.epam.training.ticketservice.service.ServiceException.MovieNotFoundException;
+import com.epam.training.ticketservice.repository.RepositoryException.InvalidRuntimeException;
+import com.epam.training.ticketservice.repository.RepositoryException.MovieAlreadyExistsException;
+import com.epam.training.ticketservice.repository.RepositoryException.MovieNotFoundException;
 
 import java.util.List;
 
@@ -18,5 +17,5 @@ public interface MovieRepository{
 
     Movie deleteMovie(String title) throws MovieNotFoundException;
 
-    Movie findMovieByTitle(String title);
+    Movie findMovieByTitle(String title) throws MovieNotFoundException;
 }

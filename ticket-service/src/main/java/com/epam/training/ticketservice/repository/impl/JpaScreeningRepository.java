@@ -8,12 +8,16 @@ import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.domain.Room;
 import com.epam.training.ticketservice.domain.Screening;
 import com.epam.training.ticketservice.repository.MapperRepository;
+import com.epam.training.ticketservice.repository.RepositoryException.ScreeningNotFoundException;
 import com.epam.training.ticketservice.repository.ScreeningRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Repository
@@ -31,6 +35,18 @@ public class JpaScreeningRepository implements ScreeningRepository {
     public void createScreening(Movie movie, Room room, LocalDateTime startDateTime) {
         ScreeningEntity screeningEntity = mapperRepository.mapperScreening(movie, room, startDateTime);
         screeningDao.save(screeningEntity);
+    }
+
+
+    @Override
+    public void deleteScreening(String movieTitle, String roomName, LocalDateTime startDateTime) throws ScreeningNotFoundException {
+        ScreeningEntity screeningEntity = screeningDao.findAll().stream()
+                .filter(currentScreening -> currentScreening.getMovieEntity().getTitle().equals(movieTitle)
+                        && currentScreening.getRoomEntity().getName().equals(roomName)
+                        && currentScreening.getDateTime().equals(startDateTime))
+                .findFirst()
+                .orElseThrow(() -> new ScreeningNotFoundException("There is no such screening"));
+        screeningDao.delete(screeningEntity);
     }
 
     @Override
@@ -58,7 +74,5 @@ public class JpaScreeningRepository implements ScreeningRepository {
     private Room mapRoomEntity(RoomEntity roomEntity) {
         return new Room(roomEntity.getName(), roomEntity.getRows(), roomEntity.getColumns());
     }
-
-
 
 }

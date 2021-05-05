@@ -1,8 +1,8 @@
 package com.epam.training.ticketservice.repository;
 
 import com.epam.training.ticketservice.domain.Room;
-import com.epam.training.ticketservice.service.ServiceException.RoomAlreadyExistsException;
-import com.epam.training.ticketservice.service.ServiceException.RoomNotFoundException;
+import com.epam.training.ticketservice.repository.RepositoryException.RoomAlreadyExistsException;
+import com.epam.training.ticketservice.repository.RepositoryException.RoomNotFoundException;
 
 import java.util.List;
 
@@ -16,5 +16,5 @@ public interface RoomRepository {
 
     List<Room> getAllRoom();
 
-    Room FindRoomByName(String name);
+    Room findRoomByName(String name) throws RoomNotFoundException;
 }

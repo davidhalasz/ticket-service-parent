@@ -1,16 +1,12 @@
 package com.epam.training.ticketservice.repository.impl;
 
-import com.epam.training.ticketservice.dataaccess.dao.AdminDao;
 import com.epam.training.ticketservice.dataaccess.dao.RoomDao;
-import com.epam.training.ticketservice.dataaccess.entity.MovieEntity;
 import com.epam.training.ticketservice.dataaccess.entity.RoomEntity;
-import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.domain.Room;
 import com.epam.training.ticketservice.repository.MapperRepository;
 import com.epam.training.ticketservice.repository.RoomRepository;
-import com.epam.training.ticketservice.service.ServiceException.RoomAlreadyExistsException;
-import com.epam.training.ticketservice.service.ServiceException.RoomNotFoundException;
-import lombok.RequiredArgsConstructor;
+import com.epam.training.ticketservice.repository.RepositoryException.RoomAlreadyExistsException;
+import com.epam.training.ticketservice.repository.RepositoryException.RoomNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -69,11 +65,11 @@ public class JpaRoomRepository implements RoomRepository {
     }
 
     @Override
-    public Room FindRoomByName(String name) {
+    public Room findRoomByName(String name) throws RoomNotFoundException{
         if (isRoomExists(name)) {
             return mapRoomEntity(roomDao.findByName(name));
         } else {
-            return null;
+            throw new RoomNotFoundException("There is no such room");
         }
     }
 
@@ -86,7 +82,6 @@ public class JpaRoomRepository implements RoomRepository {
     private Room mapRoomEntity(RoomEntity roomEntity) {
         return new Room(roomEntity.getName(), roomEntity.getRows(), roomEntity.getColumns());
     }
-
 
     private boolean isRoomExists(String name) {
         Optional<RoomEntity> roomEntity = Optional.ofNullable(roomDao.findByName(name));

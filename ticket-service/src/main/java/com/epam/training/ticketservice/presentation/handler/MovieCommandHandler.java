@@ -1,13 +1,11 @@
 package com.epam.training.ticketservice.presentation.handler;
 
-import com.epam.training.ticketservice.dataaccess.entity.MovieEntity;
 import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.MovieService;
-import com.epam.training.ticketservice.service.ServiceException.InvalidRuntimeException;
-import com.epam.training.ticketservice.service.ServiceException.MovieAlreadyExistsException;
-import com.epam.training.ticketservice.service.ServiceException.MovieNotFoundException;
-import lombok.extern.slf4j.Slf4j;
+import com.epam.training.ticketservice.repository.RepositoryException.InvalidRuntimeException;
+import com.epam.training.ticketservice.repository.RepositoryException.MovieAlreadyExistsException;
+import com.epam.training.ticketservice.repository.RepositoryException.MovieNotFoundException;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 

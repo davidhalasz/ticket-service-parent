@@ -2,14 +2,18 @@ package com.epam.training.ticketservice.service;
 
 import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.domain.Room;
-import com.epam.training.ticketservice.repository.MapperRepository;
+import com.epam.training.ticketservice.domain.Screening;
 import com.epam.training.ticketservice.repository.MovieRepository;
+import com.epam.training.ticketservice.repository.RepositoryException.MovieNotFoundException;
+import com.epam.training.ticketservice.repository.RepositoryException.RoomNotFoundException;
+import com.epam.training.ticketservice.repository.RepositoryException.ScreeningNotFoundException;
 import com.epam.training.ticketservice.repository.RoomRepository;
 import com.epam.training.ticketservice.repository.ScreeningRepository;
-import com.epam.training.ticketservice.service.ServiceException.OverlappingException;
+import com.epam.training.ticketservice.repository.RepositoryException.OverlappingException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class ScreeningService {
@@ -26,9 +30,12 @@ public class ScreeningService {
         this.roomRepository = roomRepository;
     }
 
-    public void createScreening(String movieTitle, String roomName, LocalDateTime startDateTime) throws OverlappingException {
+    public void createScreening(String movieTitle, String roomName, LocalDateTime startDateTime) throws
+            OverlappingException,
+            RoomNotFoundException,
+            MovieNotFoundException {
         Movie movie = movieRepository.findMovieByTitle(movieTitle);
-        Room room = roomRepository.FindRoomByName(roomName);
+        Room room = roomRepository.findRoomByName(roomName);
         LocalDateTime endDateTime = startDateTime.plusMinutes(movie.getRuntime());
 
         if (isThereOverlappingScreening(startDateTime, endDateTime, room.getName())) {
@@ -55,17 +62,17 @@ public class ScreeningService {
                 });
     }
 
-    private boolean isStartInTheBreakPeriod(LocalDateTime startDate,
-                                            LocalDateTime endDate,
+    private boolean isStartInTheBreakPeriod(LocalDateTime startDateTime,
+                                            LocalDateTime endDateTime,
                                             String roomName) {
         return screeningRepository.getAllScreening().stream()
                 .filter(screening -> screening.getRoom().getName().equals(roomName))
                 .anyMatch(screening -> {
                     LocalDateTime screeningStart = screening.getStartDate();
-                    LocalDateTime screeningEnd = screening.getStartDate().plusMinutes(10)
-                            .plusMinutes(screening.getMovie().getRuntime());
-                    return isWithinRange(screeningStart, screeningEnd, startDate)
-                            || isWithinRange(screeningStart, screeningEnd, endDate);
+                    LocalDateTime screeningEnd = screening.getStartDate()
+                            .plusMinutes((screening.getMovie().getRuntime()) + 10);
+                    return isWithinRange(screeningStart, screeningEnd, startDateTime)
+                            || isWithinRange(screeningStart, screeningEnd, endDateTime);
 
                 });
     }
@@ -75,4 +82,12 @@ public class ScreeningService {
                 || (checkStartDateTime.isBefore(endDate) && checkStartDateTime.isAfter(startDate));
     }
 
+    public void deleteScreening(String movieTitle, String roomName, LocalDateTime startDateTime) throws ScreeningNotFoundException {
+        screeningRepository.deleteScreening(movieTitle, roomName, startDateTime);
+    }
+
+
+    public List<Screening> getAllScreening() {
+        return screeningRepository.getAllScreening();
+    }
 }

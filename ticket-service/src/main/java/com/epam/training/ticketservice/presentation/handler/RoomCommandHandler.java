@@ -1,12 +1,11 @@
 package com.epam.training.ticketservice.presentation.handler;
 
 
-import com.epam.training.ticketservice.dataaccess.entity.RoomEntity;
 import com.epam.training.ticketservice.domain.Room;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.RoomService;
-import com.epam.training.ticketservice.service.ServiceException.RoomAlreadyExistsException;
-import com.epam.training.ticketservice.service.ServiceException.RoomNotFoundException;
+import com.epam.training.ticketservice.repository.RepositoryException.RoomAlreadyExistsException;
+import com.epam.training.ticketservice.repository.RepositoryException.RoomNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;

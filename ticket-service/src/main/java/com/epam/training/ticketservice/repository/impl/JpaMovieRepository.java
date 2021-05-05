@@ -4,10 +4,9 @@ import com.epam.training.ticketservice.dataaccess.dao.MovieDao;
 import com.epam.training.ticketservice.dataaccess.entity.MovieEntity;
 import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.repository.MovieRepository;
-import com.epam.training.ticketservice.service.ServiceException.InvalidRuntimeException;
-import com.epam.training.ticketservice.service.ServiceException.MovieAlreadyExistsException;
-import com.epam.training.ticketservice.service.ServiceException.MovieNotFoundException;
-import lombok.RequiredArgsConstructor;
+import com.epam.training.ticketservice.repository.RepositoryException.InvalidRuntimeException;
+import com.epam.training.ticketservice.repository.RepositoryException.MovieAlreadyExistsException;
+import com.epam.training.ticketservice.repository.RepositoryException.MovieNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
@@ -84,11 +83,11 @@ public class JpaMovieRepository implements MovieRepository {
     }
 
     @Override
-    public Movie findMovieByTitle(String title) {
+    public Movie findMovieByTitle(String title) throws MovieNotFoundException{
         if(isMovieExists(title)) {
             return mapMovieEntity(movieDao.findMovieByTitle(title));
         } else {
-            return null;
+            throw new MovieNotFoundException("There is no such movie");
         }
     }
 

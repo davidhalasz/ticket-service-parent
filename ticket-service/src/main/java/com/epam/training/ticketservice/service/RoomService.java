@@ -1,14 +1,11 @@
 package com.epam.training.ticketservice.service;
 
-import com.epam.training.ticketservice.dataaccess.entity.RoomEntity;
 import com.epam.training.ticketservice.domain.Room;
 import com.epam.training.ticketservice.repository.RoomRepository;
-import com.epam.training.ticketservice.service.ServiceException.RoomAlreadyExistsException;
-import com.epam.training.ticketservice.service.ServiceException.RoomNotFoundException;
+import com.epam.training.ticketservice.repository.RepositoryException.RoomAlreadyExistsException;
+import com.epam.training.ticketservice.repository.RepositoryException.RoomNotFoundException;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.stylesheets.LinkStyle;
 
-import java.util.Collection;
 import java.util.List;
 
 @Service

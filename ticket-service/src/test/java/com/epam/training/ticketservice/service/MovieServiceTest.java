@@ -2,9 +2,9 @@ package com.epam.training.ticketservice.service;
 
 import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.repository.MovieRepository;
-import com.epam.training.ticketservice.service.ServiceException.InvalidRuntimeException;
-import com.epam.training.ticketservice.service.ServiceException.MovieAlreadyExistsException;
-import com.epam.training.ticketservice.service.ServiceException.MovieNotFoundException;
+import com.epam.training.ticketservice.repository.RepositoryException.InvalidRuntimeException;
+import com.epam.training.ticketservice.repository.RepositoryException.MovieAlreadyExistsException;
+import com.epam.training.ticketservice.repository.RepositoryException.MovieNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

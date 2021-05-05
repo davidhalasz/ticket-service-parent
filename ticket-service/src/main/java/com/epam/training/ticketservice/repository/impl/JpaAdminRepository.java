@@ -5,7 +5,7 @@ import com.epam.training.ticketservice.dataaccess.dao.AdminDao;
 import com.epam.training.ticketservice.dataaccess.entity.AdminEntity;
 import com.epam.training.ticketservice.domain.Admin;
 import com.epam.training.ticketservice.repository.AdminRepository;
-import com.epam.training.ticketservice.service.ServiceException.AdminAccountNotExistsException;
+import com.epam.training.ticketservice.repository.RepositoryException.AdminAccountNotExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

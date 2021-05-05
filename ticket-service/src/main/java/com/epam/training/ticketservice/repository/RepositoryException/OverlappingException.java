@@ -1,4 +1,4 @@
-package com.epam.training.ticketservice.service.ServiceException;
+package com.epam.training.ticketservice.repository.RepositoryException;
 
 public class OverlappingException extends Exception {
     public OverlappingException(String errorMsg) {

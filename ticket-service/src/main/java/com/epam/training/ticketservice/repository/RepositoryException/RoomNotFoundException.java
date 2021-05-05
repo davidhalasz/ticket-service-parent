@@ -1,4 +1,4 @@
-package com.epam.training.ticketservice.service.ServiceException;
+package com.epam.training.ticketservice.repository.RepositoryException;
 
 public class RoomNotFoundException extends Exception {
     public RoomNotFoundException(String errorMsg){

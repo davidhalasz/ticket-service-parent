@@ -1,4 +1,4 @@
-package com.epam.training.ticketservice.service.ServiceException;
+package com.epam.training.ticketservice.repository.RepositoryException;
 
 public class RoomAlreadyExistsException extends Exception{
     public RoomAlreadyExistsException(String errorMsg) {

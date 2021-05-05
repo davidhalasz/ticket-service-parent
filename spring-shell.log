@@ -250,3 +250,79 @@
 1620162627239:create screening korte szoba "2022-10-10 12:00"
 1620162658070:create screening korte szoba "2022-10-10 19:00"
 1620162671238:exit
+1620198871123:sign in priviliged admin admin
+1620198884945:create movie cim genre 30
+1620198893125:create room ro 10 10
+1620198919564:create screening cim ro "2021-05-05 10:00"
+1620198949654:create screening cim ro "2021-05-05 10:30"
+1620199019289:create screening cim ro "2021-05-05 10:31"
+1620199081417:create screening cim ro "2021-05-05 11:41"
+1620199093297:exit
+1620207018636:sign in priviliged admin admin
+1620207033036:create movie alma al 100
+1620207052545:create room ro 10 10
+1620207085188:create screening alma ro "2021-05-05 10:00"
+1620207114125:create screening alma ro "2021-05-05 13:00"
+1620207137188:delete screening alma ro "2021-05-05 10:00"
+1620207178608:exit
+1620207460385:sign in priviliged admin admin
+1620207497673:create movie alma al 10
+1620207504024:create room ro 10 10
+1620207571359:create screening alma ro "2021-05-05 10:10"
+1620207607956:delete screening alma ro "2021-05-05 10:00"
+1620207639888:delete screening movie ro "2021-05-05 10:10"
+1620207670281:delete screening alma ro "2021-05-05 10:10"
+1620207718064:exit
+1620208765007:list screening
+1620208769805:list screenings
+1620208889732:sign in priviliged admin admin
+1620208902284:create movie alma genre 100
+1620208928340:create movie korte genre 100
+1620208941892:create room ro 10 10
+1620208966384:create screening alma ro "2021-05-05 10:00"
+1620208989821:create screening korte ro "2021-05-05 15:00"
+1620208993980:list screenings
+1620209036238:delete screening alma ro "2021-05-05 10:00"
+1620209043013:list screenings
+1620209050568:exit
+1620212767443:sign in priviliged admin admin
+1620212775783:create movie alma al 100
+1620212784435:create room ro 10 10
+1620212811157:create screening alma ro "2021-05-05 10:00"
+1620212832737:create screening alma ro "2021-05-05 15:00"
+1620212836948:list screening
+1620212842162:list screenings
+1620212862831:delete screening alma ro "2021-05-05 10:00"
+1620212869776:list screenings
+1620212910638:exit
+1620213394511:sign in priviliged dmin admin
+1620213404655:sign in priviliged admin admin
+1620213412221:create movie alma al 100
+1620213418131:reate room ro 10 10
+1620213428274:create room ro 10 10
+1620213458354:create screening alma ro "2021-05-05 10:00"
+1620213481306:delete screening alma ro "2021-05-05 10:00"
+1620213487918:list screenings
+1620213634423:create screening alma ro "2021-05-05 10:00"
+1620213653432:create screening alma ro "2021-05-05 13:00"
+1620213660090:list screening
+1620213665121:list screenings
+1620213690710:delete screening alma ro "2021-05-05 12:00"
+1620213725132:delete screening alma ro "2021-05-05 13:00"
+1620213731620:list screenings
+1620213739206:exit
+1620213899737:sign in priviliged admin admin
+1620213908563:create movie alma al 100
+1620213928448:create room ro 10 10
+1620213946244:create screening movie o "2021-05-05 10:00"
+1620213981393:create screening alma ro "2021-05-05 10:00"
+1620214025317:delete screening "alma we "2021-05-05 10:00"\nccccc"
+1620214048431:delete screening alma we "2021-05-05 10:00"
+1620214066080:delete screening alma ro "2021-05-05 10:00"
+1620214068289:exit
+1620215105363:sign in priviliged admin admin
+1620215125024:create screening al al "2012-05-05 10:00"
+1620215168512:create movie alma al 10
+1620215174160:create room ro 10 10
+1620215196258:create screening mo ro "2021-05-05 10:00"
+1620215207743:exit

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="hu"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JpaMovieRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ticket-service</a> &gt; <a href="index.source.html" class="el_package">com.epam.training.ticketservice.repository.impl</a> &gt; <span class="el_source">JpaMovieRepository.java</span></div><h1>JpaMovieRepository.java</h1><pre class="source lang-java linenums">package com.epam.training.ticketservice.repository.impl;
+
+import com.epam.training.ticketservice.dataaccess.dao.MovieDao;
+import com.epam.training.ticketservice.dataaccess.entity.MovieEntity;
+import com.epam.training.ticketservice.domain.Movie;
+import com.epam.training.ticketservice.repository.MovieRepository;
+import com.epam.training.ticketservice.repository.RepositoryException.InvalidRuntimeException;
+import com.epam.training.ticketservice.repository.RepositoryException.MovieAlreadyExistsException;
+import com.epam.training.ticketservice.repository.RepositoryException.MovieNotFoundException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+
+@Repository
+<span class="nc" id="L19">@Slf4j</span>
+public class JpaMovieRepository implements MovieRepository {
+
+    private final MovieDao movieDao;
+
+<span class="nc" id="L24">    public JpaMovieRepository(MovieDao movieDao) {</span>
+<span class="nc" id="L25">        this.movieDao = movieDao;</span>
+<span class="nc" id="L26">    }</span>
+
+    @Override
+    public void createMovie(Movie movie) throws MovieAlreadyExistsException, InvalidRuntimeException {
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        if(isMovieExists(movie.getTitle())) {</span>
+<span class="nc" id="L31">            throw new MovieAlreadyExistsException(&quot;Movie already exists&quot;);</span>
+        } else {
+<span class="nc bnc" id="L33" title="All 2 branches missed.">            if (movie.getRuntime() &lt; 1) {</span>
+<span class="nc" id="L34">                throw new InvalidRuntimeException(&quot;Runtime is invalid&quot;);</span>
+            } else {
+<span class="nc" id="L36">                MovieEntity newMovie = new MovieEntity(movie.getTitle(), movie.getGenre(), movie.getRuntime());</span>
+<span class="nc" id="L37">                movieDao.save(newMovie);</span>
+            }
+        }
+<span class="nc" id="L40">    }</span>
+
+    @Override
+    public List&lt;Movie&gt; getAllMovie() {
+<span class="nc" id="L44">        List&lt;MovieEntity&gt; movieEntities = movieDao.findAll();</span>
+<span class="nc" id="L45">        return mapMovieEntities(movieEntities);</span>
+    }
+
+    private List&lt;Movie&gt; mapMovieEntities(List&lt;MovieEntity&gt; movieEntities) {
+<span class="nc" id="L49">        return movieEntities.stream()</span>
+<span class="nc" id="L50">                .map(this::mapMovieEntity)</span>
+<span class="nc" id="L51">                .collect(Collectors.toList());</span>
+    }
+
+    private Movie mapMovieEntity(MovieEntity movieEntity) {
+<span class="nc" id="L55">        return new Movie(movieEntity.getTitle(), movieEntity.getGenre(), movieEntity.getRuntime());</span>
+    }
+
+    @Override
+    public Movie updateMovie(String title, String genre, int runtime) throws MovieNotFoundException, InvalidRuntimeException {
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (runtime &lt; 0) {</span>
+<span class="nc" id="L61">            throw new InvalidRuntimeException(&quot;Runtime cannot be null&quot;);</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        } else if (isMovieExists(title)) {</span>
+<span class="nc" id="L63">            MovieEntity movieEntity = movieDao.findMovieByTitle(title);</span>
+<span class="nc" id="L64">            movieEntity.setGenre(genre);</span>
+<span class="nc" id="L65">            movieEntity.setRuntime(runtime);</span>
+<span class="nc" id="L66">            movieDao.save(movieEntity);</span>
+<span class="nc" id="L67">        } else {</span>
+<span class="nc" id="L68">            throw new MovieNotFoundException(&quot;Movie not found&quot;);</span>
+        }
+
+<span class="nc" id="L71">        return null;</span>
+    }
+
+    @Override
+    public Movie deleteMovie(String title) throws MovieNotFoundException {
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        if (isMovieExists(title)) {</span>
+<span class="nc" id="L77">            MovieEntity movieEntity = movieDao.findMovieByTitle(title);</span>
+<span class="nc" id="L78">            movieDao.delete(movieEntity);</span>
+<span class="nc" id="L79">        } else {</span>
+<span class="nc" id="L80">            throw new MovieNotFoundException(&quot;Movie not found&quot;);</span>
+        }
+<span class="nc" id="L82">        return null;</span>
+    }
+
+    @Override
+    public Movie findMovieByTitle(String title) throws MovieNotFoundException{
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        if(isMovieExists(title)) {</span>
+<span class="nc" id="L88">            return mapMovieEntity(movieDao.findMovieByTitle(title));</span>
+        } else {
+<span class="nc" id="L90">            throw new MovieNotFoundException(&quot;There is no such movie&quot;);</span>
+        }
+    }
+
+    private boolean isMovieExists(String title) {
+<span class="nc" id="L95">        Optional&lt;MovieEntity&gt; movieEntity = movieDao.findById(title);</span>
+<span class="nc" id="L96">        return movieEntity.isPresent();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

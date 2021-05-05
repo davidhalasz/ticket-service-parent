@@ -37,6 +37,6 @@ public class Screening {
                 + movie.getRuntime() + " minutes), "
                 + "screened in room "
                 + room.getName() + ", at "
-                + startDate.format(formatter);
+                + startDate.format(formatter) + "\n";
     }
 }

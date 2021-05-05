@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="hu"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JpaAdminRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ticket-service</a> &gt; <a href="index.source.html" class="el_package">com.epam.training.ticketservice.repository.impl</a> &gt; <span class="el_source">JpaAdminRepository.java</span></div><h1>JpaAdminRepository.java</h1><pre class="source lang-java linenums">package com.epam.training.ticketservice.repository.impl;
+
+
+import com.epam.training.ticketservice.dataaccess.dao.AdminDao;
+import com.epam.training.ticketservice.dataaccess.entity.AdminEntity;
+import com.epam.training.ticketservice.domain.Admin;
+import com.epam.training.ticketservice.repository.AdminRepository;
+import com.epam.training.ticketservice.repository.RepositoryException.AdminAccountNotExistsException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+<span class="nc" id="L16">@RequiredArgsConstructor</span>
+public class JpaAdminRepository implements AdminRepository {
+
+    private AdminDao adminDao;
+
+    @Autowired
+<span class="nc" id="L22">    public JpaAdminRepository(AdminDao adminDao) {</span>
+<span class="nc" id="L23">        this.adminDao = adminDao;</span>
+<span class="nc" id="L24">    }</span>
+
+    @Override
+    public Admin findAdminByName(String name) throws AdminAccountNotExistsException {
+<span class="nc" id="L28">        Optional&lt;AdminEntity&gt; adminEntity = Optional.ofNullable(adminDao.findByName((name)));</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        if (!adminEntity.isEmpty()) {</span>
+<span class="nc" id="L30">            return mapAdmin(adminEntity.get());</span>
+        } else {
+<span class="nc" id="L32">            throw new AdminAccountNotExistsException(&quot;There is no such name&quot;);</span>
+        }
+
+    }
+
+    private Admin mapAdmin(AdminEntity adminEntity) {
+<span class="nc" id="L38">        return new Admin(adminEntity.getName(),</span>
+<span class="nc" id="L39">                adminEntity.getPassword(),</span>
+<span class="nc" id="L40">                adminEntity.isPriviliged());</span>
+    }
+
+
+    @Override
+    public void updatePriviliged(String name, boolean priviliged) {
+<span class="nc" id="L46">        AdminEntity adminEntity = adminDao.findByName(name);</span>
+<span class="nc" id="L47">        adminEntity.setPriviliged(priviliged);</span>
+<span class="nc" id="L48">        adminDao.save(adminEntity);</span>
+<span class="nc" id="L49">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

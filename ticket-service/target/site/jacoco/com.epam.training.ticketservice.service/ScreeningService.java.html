@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="hu"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ScreeningService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ticket-service</a> &gt; <a href="index.source.html" class="el_package">com.epam.training.ticketservice.service</a> &gt; <span class="el_source">ScreeningService.java</span></div><h1>ScreeningService.java</h1><pre class="source lang-java linenums">package com.epam.training.ticketservice.service;
+
+import com.epam.training.ticketservice.domain.Movie;
+import com.epam.training.ticketservice.domain.Room;
+import com.epam.training.ticketservice.domain.Screening;
+import com.epam.training.ticketservice.repository.MovieRepository;
+import com.epam.training.ticketservice.repository.RepositoryException.MovieNotFoundException;
+import com.epam.training.ticketservice.repository.RepositoryException.RoomNotFoundException;
+import com.epam.training.ticketservice.repository.RepositoryException.ScreeningNotFoundException;
+import com.epam.training.ticketservice.repository.RoomRepository;
+import com.epam.training.ticketservice.repository.ScreeningRepository;
+import com.epam.training.ticketservice.repository.RepositoryException.OverlappingException;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Service
+public class ScreeningService {
+
+    private ScreeningRepository screeningRepository;
+    private MovieRepository movieRepository;
+    private RoomRepository roomRepository;
+
+    public ScreeningService(ScreeningRepository screeningRepository,
+                            MovieRepository movieRepository,
+<span class="nc" id="L27">                            RoomRepository roomRepository) {</span>
+<span class="nc" id="L28">        this.screeningRepository = screeningRepository;</span>
+<span class="nc" id="L29">        this.movieRepository = movieRepository;</span>
+<span class="nc" id="L30">        this.roomRepository = roomRepository;</span>
+<span class="nc" id="L31">    }</span>
+
+    public void createScreening(String movieTitle, String roomName, LocalDateTime startDateTime) throws
+            OverlappingException,
+            RoomNotFoundException,
+            MovieNotFoundException {
+<span class="nc" id="L37">        Movie movie = movieRepository.findMovieByTitle(movieTitle);</span>
+<span class="nc" id="L38">        Room room = roomRepository.findRoomByName(roomName);</span>
+<span class="nc" id="L39">        LocalDateTime endDateTime = startDateTime.plusMinutes(movie.getRuntime());</span>
+
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (isThereOverlappingScreening(startDateTime, endDateTime, room.getName())) {</span>
+<span class="nc" id="L42">            throw new OverlappingException(&quot;There is an overlapping screening&quot;);</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        } else if (isStartInTheBreakPeriod(startDateTime, endDateTime, room.getName())) {</span>
+<span class="nc" id="L44">            throw new OverlappingException(&quot;This would start in the break period after another screening in this room&quot;);</span>
+        }
+<span class="nc" id="L46">        screeningRepository.createScreening(movie, room, startDateTime);</span>
+<span class="nc" id="L47">    }</span>
+
+
+    private boolean isThereOverlappingScreening(LocalDateTime startDate,
+                                                LocalDateTime endDate,
+                                                String roomName) {
+<span class="nc" id="L53">        return screeningRepository.getAllScreening().stream()</span>
+<span class="nc" id="L54">                .filter(screening -&gt; screening.getRoom().getName().equals(roomName))</span>
+<span class="nc" id="L55">                .anyMatch(screening -&gt; {</span>
+<span class="nc" id="L56">                    LocalDateTime screeningStart = screening.getStartDate();</span>
+<span class="nc" id="L57">                    LocalDateTime screeningEnd = screening.getStartDate()</span>
+<span class="nc" id="L58">                            .plusMinutes(screening.getMovie().getRuntime());</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">                    return isWithinRange(screeningStart, screeningEnd, startDate)</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">                            || isWithinRange(screeningStart, screeningEnd, endDate);</span>
+
+                });
+    }
+
+    private boolean isStartInTheBreakPeriod(LocalDateTime startDateTime,
+                                            LocalDateTime endDateTime,
+                                            String roomName) {
+<span class="nc" id="L68">        return screeningRepository.getAllScreening().stream()</span>
+<span class="nc" id="L69">                .filter(screening -&gt; screening.getRoom().getName().equals(roomName))</span>
+<span class="nc" id="L70">                .anyMatch(screening -&gt; {</span>
+<span class="nc" id="L71">                    LocalDateTime screeningStart = screening.getStartDate();</span>
+<span class="nc" id="L72">                    LocalDateTime screeningEnd = screening.getStartDate()</span>
+<span class="nc" id="L73">                            .plusMinutes((screening.getMovie().getRuntime()) + 10);</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">                    return isWithinRange(screeningStart, screeningEnd, startDateTime)</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">                            || isWithinRange(screeningStart, screeningEnd, endDateTime);</span>
+
+                });
+    }
+
+    private boolean isWithinRange(LocalDateTime startDate, LocalDateTime endDate, LocalDateTime checkStartDateTime) {
+<span class="nc bnc" id="L81" title="All 4 branches missed.">        return (checkStartDateTime.isEqual(startDate) || checkStartDateTime.isEqual(endDate))</span>
+<span class="nc bnc" id="L82" title="All 4 branches missed.">                || (checkStartDateTime.isBefore(endDate) &amp;&amp; checkStartDateTime.isAfter(startDate));</span>
+    }
+
+    public void deleteScreening(String movieTitle, String roomName, LocalDateTime startDateTime) throws ScreeningNotFoundException {
+<span class="nc" id="L86">        screeningRepository.deleteScreening(movieTitle, roomName, startDateTime);</span>
+<span class="nc" id="L87">    }</span>
+
+
+    public List&lt;Screening&gt; getAllScreening() {
+<span class="nc" id="L91">        return screeningRepository.getAllScreening();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.epam.training.ticketservice.service.AdminServiceTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.471 s <<< FAILURE! - in com.epam.training.ticketservice.service.AdminServiceTest
-com.epam.training.ticketservice.service.AdminServiceTest.testCheckAccountShouldReturnLoggedAdmin  Time elapsed: 1.37 s  <<< ERROR!
-java.lang.NullPointerException
-	at com.epam.training.ticketservice.service.AdminServiceTest.testCheckAccountShouldReturnLoggedAdmin(AdminServiceTest.java:42)
-
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.672 s - in com.epam.training.ticketservice.service.AdminServiceTest

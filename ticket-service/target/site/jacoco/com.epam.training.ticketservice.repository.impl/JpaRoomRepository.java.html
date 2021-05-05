@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="hu"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JpaRoomRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ticket-service</a> &gt; <a href="index.source.html" class="el_package">com.epam.training.ticketservice.repository.impl</a> &gt; <span class="el_source">JpaRoomRepository.java</span></div><h1>JpaRoomRepository.java</h1><pre class="source lang-java linenums">package com.epam.training.ticketservice.repository.impl;
+
+import com.epam.training.ticketservice.dataaccess.dao.RoomDao;
+import com.epam.training.ticketservice.dataaccess.entity.RoomEntity;
+import com.epam.training.ticketservice.domain.Room;
+import com.epam.training.ticketservice.repository.MapperRepository;
+import com.epam.training.ticketservice.repository.RoomRepository;
+import com.epam.training.ticketservice.repository.RepositoryException.RoomAlreadyExistsException;
+import com.epam.training.ticketservice.repository.RepositoryException.RoomNotFoundException;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Repository
+public class JpaRoomRepository implements RoomRepository {
+
+    private final RoomDao roomDao;
+    private final MapperRepository mapperRepository;
+
+
+<span class="nc" id="L23">    public JpaRoomRepository(RoomDao roomDao, MapperRepository mapperRepository) {</span>
+<span class="nc" id="L24">        this.roomDao = roomDao;</span>
+<span class="nc" id="L25">        this.mapperRepository = mapperRepository;</span>
+<span class="nc" id="L26">    }</span>
+
+    @Override
+    public void createRoom(Room room) throws RoomAlreadyExistsException {
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        if (isRoomExists(room.getName())) {</span>
+<span class="nc" id="L31">            throw new RoomAlreadyExistsException(&quot;Room already exists&quot;);</span>
+        } else  {
+<span class="nc" id="L33">            roomDao.save(mapperRepository.mapperRoom(room));</span>
+        }
+<span class="nc" id="L35">    }</span>
+
+    @Override
+    public Room updateRoom(String name, int rows, int columns) throws RoomNotFoundException {
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if (!isRoomExists(name)) {</span>
+<span class="nc" id="L40">            throw new RoomNotFoundException(&quot;Room not found&quot;);</span>
+        } else  {
+<span class="nc" id="L42">            RoomEntity roomEntity = roomDao.findByName(name);</span>
+<span class="nc" id="L43">            roomEntity.setRows(rows);</span>
+<span class="nc" id="L44">            roomEntity.setColumns(columns);</span>
+<span class="nc" id="L45">            roomDao.save(roomEntity);</span>
+        }
+<span class="nc" id="L47">        return null;</span>
+    }
+
+    @Override
+    public Room deleteRoom(String name) throws RoomNotFoundException {
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if (!isRoomExists(name)) {</span>
+<span class="nc" id="L53">            throw new RoomNotFoundException(&quot;Room not found&quot;);</span>
+        } else  {
+<span class="nc" id="L55">            RoomEntity roomEntity = roomDao.findByName(name);</span>
+<span class="nc" id="L56">            roomDao.delete(roomEntity);</span>
+        }
+<span class="nc" id="L58">        return null;</span>
+    }
+
+    @Override
+    public List&lt;Room&gt; getAllRoom() {
+<span class="nc" id="L63">        List&lt;RoomEntity&gt; roomEntities = roomDao.findAll();</span>
+<span class="nc" id="L64">        return mapRoomEntities(roomEntities);</span>
+    }
+
+    @Override
+    public Room findRoomByName(String name) throws RoomNotFoundException{
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        if (isRoomExists(name)) {</span>
+<span class="nc" id="L70">            return mapRoomEntity(roomDao.findByName(name));</span>
+        } else {
+<span class="nc" id="L72">            throw new RoomNotFoundException(&quot;There is no such room&quot;);</span>
+        }
+    }
+
+    private List&lt;Room&gt; mapRoomEntities(List&lt;RoomEntity&gt; roomEntities) {
+<span class="nc" id="L77">        return roomEntities.stream()</span>
+<span class="nc" id="L78">                .map(this::mapRoomEntity)</span>
+<span class="nc" id="L79">                .collect(Collectors.toList());</span>
+    }
+
+    private Room mapRoomEntity(RoomEntity roomEntity) {
+<span class="nc" id="L83">        return new Room(roomEntity.getName(), roomEntity.getRows(), roomEntity.getColumns());</span>
+    }
+
+    private boolean isRoomExists(String name) {
+<span class="nc" id="L87">        Optional&lt;RoomEntity&gt; roomEntity = Optional.ofNullable(roomDao.findByName(name));</span>
+<span class="nc" id="L88">        return roomEntity.isPresent();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

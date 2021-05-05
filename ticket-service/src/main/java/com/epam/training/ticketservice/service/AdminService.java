@@ -17,10 +17,10 @@ public class AdminService {
     }
 
     public Admin checkAccount(String name, String password) throws AdminAccountNotExistsException, InvalidPasswordException {
-        Admin admin = adminRepository.findAdminByName(name);
+        Admin admin = adminRepository.getAdminByName(name);
         if (admin.getPassword().matches(password)) {
             adminRepository.updatePriviliged(name, true);
-            currentAdmin = adminRepository.findAdminByName(name);
+            currentAdmin = adminRepository.getAdminByName(name);
         } else {
             throw new InvalidPasswordException("Invalid password");
         }
@@ -37,7 +37,7 @@ public class AdminService {
 
     public void signOut() throws AdminAccountNotExistsException{
         try {
-            Admin admin = adminRepository.findAdminByName(currentAdmin.getName());
+            Admin admin = adminRepository.getAdminByName(currentAdmin.getName());
             adminRepository.updatePriviliged(admin.getName(), false);
             currentAdmin = null;
         } catch (NullPointerException e) {

@@ -47,7 +47,7 @@ class AdminServiceTest {
     @Test
     public void testCheckAccountShouldReturnLoggedAdmin() throws AdminAccountNotExistsException, InvalidPasswordException {
         // Given
-        given(adminRepository.findAdminByName(NAME)).willReturn(PRIVILIGED_ADMIN);
+        given(adminRepository.getAdminByName(NAME)).willReturn(PRIVILIGED_ADMIN);
 
         // When
         Admin result = underTest.checkAccount(NAME, PASSWORD);
@@ -59,12 +59,12 @@ class AdminServiceTest {
     @Test
     public void testCheckAccountShouldReturnExceptionWhenLogInWithNonExistingAccount() throws AdminAccountNotExistsException {
         // Given
-        doThrow(AdminAccountNotExistsException.class).when(adminRepository).findAdminByName(anyString());
+        doThrow(AdminAccountNotExistsException.class).when(adminRepository).getAdminByName(anyString());
         Exception exception = null;
 
         // When
         try {
-            adminRepository.findAdminByName(INVALID_NAME);
+            adminRepository.getAdminByName(INVALID_NAME);
         } catch (AdminAccountNotExistsException e) {
             exception = e;
         }

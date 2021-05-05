@@ -10,6 +10,8 @@ import com.epam.training.ticketservice.repository.MapperRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class ScreeningMapper implements MapperRepository {
@@ -28,4 +30,18 @@ public class ScreeningMapper implements MapperRepository {
     public ScreeningEntity mapperScreening(Movie movie, Room room, LocalDateTime startDateTime) {
         return new ScreeningEntity(mapperMovie(movie), mapperRoom(room), startDateTime);
     }
+
+    @Override
+    public Movie mapMovieEntity(MovieEntity movieEntity) {
+        return new Movie(movieEntity.getTitle(), movieEntity.getGenre(), movieEntity.getRuntime());
+    }
+
+
+    @Override
+    public List<Movie> mapMovieEntities(List<MovieEntity> movieEntities) {
+        return movieEntities.stream()
+                .map(this::mapMovieEntity)
+                .collect(Collectors.toList());
+    }
+
 }

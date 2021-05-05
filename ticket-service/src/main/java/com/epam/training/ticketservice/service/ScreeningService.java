@@ -86,7 +86,6 @@ public class ScreeningService {
         screeningRepository.deleteScreening(movieTitle, roomName, startDateTime);
     }
 
-
     public List<Screening> getAllScreening() {
         return screeningRepository.getAllScreening();
     }

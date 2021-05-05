@@ -8,6 +8,7 @@ import com.epam.training.ticketservice.domain.Room;
 import com.epam.training.ticketservice.domain.Screening;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface MapperRepository {
 
@@ -17,4 +18,8 @@ public interface MapperRepository {
     RoomEntity mapperRoom(Room room);
 
     ScreeningEntity mapperScreening(Movie movie, Room room, LocalDateTime startDateTime);
+
+    Movie mapMovieEntity(MovieEntity movieEntity);
+
+    List<Movie> mapMovieEntities(List<MovieEntity> movieEntities);
 }

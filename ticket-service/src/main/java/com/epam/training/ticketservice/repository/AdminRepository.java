@@ -5,7 +5,7 @@ import com.epam.training.ticketservice.repository.RepositoryException.AdminAccou
 
 public interface AdminRepository {
 
-    Admin findAdminByName(String name) throws AdminAccountNotExistsException;
+    Admin getAdminByName(String name) throws AdminAccountNotExistsException;
 
     void updatePriviliged(String name, boolean priviliged);
 }

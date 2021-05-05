@@ -33,7 +33,11 @@ public class JpaMovieRepository implements MovieRepository {
             if (movie.getRuntime() < 1) {
                 throw new InvalidRuntimeException("Runtime is invalid");
             } else {
-                MovieEntity newMovie = new MovieEntity(movie.getTitle(), movie.getGenre(), movie.getRuntime());
+                MovieEntity newMovie = new MovieEntity(
+                        movie.getTitle(),
+                        movie.getGenre(),
+                        movie.getRuntime()
+                );
                 movieDao.save(newMovie);
             }
         }

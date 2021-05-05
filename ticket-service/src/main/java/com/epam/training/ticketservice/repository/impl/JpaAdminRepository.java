@@ -24,7 +24,7 @@ public class JpaAdminRepository implements AdminRepository {
     }
 
     @Override
-    public Admin findAdminByName(String name) throws AdminAccountNotExistsException {
+    public Admin getAdminByName(String name) throws AdminAccountNotExistsException {
         Optional<AdminEntity> adminEntity = Optional.ofNullable(adminDao.findByName((name)));
         if (!adminEntity.isEmpty()) {
             return mapAdmin(adminEntity.get());

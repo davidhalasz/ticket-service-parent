@@ -1,6 +1,7 @@
 package com.epam.training.ticketservice.service;
 
 import com.epam.training.ticketservice.domain.Room;
+import com.epam.training.ticketservice.repository.RepositoryException.InvalidRoomParameterException;
 import com.epam.training.ticketservice.repository.RoomRepository;
 import com.epam.training.ticketservice.repository.RepositoryException.RoomAlreadyExistsException;
 import com.epam.training.ticketservice.repository.RepositoryException.RoomNotFoundException;
@@ -17,13 +18,14 @@ public class RoomService {
         this.roomRepository = roomRepository;
     }
 
-    public Room createRoom(String name, int rows, int columns) throws RoomAlreadyExistsException {
+    public Room createRoom(String name, int rows, int columns) throws RoomAlreadyExistsException, InvalidRoomParameterException {
         Room room = new Room(name, rows, columns);
         roomRepository.createRoom(room);
         return room;
     }
 
-    public Room updateRoom(String name, int rows, int columns) throws RoomNotFoundException {
+    public Room updateRoom(String name, int rows, int columns)
+            throws RoomNotFoundException, InvalidRoomParameterException {
         return roomRepository.updateRoom(name, rows, columns);
     }
 

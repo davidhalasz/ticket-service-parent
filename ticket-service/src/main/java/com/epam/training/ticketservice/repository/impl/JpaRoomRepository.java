@@ -4,6 +4,7 @@ import com.epam.training.ticketservice.dataaccess.dao.RoomDao;
 import com.epam.training.ticketservice.dataaccess.entity.RoomEntity;
 import com.epam.training.ticketservice.domain.Room;
 import com.epam.training.ticketservice.repository.MapperRepository;
+import com.epam.training.ticketservice.repository.RepositoryException.InvalidRoomParameterException;
 import com.epam.training.ticketservice.repository.RoomRepository;
 import com.epam.training.ticketservice.repository.RepositoryException.RoomAlreadyExistsException;
 import com.epam.training.ticketservice.repository.RepositoryException.RoomNotFoundException;
@@ -26,18 +27,22 @@ public class JpaRoomRepository implements RoomRepository {
     }
 
     @Override
-    public void createRoom(Room room) throws RoomAlreadyExistsException {
+    public void createRoom(Room room) throws RoomAlreadyExistsException, InvalidRoomParameterException {
         if (isRoomExists(room.getName())) {
             throw new RoomAlreadyExistsException("Room already exists");
-        } else  {
+        } else if (room.getRows() < 1 || room.getColumns() < 1) {
+            throw new InvalidRoomParameterException("Room's rows and columns cannot be null");
+        } else {
             roomDao.save(mapperRepository.mapperRoom(room));
         }
     }
 
     @Override
-    public Room updateRoom(String name, int rows, int columns) throws RoomNotFoundException {
+    public Room updateRoom(String name, int rows, int columns) throws RoomNotFoundException, InvalidRoomParameterException {
         if (!isRoomExists(name)) {
             throw new RoomNotFoundException("Room not found");
+        } else if (rows < 1 || columns < 1) {
+            throw new InvalidRoomParameterException("Room's rows and columns cannot be null");
         } else  {
             RoomEntity roomEntity = roomDao.findByName(name);
             roomEntity.setRows(rows);

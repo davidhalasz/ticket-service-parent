@@ -4,10 +4,7 @@ import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.domain.Room;
 import com.epam.training.ticketservice.domain.Screening;
 import com.epam.training.ticketservice.repository.MovieRepository;
-import com.epam.training.ticketservice.repository.RepositoryException.MovieNotFoundException;
-import com.epam.training.ticketservice.repository.RepositoryException.OverlappingException;
-import com.epam.training.ticketservice.repository.RepositoryException.RoomNotFoundException;
-import com.epam.training.ticketservice.repository.RepositoryException.ScreeningNotFoundException;
+import com.epam.training.ticketservice.repository.RepositoryException.*;
 import com.epam.training.ticketservice.repository.RoomRepository;
 import com.epam.training.ticketservice.repository.ScreeningRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -59,7 +56,10 @@ class ScreeningServiceTest {
 
     @Test
     public void testCreateScreeningShouldReturnExceptionWhenThereIsOverlapping()
-            throws OverlappingException, RoomNotFoundException, MovieNotFoundException {
+            throws OverlappingException,
+            RoomNotFoundException,
+            MovieNotFoundException,
+            OverlappingInBreakException {
         // Given
         doThrow(OverlappingException.class)
                 .when(screeningService)

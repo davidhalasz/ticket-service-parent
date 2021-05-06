@@ -37,7 +37,6 @@ public class JpaScreeningRepository implements ScreeningRepository {
         screeningDao.save(screeningEntity);
     }
 
-
     @Override
     public void deleteScreening(String movieTitle, String roomName, LocalDateTime startDateTime) throws ScreeningNotFoundException {
         ScreeningEntity screeningEntity = screeningDao.findAll().stream()

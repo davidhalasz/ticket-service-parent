@@ -37,42 +37,41 @@ public class JpaScreeningRepository implements ScreeningRepository {
 <span class="nc" id="L37">        screeningDao.save(screeningEntity);</span>
 <span class="nc" id="L38">    }</span>
 
-
     @Override
     public void deleteScreening(String movieTitle, String roomName, LocalDateTime startDateTime) throws ScreeningNotFoundException {
-<span class="nc" id="L43">        ScreeningEntity screeningEntity = screeningDao.findAll().stream()</span>
-<span class="nc bnc" id="L44" title="All 2 branches missed.">                .filter(currentScreening -&gt; currentScreening.getMovieEntity().getTitle().equals(movieTitle)</span>
-<span class="nc bnc" id="L45" title="All 2 branches missed.">                        &amp;&amp; currentScreening.getRoomEntity().getName().equals(roomName)</span>
-<span class="nc bnc" id="L46" title="All 2 branches missed.">                        &amp;&amp; currentScreening.getDateTime().equals(startDateTime))</span>
-<span class="nc" id="L47">                .findFirst()</span>
-<span class="nc" id="L48">                .orElseThrow(() -&gt; new ScreeningNotFoundException(&quot;There is no such screening&quot;));</span>
-<span class="nc" id="L49">        screeningDao.delete(screeningEntity);</span>
-<span class="nc" id="L50">    }</span>
+<span class="nc" id="L42">        ScreeningEntity screeningEntity = screeningDao.findAll().stream()</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">                .filter(currentScreening -&gt; currentScreening.getMovieEntity().getTitle().equals(movieTitle)</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">                        &amp;&amp; currentScreening.getRoomEntity().getName().equals(roomName)</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">                        &amp;&amp; currentScreening.getDateTime().equals(startDateTime))</span>
+<span class="nc" id="L46">                .findFirst()</span>
+<span class="nc" id="L47">                .orElseThrow(() -&gt; new ScreeningNotFoundException(&quot;There is no such screening&quot;));</span>
+<span class="nc" id="L48">        screeningDao.delete(screeningEntity);</span>
+<span class="nc" id="L49">    }</span>
 
     @Override
     public List&lt;Screening&gt; getAllScreening() {
-<span class="nc" id="L54">        List&lt;ScreeningEntity&gt; screeningEntities = screeningDao.findAll();</span>
-<span class="nc" id="L55">        return mapScreeningEntities(screeningEntities);</span>
+<span class="nc" id="L53">        List&lt;ScreeningEntity&gt; screeningEntities = screeningDao.findAll();</span>
+<span class="nc" id="L54">        return mapScreeningEntities(screeningEntities);</span>
     }
 
     private List&lt;Screening&gt; mapScreeningEntities(List&lt;ScreeningEntity&gt; screeningEntities) {
-<span class="nc" id="L59">        return screeningEntities.stream()</span>
-<span class="nc" id="L60">                .map(this::mapScreeningEntity)</span>
-<span class="nc" id="L61">                .collect(Collectors.toList());</span>
+<span class="nc" id="L58">        return screeningEntities.stream()</span>
+<span class="nc" id="L59">                .map(this::mapScreeningEntity)</span>
+<span class="nc" id="L60">                .collect(Collectors.toList());</span>
     }
 
     private Screening mapScreeningEntity(ScreeningEntity screeningEntity) {
-<span class="nc" id="L65">        return new Screening(mapMovieEntity(screeningEntity.getMovieEntity()),</span>
-<span class="nc" id="L66">                mapRoomEntity(screeningEntity.getRoomEntity()),</span>
-<span class="nc" id="L67">                screeningEntity.getDateTime());</span>
+<span class="nc" id="L64">        return new Screening(mapMovieEntity(screeningEntity.getMovieEntity()),</span>
+<span class="nc" id="L65">                mapRoomEntity(screeningEntity.getRoomEntity()),</span>
+<span class="nc" id="L66">                screeningEntity.getDateTime());</span>
     }
 
     private Movie mapMovieEntity(MovieEntity movieEntity) {
-<span class="nc" id="L71">        return new Movie(movieEntity.getTitle(), movieEntity.getGenre(), movieEntity.getRuntime());</span>
+<span class="nc" id="L70">        return new Movie(movieEntity.getTitle(), movieEntity.getGenre(), movieEntity.getRuntime());</span>
     }
 
     private Room mapRoomEntity(RoomEntity roomEntity) {
-<span class="nc" id="L75">        return new Room(roomEntity.getName(), roomEntity.getRows(), roomEntity.getColumns());</span>
+<span class="nc" id="L74">        return new Room(roomEntity.getName(), roomEntity.getRows(), roomEntity.getColumns());</span>
     }
 
 }

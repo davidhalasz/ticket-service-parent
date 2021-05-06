@@ -30,7 +30,7 @@ class MovieCommandHandlerTest {
     private AdminService adminService;
 
 
-    private final static String UNPRIVILIGES_MSG = "You are not signed in";
+    private final static String UNPRIVILIGED_MSG = "You are not signed in";
     private final static String MOVIE_ADDED = "Movie added";
     private final static String MOVIE_UPDATED = "Movie updated";
     private final static String MOVIE_DELETED = "Movie deleted";
@@ -40,7 +40,6 @@ class MovieCommandHandlerTest {
     private final static String GENRE = "movie genre";
     private final static int RUNTIME = 20;
     private final static int INV_RUNTIME = 0;
-    private final static String UNSIGNED_USER_MSG = "You are not signed in";
     private final static String MOVIE_EXISTS = "Movie already exists";
     private final static String EMPTY_LIST_MSG = "There are no movies at the moment";
 
@@ -79,7 +78,7 @@ class MovieCommandHandlerTest {
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
-        assertThat(current, equalTo(UNSIGNED_USER_MSG));
+        assertThat(current, equalTo(UNPRIVILIGED_MSG));
     }
 
     @Test
@@ -155,7 +154,7 @@ class MovieCommandHandlerTest {
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
-        assertThat(current, equalTo(UNSIGNED_USER_MSG));
+        assertThat(current, equalTo(UNPRIVILIGED_MSG));
     }
 
     @Test
@@ -217,7 +216,7 @@ class MovieCommandHandlerTest {
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
-        assertThat(current, equalTo(UNSIGNED_USER_MSG));
+        assertThat(current, equalTo(UNPRIVILIGED_MSG));
     }
 
 }

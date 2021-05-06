@@ -103,7 +103,8 @@ class MovieServiceTest {
     }
 
     @Test
-     void testUpdateMovieWithNonExistingMovieShouldReturnException() throws MovieNotFoundException, InvalidRuntimeException {
+     void testUpdateMovieWithNonExistingMovieShouldReturnException()
+            throws MovieNotFoundException, InvalidRuntimeException {
         // Given
         doThrow(MovieNotFoundException.class).when(movieRepository).updateMovie(anyString(), anyString(), anyInt());
         Exception exception = null;
@@ -120,7 +121,8 @@ class MovieServiceTest {
     }
 
     @Test
-        void testUpdateMovieShouldReturnExceptionWhenUpdateWithInvalidRuntime() throws MovieNotFoundException, InvalidRuntimeException {
+        void testUpdateMovieShouldReturnExceptionWhenUpdateWithInvalidRuntime()
+            throws MovieNotFoundException, InvalidRuntimeException {
         // Given
         doThrow(InvalidRuntimeException.class)
                 .when(movieRepository)
@@ -148,7 +150,8 @@ class MovieServiceTest {
     }
 
     @Test
-    void testDeleteMovieShouldReturnExceptionWhenDeleteNonExistingMovie() throws MovieNotFoundException {
+    void testDeleteMovieShouldReturnExceptionWhenDeleteNonExistingMovie()
+            throws MovieNotFoundException {
         // Given
         doThrow(MovieNotFoundException.class)
                 .when(movieRepository)

@@ -19,12 +19,11 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.mockito.internal.verification.VerificationModeFactory.times;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class JpaMovieRepositoryTest {
@@ -33,13 +32,12 @@ class JpaMovieRepositoryTest {
     @InjectMocks
     private JpaMovieRepository movieRepository;
     @Mock
-    private MapperRepository mapperRepository;
-    @Mock
     private MovieDao movieDao;
 
     private static final String MOVIE_TITLE = "title";
     private static final String MOVIE_GENRE = "genre";
     private static final int VALID_RUNTIME = 100;
+    private static final String MOVIE_EXISTS_MSG = "Movie already exists";
 
     private Movie movie;
     private Movie movie2;
@@ -50,6 +48,9 @@ class JpaMovieRepositoryTest {
     private MovieEntity movieEntity2;
     private List<MovieEntity> movieEntities;
 
+    private static final MovieAlreadyExistsException MOVIE_ALREADY_EXISTS_EXCEPTION
+            = new MovieAlreadyExistsException(MOVIE_EXISTS_MSG);
+
     @BeforeEach
     void setUp() {
         movie = new Movie(MOVIE_TITLE, MOVIE_GENRE, VALID_RUNTIME);
@@ -57,5 +58,6 @@ class JpaMovieRepositoryTest {
         movieEntities = List.of(movieEntity, movieEntity, movieEntity);
         movies = List.of(movie, movie2);
     }
+
 
 }

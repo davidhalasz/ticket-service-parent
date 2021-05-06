@@ -4,12 +4,9 @@ import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.domain.Room;
 import com.epam.training.ticketservice.domain.Screening;
 import com.epam.training.ticketservice.repository.MovieRepository;
-import com.epam.training.ticketservice.repository.RepositoryException.MovieNotFoundException;
-import com.epam.training.ticketservice.repository.RepositoryException.RoomNotFoundException;
-import com.epam.training.ticketservice.repository.RepositoryException.ScreeningNotFoundException;
+import com.epam.training.ticketservice.repository.RepositoryException.*;
 import com.epam.training.ticketservice.repository.RoomRepository;
 import com.epam.training.ticketservice.repository.ScreeningRepository;
-import com.epam.training.ticketservice.repository.RepositoryException.OverlappingException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -32,6 +29,7 @@ public class ScreeningService {
 
     public void createScreening(String movieTitle, String roomName, LocalDateTime startDateTime) throws
             OverlappingException,
+            OverlappingInBreakException,
             RoomNotFoundException,
             MovieNotFoundException {
         Movie movie = movieRepository.findMovieByTitle(movieTitle);
@@ -41,7 +39,7 @@ public class ScreeningService {
         if (isThereOverlappingScreening(startDateTime, endDateTime, room.getName())) {
             throw new OverlappingException("There is an overlapping screening");
         } else if (isStartInTheBreakPeriod(startDateTime, endDateTime, room.getName())) {
-            throw new OverlappingException("This would start in the break period after another screening in this room");
+            throw new OverlappingInBreakException("This would start in the break period after another screening in this room");
         }
         screeningRepository.createScreening(movie, room, startDateTime);
     }

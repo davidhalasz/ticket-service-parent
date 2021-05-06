@@ -3,12 +3,9 @@ package com.epam.training.ticketservice.presentation.handler;
 
 import com.epam.training.ticketservice.domain.Room;
 import com.epam.training.ticketservice.domain.Screening;
-import com.epam.training.ticketservice.repository.RepositoryException.MovieNotFoundException;
-import com.epam.training.ticketservice.repository.RepositoryException.RoomNotFoundException;
-import com.epam.training.ticketservice.repository.RepositoryException.ScreeningNotFoundException;
+import com.epam.training.ticketservice.repository.RepositoryException.*;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.ScreeningService;
-import com.epam.training.ticketservice.repository.RepositoryException.OverlappingException;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
@@ -31,8 +28,9 @@ public class ScreeningCommandHandler {
     }
 
     @ShellMethod(value = "Create a new screening", key = "create screening")
-    public String createScreening(String movieTitle, String roomName, String startDateTime) throws OverlappingException, MovieNotFoundException, RoomNotFoundException{
-        String result = "";
+    public String createScreening(String movieTitle, String roomName, String startDateTime)
+            throws OverlappingException, MovieNotFoundException, RoomNotFoundException, OverlappingInBreakException{
+        String result;
         try {
             if (adminService.loggedAdmin()) {
                 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -41,7 +39,7 @@ public class ScreeningCommandHandler {
             } else {
                 result = "You are not signed in";
             }
-        } catch (OverlappingException | RoomNotFoundException | MovieNotFoundException e) {
+        } catch (OverlappingException | RoomNotFoundException | MovieNotFoundException | OverlappingInBreakException e) {
             result = e.getMessage();
         }
         return result;
@@ -68,7 +66,7 @@ public class ScreeningCommandHandler {
     public String listScreenings()  {
         StringBuilder builder = new StringBuilder();
         if (screeningService.getAllScreening().isEmpty()) {
-            return "There are no screenings at the moment";
+            return "There are no screenings";
         } else {
             for (Screening screening : screeningService.getAllScreening()) {
                 builder.append(screening);

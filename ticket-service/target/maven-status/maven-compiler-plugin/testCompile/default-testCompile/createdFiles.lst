@@ -1,2 +1,3 @@
 com\epam\training\ticketservice\service\AdminServiceTest.class
+com\epam\training\ticketservice\presentation\handler\ScreeningCommandHandlerTest.class
 com\epam\training\ticketservice\service\MovieServiceTest.class

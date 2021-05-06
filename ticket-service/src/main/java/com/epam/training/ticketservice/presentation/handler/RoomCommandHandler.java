@@ -2,6 +2,7 @@ package com.epam.training.ticketservice.presentation.handler;
 
 
 import com.epam.training.ticketservice.domain.Room;
+import com.epam.training.ticketservice.repository.RepositoryException.InvalidRoomParameterException;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.RoomService;
 import com.epam.training.ticketservice.repository.RepositoryException.RoomAlreadyExistsException;
@@ -27,7 +28,8 @@ public class RoomCommandHandler {
     }
 
     @ShellMethod(value = "Create a new room", key = "create room")
-    public String createRoom(String name, int rows, int columns) throws RoomAlreadyExistsException {
+    public String createRoom(String name, int rows, int columns)
+            throws RoomAlreadyExistsException, InvalidRoomParameterException {
         String result;
         try {
             if (adminService.loggedAdmin()) {
@@ -36,14 +38,15 @@ public class RoomCommandHandler {
             } else {
                 result = "You are not signed in";
             }
-        } catch (RoomAlreadyExistsException e) {
+        } catch (RoomAlreadyExistsException | InvalidRoomParameterException e) {
             result = e.getMessage();
         }
         return result;
     }
 
     @ShellMethod(value = "Update a room", key = "update room")
-    public String updateRoom(String name, int rows, int columns) throws RoomNotFoundException {
+    public String updateRoom(String name, int rows, int columns)
+            throws RoomNotFoundException, InvalidRoomParameterException {
         String result;
         try {
             if (adminService.loggedAdmin()) {
@@ -52,7 +55,7 @@ public class RoomCommandHandler {
             } else {
                 result = "You are not signed in";
             }
-        } catch (RoomNotFoundException e) {
+        } catch (RoomNotFoundException | InvalidRoomParameterException e) {
             result = e.getMessage();
         }
         return result;

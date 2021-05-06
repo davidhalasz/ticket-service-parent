@@ -2,6 +2,7 @@ package com.epam.training.ticketservice.service;
 
 import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.domain.Room;
+import com.epam.training.ticketservice.repository.RepositoryException.InvalidRoomParameterException;
 import com.epam.training.ticketservice.repository.RepositoryException.RoomAlreadyExistsException;
 import com.epam.training.ticketservice.repository.RepositoryException.RoomNotFoundException;
 import com.epam.training.ticketservice.repository.RoomRepository;
@@ -45,7 +46,8 @@ class RoomServiceTest {
     }
 
     @Test
-    void testCreateRoomShouldReturnExceptionWhenRoomExists()  throws RoomAlreadyExistsException {
+    void testCreateRoomShouldReturnExceptionWhenRoomExists()
+            throws RoomAlreadyExistsException, InvalidRoomParameterException {
         // Given
         doThrow(RoomAlreadyExistsException.class)
                 .when(roomRepository)
@@ -59,7 +61,8 @@ class RoomServiceTest {
     }
 
     @Test
-    void testUpdateRoomShouldReturnExceptionWhenRoomNotFound() throws RoomNotFoundException {
+    void testUpdateRoomShouldReturnExceptionWhenRoomNotFound()
+            throws RoomNotFoundException, InvalidRoomParameterException {
         // Given
         given(roomRepository.updateRoom(NAME, ROWS, COLUMNS))
                 .willThrow(RoomNotFoundException.class);
@@ -72,7 +75,8 @@ class RoomServiceTest {
     }
 
     @Test
-    void testDeleteRoomShouldReturnExceptionWhenRoomNotFound() throws RoomNotFoundException {
+    void testDeleteRoomShouldReturnExceptionWhenRoomNotFound()
+            throws RoomNotFoundException {
         // Given
         given(roomRepository.deleteRoom(anyString()))
                 .willThrow(RoomNotFoundException.class);

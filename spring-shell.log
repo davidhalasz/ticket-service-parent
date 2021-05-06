@@ -326,3 +326,11 @@
 1620215174160:create room ro 10 10
 1620215196258:create screening mo ro "2021-05-05 10:00"
 1620215207743:exit
+1620299749763:sign in priviliged admin admin
+1620299758882:create movie alma aé 120
+1620299765851:list movies
+1620299769979:exit
+1620320648160:sign out
+1620320659135:sign in priviliged admin admin
+1620320664480:sign out
+1620320668127:exit

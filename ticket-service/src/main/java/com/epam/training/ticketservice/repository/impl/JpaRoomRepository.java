@@ -84,11 +84,11 @@ public class JpaRoomRepository implements RoomRepository {
                 .collect(Collectors.toList());
     }
 
-    private Room mapRoomEntity(RoomEntity roomEntity) {
+    public Room mapRoomEntity(RoomEntity roomEntity) {
         return new Room(roomEntity.getName(), roomEntity.getRows(), roomEntity.getColumns());
     }
 
-    private boolean isRoomExists(String name) {
+    public boolean isRoomExists(String name) {
         Optional<RoomEntity> roomEntity = Optional.ofNullable(roomDao.findByName(name));
         return roomEntity.isPresent();
     }

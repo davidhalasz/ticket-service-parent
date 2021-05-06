@@ -84,11 +84,11 @@ public class JpaRoomRepository implements RoomRepository {
 <span class="nc" id="L84">                .collect(Collectors.toList());</span>
     }
 
-    private Room mapRoomEntity(RoomEntity roomEntity) {
+    public Room mapRoomEntity(RoomEntity roomEntity) {
 <span class="nc" id="L88">        return new Room(roomEntity.getName(), roomEntity.getRows(), roomEntity.getColumns());</span>
     }
 
-    private boolean isRoomExists(String name) {
+    public boolean isRoomExists(String name) {
 <span class="nc" id="L92">        Optional&lt;RoomEntity&gt; roomEntity = Optional.ofNullable(roomDao.findByName(name));</span>
 <span class="nc" id="L93">        return roomEntity.isPresent();</span>
     }

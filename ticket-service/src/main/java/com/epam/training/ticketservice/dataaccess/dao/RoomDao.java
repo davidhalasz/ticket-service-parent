@@ -7,4 +7,5 @@ import java.util.UUID;
 
 public interface RoomDao extends JpaRepository<RoomEntity, UUID> {
     RoomEntity findByName(String name);
+
 }

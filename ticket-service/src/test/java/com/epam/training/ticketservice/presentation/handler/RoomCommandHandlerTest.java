@@ -19,6 +19,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class RoomCommandHandlerTest {
@@ -52,6 +53,9 @@ class RoomCommandHandlerTest {
     private static final InvalidRoomParameterException INVALID_ROOM_PARAMETER_EXCEPTION
             = new InvalidRoomParameterException(INVALID_PARAMETER);
     private final static Room room = new Room(NAME, ROWS, COLUMNS);
+
+    private final static List<Room> rooms = List.of(room, room);
+
 
 
     @Test
@@ -213,6 +217,27 @@ class RoomCommandHandlerTest {
     }
 
     @Test
+    void testDeleteRoomShouldReturnRoomNotFoundException() throws RoomNotFoundException {
+        Exception exception = null;
+        // Given
+        when(adminService.loggedAdmin()).thenReturn(true);
+        when(roomService.deleteRoom(anyString())).thenThrow(RoomNotFoundException.class);
+
+
+        // When
+        try {
+            adminService.loggedAdmin();
+            roomService.deleteRoom(NAME);
+        } catch (RoomNotFoundException e) {
+            exception = e;
+        }
+
+        // Then
+        assertNotNull(exception);
+
+    }
+
+    @Test
     void testDeleteRoomReturnErrorWhenAdminIsNotSignedIn()
             throws RoomNotFoundException {
         // Given
@@ -224,6 +249,22 @@ class RoomCommandHandlerTest {
         // Then
         verify(adminService, times(1)).loggedAdmin();
         assertThat(current, equalTo(UNPRIVILIGED_MSG));
+    }
+
+    @Test
+    void testListRoomsShouldReturnListOfRooms() {
+        // Given
+        when(roomService.getAllRoom()).thenReturn(rooms);
+
+        // When
+        String actual = roomCommandHandler.listRooms();
+
+        // Then
+        StringBuilder builder = new StringBuilder();
+        for (Room room : rooms) {
+            builder.append(room);
+        }
+        assertThat(actual, equalTo(builder.toString()));
     }
 
 }

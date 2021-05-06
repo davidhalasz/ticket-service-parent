@@ -12,7 +12,6 @@ import java.util.List;
 
 public interface MapperRepository {
 
-
     MovieEntity mapperMovie(Movie movie);
 
     RoomEntity mapperRoom(Room room);
@@ -22,4 +21,8 @@ public interface MapperRepository {
     Movie mapMovieEntity(MovieEntity movieEntity);
 
     List<Movie> mapMovieEntities(List<MovieEntity> movieEntities);
+
+    List<Room> mapRoomEntities(List<RoomEntity> roomEntities);
+
+    Room mapRoomEntity(RoomEntity roomEntity);
 }

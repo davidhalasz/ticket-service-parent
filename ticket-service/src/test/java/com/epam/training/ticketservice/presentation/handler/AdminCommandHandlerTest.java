@@ -1,6 +1,7 @@
 package com.epam.training.ticketservice.presentation.handler;
 
 import com.epam.training.ticketservice.repository.RepositoryException.AdminAccountNotExistsException;
+import com.epam.training.ticketservice.repository.RepositoryException.AdminIsNotLoggedInException;
 import com.epam.training.ticketservice.repository.RepositoryException.InvalidPasswordException;
 import com.epam.training.ticketservice.service.AdminService;
 import org.junit.jupiter.api.Test;
@@ -66,17 +67,5 @@ class AdminCommandHandlerTest {
         assertThat(passwordCaptor.getValue(), equalTo(PASSWORD));
         assertThat(current, equalTo(FAIL_SIGN_IN));
     }
-
-    @Test
-    void testAdminLogOutShouldReturnStringLoggedOut() throws AdminAccountNotExistsException {
-        //When
-        String current = adminCommandHandler.adminLogout();
-
-        //Then
-        verify(adminService, times(1)).signOut();
-        assertThat(current, equalTo(LOGOUT));
-    }
-
-
 
 }

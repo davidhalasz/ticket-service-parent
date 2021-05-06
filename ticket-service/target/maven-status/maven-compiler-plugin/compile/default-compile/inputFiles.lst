@@ -12,6 +12,7 @@ D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\c
 D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\RepositoryException\RoomAlreadyExistsException.java
 D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\handler\AdminCommandHandler.java
 D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\MovieRepository.java
+D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\RepositoryException\AdminIsNotLoggedInException.java
 D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\RepositoryException\OverlappingInBreakException.java
 D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\entity\MovieEntity.java
 D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\impl\JpaAdminRepository.java

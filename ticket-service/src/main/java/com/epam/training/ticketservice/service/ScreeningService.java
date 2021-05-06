@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
 @Service
 public class ScreeningService {
 
@@ -26,6 +27,7 @@ public class ScreeningService {
         this.movieRepository = movieRepository;
         this.roomRepository = roomRepository;
     }
+
 
     public void createScreening(String movieTitle, String roomName, LocalDateTime startDateTime) throws
             OverlappingException,
@@ -45,7 +47,7 @@ public class ScreeningService {
     }
 
 
-    private boolean isThereOverlappingScreening(LocalDateTime startDate,
+    public boolean isThereOverlappingScreening(LocalDateTime startDate,
                                                 LocalDateTime endDate,
                                                 String roomName) {
         return screeningRepository.getAllScreening().stream()
@@ -60,7 +62,7 @@ public class ScreeningService {
                 });
     }
 
-    private boolean isStartInTheBreakPeriod(LocalDateTime startDateTime,
+    public boolean isStartInTheBreakPeriod(LocalDateTime startDateTime,
                                             LocalDateTime endDateTime,
                                             String roomName) {
         return screeningRepository.getAllScreening().stream()
@@ -75,7 +77,7 @@ public class ScreeningService {
                 });
     }
 
-    private boolean isWithinRange(LocalDateTime startDate, LocalDateTime endDate, LocalDateTime checkStartDateTime) {
+    public boolean isWithinRange(LocalDateTime startDate, LocalDateTime endDate, LocalDateTime checkStartDateTime) {
         return (checkStartDateTime.isEqual(startDate) || checkStartDateTime.isEqual(endDate))
                 || (checkStartDateTime.isBefore(endDate) && checkStartDateTime.isAfter(startDate));
     }

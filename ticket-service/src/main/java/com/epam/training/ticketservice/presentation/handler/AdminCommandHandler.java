@@ -1,6 +1,7 @@
 package com.epam.training.ticketservice.presentation.handler;
 
 import com.epam.training.ticketservice.domain.Admin;
+import com.epam.training.ticketservice.repository.RepositoryException.AdminIsNotLoggedInException;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.repository.RepositoryException.AdminAccountNotExistsException;
 import com.epam.training.ticketservice.repository.RepositoryException.InvalidPasswordException;
@@ -15,6 +16,7 @@ import org.springframework.shell.standard.ShellMethod;
 public class AdminCommandHandler {
 
     private AdminService adminService;
+    private Admin loggedAdmin = null;
 
     public AdminCommandHandler(AdminService adminService) {
         this.adminService = adminService;
@@ -24,7 +26,7 @@ public class AdminCommandHandler {
     public String adminLogIn(String name, String password) throws AdminAccountNotExistsException, InvalidPasswordException {
         String result;
         try {
-            Admin Admin = adminService.checkAccount(name, password);
+            loggedAdmin = adminService.checkAccount(name, password);
             result = "Signed in with privileged account " + name;
         } catch (AdminAccountNotExistsException | InvalidPasswordException e) {
             result = e.getMessage();
@@ -33,8 +35,13 @@ public class AdminCommandHandler {
     }
 
     @ShellMethod(value = "Admin sign out", key = "sign out")
-    public String adminLogout() throws AdminAccountNotExistsException {
-        adminService.signOut();
-        return "Logged out";
+    public String adminLogout() throws AdminIsNotLoggedInException, AdminAccountNotExistsException {
+        try {
+            adminService.signOut(loggedAdmin);
+            return "Logged out";
+        } catch (AdminIsNotLoggedInException | AdminAccountNotExistsException e ) {
+            return e.getMessage();
+        }
+
     }
 }

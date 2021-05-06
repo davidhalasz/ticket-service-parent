@@ -3,6 +3,7 @@ package com.epam.training.ticketservice.repository.impl;
 import com.epam.training.ticketservice.dataaccess.dao.MovieDao;
 import com.epam.training.ticketservice.dataaccess.entity.MovieEntity;
 import com.epam.training.ticketservice.domain.Movie;
+import com.epam.training.ticketservice.repository.MapperRepository;
 import com.epam.training.ticketservice.repository.MovieRepository;
 import com.epam.training.ticketservice.repository.RepositoryException.InvalidRuntimeException;
 import com.epam.training.ticketservice.repository.RepositoryException.MovieAlreadyExistsException;
@@ -20,33 +21,35 @@ import java.util.stream.Collectors;
 public class JpaMovieRepository implements MovieRepository {
 
     private final MovieDao movieDao;
+    private final MapperRepository mapper;
 
-    public JpaMovieRepository(MovieDao movieDao) {
+    public JpaMovieRepository(MovieDao movieDao, MapperRepository mapper) {
         this.movieDao = movieDao;
+        this.mapper = mapper;
     }
 
     @Override
     public void createMovie(Movie movie) throws MovieAlreadyExistsException, InvalidRuntimeException {
         if(isMovieExists(movie.getTitle())) {
             throw new MovieAlreadyExistsException("Movie already exists");
-        } else {
-            if (movie.getRuntime() < 1) {
-                throw new InvalidRuntimeException("Runtime is invalid");
-            } else {
-                MovieEntity newMovie = new MovieEntity(
-                        movie.getTitle(),
-                        movie.getGenre(),
-                        movie.getRuntime()
-                );
-                movieDao.save(newMovie);
-            }
         }
+
+        if (movie.getRuntime() < 1) {
+            throw new InvalidRuntimeException("Runtime is invalid");
+        }
+
+        MovieEntity newMovie = new MovieEntity(
+                movie.getTitle(),
+                movie.getGenre(),
+                movie.getRuntime()
+        );
+        movieDao.save(newMovie);
     }
 
     @Override
     public List<Movie> getAllMovie() {
         List<MovieEntity> movieEntities = movieDao.findAll();
-        return mapMovieEntities(movieEntities);
+        return mapper.mapMovieEntities(movieEntities);
     }
 
     private List<Movie> mapMovieEntities(List<MovieEntity> movieEntities) {
@@ -95,7 +98,8 @@ public class JpaMovieRepository implements MovieRepository {
         }
     }
 
-    private boolean isMovieExists(String title) {
+    @Override
+    public boolean isMovieExists(String title) {
         Optional<MovieEntity> movieEntity = movieDao.findById(title);
         return movieEntity.isPresent();
     }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -43,5 +44,18 @@ public class ScreeningMapper implements MapperRepository {
                 .map(this::mapMovieEntity)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Room> mapRoomEntities(List<RoomEntity> roomEntities) {
+        return roomEntities.stream()
+                .map(this::mapRoomEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Room mapRoomEntity(RoomEntity roomEntity) {
+        return new Room(roomEntity.getName(), roomEntity.getRows(), roomEntity.getColumns());
+    }
+
 
 }

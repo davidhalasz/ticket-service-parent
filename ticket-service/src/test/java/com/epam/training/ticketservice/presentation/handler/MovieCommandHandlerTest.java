@@ -1,6 +1,7 @@
 package com.epam.training.ticketservice.presentation.handler;
 
 import com.epam.training.ticketservice.domain.Movie;
+import com.epam.training.ticketservice.domain.Room;
 import com.epam.training.ticketservice.repository.RepositoryException.*;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.MovieService;
@@ -51,6 +52,8 @@ class MovieCommandHandlerTest {
     private static final MovieNotFoundException MOVIE_NOT_FOUND_EXCEPTION
             = new MovieNotFoundException(MOVIE_NOT_FOUND);
     private final static Movie movie = new Movie(TITLE, GENRE, RUNTIME);
+
+    private final static List<Movie> movies = List.of(movie, movie);
 
 
     @Test
@@ -217,6 +220,22 @@ class MovieCommandHandlerTest {
         // Then
         verify(adminService, times(1)).loggedAdmin();
         assertThat(current, equalTo(UNPRIVILIGED_MSG));
+    }
+
+    @Test
+    void testListMoviesShouldReturnListOfRooms() {
+        // Given
+        when(movieService.getAllMovie()).thenReturn(movies);
+
+        // When
+        String actual = movieCommandHandler.listMovies();
+
+        // Then
+        StringBuilder builder = new StringBuilder();
+        for (Movie movie : movies) {
+            builder.append(movie);
+        }
+        assertThat(actual, equalTo(builder.toString()));
     }
 
 }

@@ -18,4 +18,6 @@ public interface MovieRepository{
     Movie deleteMovie(String title) throws MovieNotFoundException;
 
     Movie findMovieByTitle(String title) throws MovieNotFoundException;
+
+    boolean isMovieExists(String title);
 }

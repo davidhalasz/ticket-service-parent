@@ -45,13 +45,13 @@ public class MovieCommandHandler {
     public String listMovies() {
 <span class="fc" id="L46">        StringBuilder builder = new StringBuilder();</span>
 
-<span class="pc bpc" id="L48" title="1 of 2 branches missed.">        if (movieService.getAllMovie().isEmpty()) {</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        if (movieService.getAllMovie().isEmpty()) {</span>
 <span class="fc" id="L49">            return &quot;There are no movies at the moment&quot;;</span>
         } else {
-<span class="nc bnc" id="L51" title="All 2 branches missed.">            for (Movie value : movieService.getAllMovie()) {</span>
-<span class="nc" id="L52">                builder.append(value);</span>
-<span class="nc" id="L53">            }</span>
-<span class="nc" id="L54">            return builder.toString();</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">            for (Movie value : movieService.getAllMovie()) {</span>
+<span class="fc" id="L52">                builder.append(value);</span>
+<span class="fc" id="L53">            }</span>
+<span class="fc" id="L54">            return builder.toString();</span>
         }
     }
 

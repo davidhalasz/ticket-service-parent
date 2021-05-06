@@ -80,13 +80,13 @@ public class RoomCommandHandler {
     @ShellMethod(value = &quot;List all room&quot;, key = &quot;list rooms&quot;)
     public String listRooms() {
 <span class="fc" id="L82">        StringBuilder builder = new StringBuilder();</span>
-<span class="pc bpc" id="L83" title="1 of 2 branches missed.">        if (roomService.getAllRoom().isEmpty()) {</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (roomService.getAllRoom().isEmpty()) {</span>
 <span class="fc" id="L84">            return &quot;There are no rooms at the moment&quot;;</span>
         } else {
-<span class="nc bnc" id="L86" title="All 2 branches missed.">            for (Room room : roomService.getAllRoom()) {</span>
-<span class="nc" id="L87">                builder.append(room);</span>
-<span class="nc" id="L88">            }</span>
-<span class="nc" id="L89">            return builder.toString();</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">            for (Room room : roomService.getAllRoom()) {</span>
+<span class="fc" id="L87">                builder.append(room);</span>
+<span class="fc" id="L88">            }</span>
+<span class="fc" id="L89">            return builder.toString();</span>
         }
     }
 }

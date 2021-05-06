@@ -11,38 +11,52 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
-<span class="nc" id="L17">public class ScreeningMapper implements MapperRepository {</span>
+<span class="nc" id="L18">public class ScreeningMapper implements MapperRepository {</span>
 
     @Override
     public MovieEntity mapperMovie(Movie movie) {
-<span class="nc" id="L21">        return new MovieEntity(movie.getTitle(), movie.getGenre(), movie.getRuntime());</span>
+<span class="nc" id="L22">        return new MovieEntity(movie.getTitle(), movie.getGenre(), movie.getRuntime());</span>
     }
 
     @Override
     public RoomEntity mapperRoom(Room room) {
-<span class="nc" id="L26">        return new RoomEntity(room.getName(), room.getRows(), room.getColumns());</span>
+<span class="nc" id="L27">        return new RoomEntity(room.getName(), room.getRows(), room.getColumns());</span>
     }
 
     @Override
     public ScreeningEntity mapperScreening(Movie movie, Room room, LocalDateTime startDateTime) {
-<span class="nc" id="L31">        return new ScreeningEntity(mapperMovie(movie), mapperRoom(room), startDateTime);</span>
+<span class="nc" id="L32">        return new ScreeningEntity(mapperMovie(movie), mapperRoom(room), startDateTime);</span>
     }
 
     @Override
     public Movie mapMovieEntity(MovieEntity movieEntity) {
-<span class="nc" id="L36">        return new Movie(movieEntity.getTitle(), movieEntity.getGenre(), movieEntity.getRuntime());</span>
+<span class="nc" id="L37">        return new Movie(movieEntity.getTitle(), movieEntity.getGenre(), movieEntity.getRuntime());</span>
     }
 
 
     @Override
     public List&lt;Movie&gt; mapMovieEntities(List&lt;MovieEntity&gt; movieEntities) {
-<span class="nc" id="L42">        return movieEntities.stream()</span>
-<span class="nc" id="L43">                .map(this::mapMovieEntity)</span>
-<span class="nc" id="L44">                .collect(Collectors.toList());</span>
+<span class="nc" id="L43">        return movieEntities.stream()</span>
+<span class="nc" id="L44">                .map(this::mapMovieEntity)</span>
+<span class="nc" id="L45">                .collect(Collectors.toList());</span>
     }
+
+    @Override
+    public List&lt;Room&gt; mapRoomEntities(List&lt;RoomEntity&gt; roomEntities) {
+<span class="nc" id="L50">        return roomEntities.stream()</span>
+<span class="nc" id="L51">                .map(this::mapRoomEntity)</span>
+<span class="nc" id="L52">                .collect(Collectors.toList());</span>
+    }
+
+    @Override
+    public Room mapRoomEntity(RoomEntity roomEntity) {
+<span class="nc" id="L57">        return new Room(roomEntity.getName(), roomEntity.getRows(), roomEntity.getColumns());</span>
+    }
+
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

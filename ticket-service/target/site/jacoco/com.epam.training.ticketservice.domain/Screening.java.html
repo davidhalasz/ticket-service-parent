@@ -31,13 +31,13 @@ public class Screening {
 
     @Override
     public String toString() {
-<span class="nc" id="L34">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
-<span class="nc" id="L35">        return movie.getTitle() + &quot; (&quot;</span>
-<span class="nc" id="L36">                + movie.getGenre() + &quot;, &quot;</span>
-<span class="nc" id="L37">                + movie.getRuntime() + &quot; minutes), &quot;</span>
+<span class="fc" id="L34">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+<span class="fc" id="L35">        return movie.getTitle() + &quot; (&quot;</span>
+<span class="fc" id="L36">                + movie.getGenre() + &quot;, &quot;</span>
+<span class="fc" id="L37">                + movie.getRuntime() + &quot; minutes), &quot;</span>
                 + &quot;screened in room &quot;
-<span class="nc" id="L39">                + room.getName() + &quot;, at &quot;</span>
-<span class="nc" id="L40">                + startDate.format(formatter) + &quot;\n&quot;;</span>
+<span class="fc" id="L39">                + room.getName() + &quot;, at &quot;</span>
+<span class="fc" id="L40">                + startDate.format(formatter) + &quot;\n&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -65,13 +65,13 @@ public class ScreeningCommandHandler {
     @ShellMethod(value = &quot;List all new screening&quot;, key = &quot;list screenings&quot;)
     public String listScreenings()  {
 <span class="fc" id="L67">        StringBuilder builder = new StringBuilder();</span>
-<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if (screeningService.getAllScreening().isEmpty()) {</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (screeningService.getAllScreening().isEmpty()) {</span>
 <span class="fc" id="L69">            return &quot;There are no screenings&quot;;</span>
         } else {
-<span class="nc bnc" id="L71" title="All 2 branches missed.">            for (Screening screening : screeningService.getAllScreening()) {</span>
-<span class="nc" id="L72">                builder.append(screening);</span>
-<span class="nc" id="L73">            }</span>
-<span class="nc" id="L74">            return builder.toString();</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">            for (Screening screening : screeningService.getAllScreening()) {</span>
+<span class="fc" id="L72">                builder.append(screening);</span>
+<span class="fc" id="L73">            }</span>
+<span class="fc" id="L74">            return builder.toString();</span>
         }
     }
 }

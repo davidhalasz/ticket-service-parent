@@ -3,6 +3,7 @@
 import com.epam.training.ticketservice.domain.Admin;
 import com.epam.training.ticketservice.repository.AdminRepository;
 import com.epam.training.ticketservice.repository.RepositoryException.AdminAccountNotExistsException;
+import com.epam.training.ticketservice.repository.RepositoryException.AdminIsNotLoggedInException;
 import com.epam.training.ticketservice.repository.RepositoryException.InvalidPasswordException;
 import org.springframework.stereotype.Service;
 
@@ -12,39 +13,40 @@ public class AdminService {
     private AdminRepository adminRepository;
     private Admin currentAdmin;
 
-<span class="fc" id="L15">    public AdminService(AdminRepository adminRepository) {</span>
-<span class="fc" id="L16">        this.adminRepository = adminRepository;</span>
-<span class="fc" id="L17">    }</span>
+<span class="fc" id="L16">    public AdminService(AdminRepository adminRepository) {</span>
+<span class="fc" id="L17">        this.adminRepository = adminRepository;</span>
+<span class="fc" id="L18">    }</span>
 
     public Admin checkAccount(String name, String password) throws AdminAccountNotExistsException, InvalidPasswordException {
-<span class="fc" id="L20">        Admin admin = adminRepository.getAdminByName(name);</span>
-<span class="pc bpc" id="L21" title="1 of 2 branches missed.">        if (admin.getPassword().matches(password)) {</span>
-<span class="fc" id="L22">            adminRepository.updatePriviliged(name, true);</span>
-<span class="fc" id="L23">            currentAdmin = adminRepository.getAdminByName(name);</span>
+<span class="fc" id="L21">        Admin admin = adminRepository.getAdminByName(name);</span>
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        if (admin.getPassword().matches(password)) {</span>
+<span class="fc" id="L23">            adminRepository.updatePriviliged(name, true);</span>
+<span class="fc" id="L24">            currentAdmin = adminRepository.getAdminByName(name);</span>
         } else {
-<span class="nc" id="L25">            throw new InvalidPasswordException(&quot;Invalid password&quot;);</span>
+<span class="fc" id="L26">            throw new InvalidPasswordException(&quot;Invalid password&quot;);</span>
         }
-<span class="fc" id="L27">        return admin;</span>
+<span class="fc" id="L28">        return admin;</span>
     }
 
     public boolean loggedAdmin() {
-<span class="nc bnc" id="L31" title="All 2 branches missed.">        if (currentAdmin != null) {</span>
-<span class="nc" id="L32">            return currentAdmin.isPriviliged();</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">        if (currentAdmin != null) {</span>
+<span class="nc" id="L33">            return currentAdmin.isPriviliged();</span>
         } else {
-<span class="nc" id="L34">            return false;</span>
+<span class="nc" id="L35">            return false;</span>
         }
     }
 
-    public void signOut() throws AdminAccountNotExistsException{
-        try {
-<span class="nc" id="L40">            Admin admin = adminRepository.getAdminByName(currentAdmin.getName());</span>
-<span class="nc" id="L41">            adminRepository.updatePriviliged(admin.getName(), false);</span>
-<span class="nc" id="L42">            currentAdmin = null;</span>
-<span class="nc" id="L43">        } catch (NullPointerException e) {</span>
-<span class="nc" id="L44">            throw new NullPointerException(&quot;Something wrong&quot;);</span>
-<span class="nc" id="L45">        }</span>
-
-<span class="nc" id="L47">    }</span>
-
+    public void signOut(Admin loggedAdmin) throws AdminIsNotLoggedInException, AdminAccountNotExistsException{
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if(loggedAdmin != null) {</span>
+            try {
+<span class="fc" id="L42">                Admin admin = adminRepository.getAdminByName(loggedAdmin.getName());</span>
+<span class="fc" id="L43">                adminRepository.updatePriviliged(admin.getName(), false);</span>
+<span class="fc" id="L44">            } catch (AdminAccountNotExistsException e) {</span>
+<span class="fc" id="L45">                throw new AdminAccountNotExistsException(&quot;Account not exists&quot;);</span>
+<span class="fc" id="L46">            }</span>
+        } else {
+<span class="fc" id="L48">            throw new AdminIsNotLoggedInException(&quot;You are not logged in&quot;);</span>
+        }
+<span class="fc" id="L50">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -2,6 +2,7 @@ package com.epam.training.ticketservice.presentation.handler;
 
 import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.domain.Room;
+import com.epam.training.ticketservice.domain.Screening;
 import com.epam.training.ticketservice.repository.MovieRepository;
 import com.epam.training.ticketservice.repository.RepositoryException.*;
 import com.epam.training.ticketservice.repository.RoomRepository;
@@ -48,6 +49,7 @@ class ScreeningCommandHandlerTest {
     private final static String SCREENING_NOT_FOUND = "There is no such screening";
     private final static String TITLE = "movie title";
     private final static String NAME = "room name";
+
     private final static String DATETIME = "2021-05-06 10:00";
     private final static String SCREENING_EXISTS_MSG = "Screening already exists";
     private final static String EMPTY_LIST_MSG = "There are no screenings";
@@ -67,9 +69,13 @@ class ScreeningCommandHandlerTest {
     private static final ScreeningNotFoundException SCREENING_NOT_FOUND_EXCEPTION
             = new ScreeningNotFoundException(SCREENING_NOT_FOUND);
 
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    private final LocalDateTime FORMATTED_DATETIME = LocalDateTime.parse(DATETIME, dateTimeFormatter);
+    private final static  DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private final static LocalDateTime FORMATTED_DATETIME = LocalDateTime.parse(DATETIME, dateTimeFormatter);
 
+    private final static Movie movie = new Movie(TITLE, "genre", 10);
+    private final static Room room = new Room(NAME, 10, 10);
+    private final static Screening screening = new Screening(movie, room, FORMATTED_DATETIME);
+    private final static List<Screening> screenings = List.of(screening, screening);
 
     @Test
     void testCreateScreeningWhenAdminIsSignedIn()
@@ -226,6 +232,22 @@ class ScreeningCommandHandlerTest {
         // Then
         verify(screeningService, times(1)).getAllScreening();
         assertThat(current, equalTo(EMPTY_LIST_MSG));
+    }
+
+    @Test
+    void testListScreeningsShouldReturnListOfRooms() {
+        // Given
+        when(screeningService.getAllScreening()).thenReturn(screenings);
+
+        // When
+        String actual = screeningCommandHandler.listScreenings();
+
+        // Then
+        StringBuilder builder = new StringBuilder();
+        for (Screening screening : screenings) {
+            builder.append(screening);
+        }
+        assertThat(actual, equalTo(builder.toString()));
     }
 
 }

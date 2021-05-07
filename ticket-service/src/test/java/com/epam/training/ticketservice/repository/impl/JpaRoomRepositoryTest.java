@@ -1,32 +1,25 @@
 package com.epam.training.ticketservice.repository.impl;
 
+import com.epam.training.ticketservice.exceptions.RoomNotFoundException;
 import com.epam.training.ticketservice.dataaccess.dao.RoomDao;
 import com.epam.training.ticketservice.dataaccess.entity.RoomEntity;
 import com.epam.training.ticketservice.domain.Room;
-import com.epam.training.ticketservice.repository.MapperRepository;
-import com.epam.training.ticketservice.repository.RepositoryException.InvalidRoomParameterException;
-import com.epam.training.ticketservice.repository.RepositoryException.RoomAlreadyExistsException;
-import com.epam.training.ticketservice.service.AdminService;
-import org.junit.jupiter.api.BeforeEach;
+import com.epam.training.ticketservice.repository.mapper.MapperInterface;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,7 +31,7 @@ class JpaRoomRepositoryTest {
     RoomDao roomDao;
 
     @Mock
-    MapperRepository mapper;
+    MapperInterface mapper;
 
     @Spy
     @InjectMocks
@@ -48,15 +41,49 @@ class JpaRoomRepositoryTest {
     private static final int ROWS = 10;
     private static final int COLUMNS = 10;
 
-    private Room room;
-    private RoomEntity roomEntity;
-    private List<Room> rooms;
-    private List<RoomEntity> roomEntities;
+    private static final Room room1 = new Room(NAME, ROWS, COLUMNS);
+    private static final List<Room> rooms = List.of(room1, room1);
+    private static final RoomEntity roomEnity = new RoomEntity(NAME, ROWS, COLUMNS);
+    private static final List<RoomEntity> roomEntities = List.of(roomEnity, roomEnity);
 
-    private static Room createRoom(String roomName, int rows, int columns) {
-        Room result = null;
-        result = new Room(roomName, rows, columns);
-        return result;
+
+    @Test
+    void testGetAllRoomsShouldReturnListOfAllRooms() {
+        given(roomDao.findAll()).willReturn(roomEntities);
+        given(mapper.mapRoomEntities(roomEntities)).willReturn(rooms);
+
+        List<Room> actualResult = roomRepository.getAllRooms();
+
+        assertThat(actualResult, equalTo(rooms));
+    }
+
+    @Test
+    void testIsRoomExistsShouldReturnTrueWhenRoomIsExists() {
+        // Given
+        when(roomDao.findByName(NAME)).thenReturn(roomEnity);
+
+        boolean actualResult = roomRepository.isRoomExists(NAME);
+
+        assertTrue(actualResult);
+    }
+
+    @Test
+    void testGetRoomByNameShouldReturnRoomWhenExists() throws RoomNotFoundException {
+        when(roomDao.findByName(NAME)).thenReturn(roomEnity);
+        when(mapper.mapRoomEntity(roomEnity)).thenReturn(room1);
+
+        Room actualResult = roomRepository.getRoomByName(NAME);
+
+        assertThat(actualResult, equalTo(room1));
+    }
+
+    @Test
+    void testDeleteRoomShouldBeSuccess() throws RoomNotFoundException {
+        when(roomDao.findByName(NAME)).thenReturn(roomEnity);
+
+        roomRepository.deleteRoom(NAME);
+
+        verify(roomDao, times(1)).delete(roomEnity);
     }
 
 }

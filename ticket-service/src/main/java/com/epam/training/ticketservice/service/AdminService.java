@@ -2,12 +2,14 @@ package com.epam.training.ticketservice.service;
 
 import com.epam.training.ticketservice.domain.Admin;
 import com.epam.training.ticketservice.repository.AdminRepository;
-import com.epam.training.ticketservice.repository.RepositoryException.AdminAccountNotExistsException;
-import com.epam.training.ticketservice.repository.RepositoryException.AdminIsNotLoggedInException;
-import com.epam.training.ticketservice.repository.RepositoryException.InvalidPasswordException;
+import com.epam.training.ticketservice.exceptions.AdminAccountNotExistsException;
+import com.epam.training.ticketservice.exceptions.AdminIsNotLoggedInException;
+import com.epam.training.ticketservice.exceptions.InvalidPasswordException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class AdminService {
 
     private AdminRepository adminRepository;
@@ -17,7 +19,9 @@ public class AdminService {
         this.adminRepository = adminRepository;
     }
 
-    public Admin checkAccount(String name, String password) throws AdminAccountNotExistsException, InvalidPasswordException {
+    public Admin checkAccount(String name, String password)
+            throws AdminAccountNotExistsException, InvalidPasswordException {
+
         Admin admin = adminRepository.getAdminByName(name);
         if (admin.getPassword().matches(password)) {
             adminRepository.updatePriviliged(name, true);
@@ -29,6 +33,7 @@ public class AdminService {
     }
 
     public boolean loggedAdmin() {
+
         if (currentAdmin != null) {
             return currentAdmin.isPriviliged();
         } else {
@@ -36,8 +41,10 @@ public class AdminService {
         }
     }
 
-    public void signOut(Admin loggedAdmin) throws AdminIsNotLoggedInException, AdminAccountNotExistsException{
-        if(loggedAdmin != null) {
+    public void signOut(Admin loggedAdmin)
+            throws AdminIsNotLoggedInException, AdminAccountNotExistsException {
+
+        if (loggedAdmin != null) {
             try {
                 Admin admin = adminRepository.getAdminByName(loggedAdmin.getName());
                 adminRepository.updatePriviliged(admin.getName(), false);

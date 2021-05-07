@@ -3,25 +3,17 @@ package com.epam.training.ticketservice.repository.impl;
 import com.epam.training.ticketservice.dataaccess.dao.AdminDao;
 import com.epam.training.ticketservice.dataaccess.entity.AdminEntity;
 import com.epam.training.ticketservice.domain.Admin;
-import com.epam.training.ticketservice.repository.RepositoryException.AdminAccountNotExistsException;
-import com.epam.training.ticketservice.repository.mapper.ScreeningMapper;
+import com.epam.training.ticketservice.exceptions.AdminAccountNotExistsException;
+import com.epam.training.ticketservice.repository.mapper.Mapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.print.attribute.standard.MediaSize;
-
-import java.util.Optional;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.hamcrest.Matchers.equalTo;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class JpaAdminRepositoryTest {
@@ -33,7 +25,7 @@ class JpaAdminRepositoryTest {
     AdminDao adminDao;
 
     @Mock
-    ScreeningMapper mapper;
+    Mapper mapper;
 
     private static final String NAME = "admin";
     private static final boolean PRIVILIGED = false;

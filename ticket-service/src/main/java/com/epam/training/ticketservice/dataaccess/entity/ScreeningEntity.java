@@ -1,11 +1,18 @@
 package com.epam.training.ticketservice.dataaccess.entity;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import com.epam.training.ticketservice.domain.Screening;
-import lombok.*;
-import org.hibernate.annotations.Type;
-
-import javax.persistence.*;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Column;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

@@ -4,7 +4,7 @@ import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.domain.Room;
 import com.epam.training.ticketservice.domain.Screening;
 import com.epam.training.ticketservice.repository.MovieRepository;
-import com.epam.training.ticketservice.repository.RepositoryException.*;
+import com.epam.training.ticketservice.exceptions.*;
 import com.epam.training.ticketservice.repository.RoomRepository;
 import com.epam.training.ticketservice.repository.ScreeningRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +25,6 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -36,15 +35,15 @@ class ScreeningServiceTest {
     private final static LocalDateTime DATETIME = LocalDateTime.parse(STR_DATETIME, dateTimeFormatter);
 
     private ScreeningService underTest;
-    private static final String TITLE = "movie title";
-    private static final String NAME = "room name";
-    private static final Movie MOVIE =  new Movie(TITLE, "genre", 60);
-    private static final Room ROOM = new Room(NAME, 10,10);
+    private final static String TITLE = "movie title";
+    private final static String NAME = "room name";
+    private final static Movie MOVIE =  new Movie(TITLE, "genre", 60);
+    private final static Room ROOM = new Room(NAME, 10,10);
     // screening 10:00 - 11:00
-    private static final Screening SCREENING_1 = new Screening(MOVIE, ROOM, DATETIME);
+    private final static Screening SCREENING_1 = new Screening(MOVIE, ROOM, DATETIME);
     // screening 13:00 - 14:00
-    private static final Screening SCREENING_2 = new Screening(MOVIE, ROOM, DATETIME.plusMinutes(180));
-    private static final List<Screening> SCREENINGS = List.of(SCREENING_1, SCREENING_2);
+    private final static Screening SCREENING_2 = new Screening(MOVIE, ROOM, DATETIME.plusMinutes(180));
+    private final static List<Screening> SCREENINGS = List.of(SCREENING_1, SCREENING_2);
 
     // screening 11:05 - 12:05
     private static final Screening INV_SCREENING_IN_BREAK = new Screening(MOVIE, ROOM, DATETIME.plusMinutes(125));
@@ -52,8 +51,6 @@ class ScreeningServiceTest {
     private static final Screening VALID_SCREENING = new Screening(MOVIE, ROOM, DATETIME);
     private final static LocalDateTime START_DATETIME = DATETIME.plusMinutes(-30);
     private final static LocalDateTime END_DATETIME = DATETIME.plusMinutes(30);
-
-
 
 
     @InjectMocks
@@ -74,28 +71,13 @@ class ScreeningServiceTest {
         underTest = new ScreeningService(screeningRepository, movieRepository, roomRepository);
     }
 
-    @Test
-    void testCreateScreeningIsSuccessfulWhenListOfScreeningsIsEmpty()
-            throws MovieNotFoundException, RoomNotFoundException,
-            OverlappingException, OverlappingInBreakException {
-
-        // Given
-        given(movieRepository.findMovieByTitle(TITLE)).willReturn(MOVIE);
-        given(roomRepository.findRoomByName(NAME)).willReturn(ROOM);
-
-        // When
-        screeningService.createScreening(TITLE, NAME, DATETIME);
-
-        // Then
-        verify(screeningRepository, times(1)).createScreening(MOVIE, ROOM, DATETIME);
-    }
 
     @Test
     void testCreateScreeningShouldReturnExceptionWhenMovieNotFound() throws MovieNotFoundException {
         // Given
         doThrow(MovieNotFoundException.class)
                 .when(movieRepository)
-                .findMovieByTitle(anyString());
+                .getMovieByTitle(anyString());
 
         // Then
         assertThrows(MovieNotFoundException.class, () -> {
@@ -109,7 +91,7 @@ class ScreeningServiceTest {
         // Given
         doThrow(RoomNotFoundException.class)
                 .when(roomRepository)
-                .findRoomByName(anyString());
+                .getRoomByName(anyString());
 
         // Then
         assertThrows(RoomNotFoundException.class, () -> {
@@ -149,27 +131,13 @@ class ScreeningServiceTest {
     @Test
     void testGetAllScreeningsShouldReturnsListOfExistingScreenings() {
         // Given
-        given(screeningRepository.getAllScreening()).willReturn(SCREENINGS);
+        given(screeningRepository.getAllScreenings()).willReturn(SCREENINGS);
 
         // When
-        List<Screening> current = underTest.getAllScreening();
+        List<Screening> current = underTest.getAllScreenings();
 
         // Then
         assertThat(current, equalTo(SCREENINGS));
-    }
-
-    @Test
-    void testDeleteScreeningShouldBeSuccessful() throws ScreeningNotFoundException {
-        // When
-       screeningService.deleteScreening(TITLE, NAME, DATETIME);
-
-        // Then
-        verify(screeningRepository, times(1)).deleteScreening(TITLE, NAME, DATETIME);
-    }
-
-    @Test
-    void testIsStartInTheBreakPeriodShouldReturnTrue() {
-
     }
 
 }

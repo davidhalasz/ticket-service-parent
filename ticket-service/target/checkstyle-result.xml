@@ -1,118 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="8.29">
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\configuration\JpaConfiguration.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\dao\AdminDao.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\dao\MovieDao.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\dao\RoomDao.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\dao\ScreeningDao.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\entity\AdminEntity.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\entity\MovieEntity.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\entity\RoomEntity.java">
+</file>
 <file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\entity\ScreeningEntity.java">
-<error line="5" severity="warning" message="Using the &apos;.*&apos; form of import should be avoided - lombok.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
-<error line="8" severity="warning" message="Using the &apos;.*&apos; form of import should be avoided - javax.persistence.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\init\AdminInitializer.java">
 </file>
 <file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\domain\Admin.java">
-<error line="19" column="25" severity="warning" message="&apos;+&apos; should be on a new line." source="com.puppycrawl.tools.checkstyle.checks.whitespace.OperatorWrapCheck"/>
-<error line="20" column="40" severity="warning" message="&apos;+&apos; should be on a new line." source="com.puppycrawl.tools.checkstyle.checks.whitespace.OperatorWrapCheck"/>
-<error line="21" column="50" severity="warning" message="&apos;+&apos; should be on a new line." source="com.puppycrawl.tools.checkstyle.checks.whitespace.OperatorWrapCheck"/>
-<error line="22" column="46" severity="warning" message="&apos;+&apos; should be on a new line." source="com.puppycrawl.tools.checkstyle.checks.whitespace.OperatorWrapCheck"/>
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\domain\Movie.java">
 </file>
 <file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\domain\Room.java">
-<error line="20" column="23" severity="warning" message="WhitespaceAround: &apos;*&apos; is not followed by whitespace. Empty blocks may only be represented as {} when not part of a multi-block statement (4.1.3)" source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="20" column="23" severity="warning" message="WhitespaceAround: &apos;*&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\domain\Screening.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\AdminAccountNotExistsException.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\AdminIsNotLoggedInException.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\InvalidPasswordException.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\InvalidRoomParameterException.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\InvalidRuntimeException.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\MovieAlreadyExistsException.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\MovieNotFoundException.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\OverlappingException.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\OverlappingInBreakException.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\RoomAlreadyExistsException.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\RoomNotFoundException.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\ScreeningNotFoundException.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\CliApplication.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\configuration\CliConfiguration.java">
 </file>
 <file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\handler\AdminCommandHandler.java">
-<error line="11" severity="warning" message="First sentence of Javadoc is missing an ending period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.SummaryJavadocCheck"/>
-<error line="26" severity="warning" message="Line is longer than 120 characters (found 124)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="42" column="81" severity="warning" message="&apos;)&apos; is preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.ParenPadCheck"/>
 </file>
 <file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\handler\MovieCommandHandler.java">
-<error line="12" severity="warning" message="First sentence of Javadoc is missing an ending period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.SummaryJavadocCheck"/>
-<error line="29" severity="warning" message="Line is longer than 120 characters (found 132)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="59" severity="warning" message="Line is longer than 120 characters (found 127)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
 </file>
 <file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\handler\RoomCommandHandler.java">
-<error line="14" severity="warning" message="First sentence of Javadoc is missing an ending period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.SummaryJavadocCheck"/>
-<error line="65" column="71" severity="warning" message="WhitespaceAround: &apos;{&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
 </file>
 <file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\handler\ScreeningCommandHandler.java">
-<error line="6" severity="warning" message="Using the &apos;.*&apos; form of import should be avoided - com.epam.training.ticketservice.repository.RepositoryException.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
-<error line="15" severity="warning" message="First sentence of Javadoc is missing an ending period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.SummaryJavadocCheck"/>
-<error line="32" column="116" severity="warning" message="WhitespaceAround: &apos;{&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="37" severity="warning" message="Line is longer than 120 characters (found 126)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="42" severity="warning" message="Line is longer than 120 characters (found 121)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="49" severity="warning" message="Line is longer than 120 characters (found 127)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="54" severity="warning" message="Line is longer than 120 characters (found 126)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\TicketServicePromptProvider.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\AdminRepository.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\impl\JpaAdminRepository.java">
 </file>
 <file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\impl\JpaMovieRepository.java">
-<error line="33" column="9" severity="warning" message="WhitespaceAround: &apos;if&apos; is not followed by whitespace. Empty blocks may only be represented as {} when not part of a multi-block statement (4.1.3)" source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="66" severity="warning" message="Line is longer than 120 characters (found 126)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="93" column="78" severity="warning" message="WhitespaceAround: &apos;{&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="94" column="9" severity="warning" message="WhitespaceAround: &apos;if&apos; is not followed by whitespace. Empty blocks may only be represented as {} when not part of a multi-block statement (4.1.3)" source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
 </file>
 <file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\impl\JpaRoomRepository.java">
-<error line="41" severity="warning" message="Line is longer than 120 characters (found 124)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="73" column="73" severity="warning" message="WhitespaceAround: &apos;{&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
 </file>
 <file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\impl\JpaScreeningRepository.java">
-<error line="41" severity="warning" message="Line is longer than 120 characters (found 132)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\mapper\Mapper.java">
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\mapper\MapperInterface.java">
 </file>
 <file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\MovieRepository.java">
-<error line="10" column="33" severity="warning" message="WhitespaceAround: &apos;{&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\RepositoryException\AdminAccountNotExistsException.java">
-<error line="1" column="9" severity="warning" message="Package name &apos;com.epam.training.ticketservice.repository.RepositoryException&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
-</file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\RepositoryException\AdminIsNotLoggedInException.java">
-<error line="1" column="9" severity="warning" message="Package name &apos;com.epam.training.ticketservice.repository.RepositoryException&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
-</file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\RepositoryException\InvalidPasswordException.java">
-<error line="1" column="9" severity="warning" message="Package name &apos;com.epam.training.ticketservice.repository.RepositoryException&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
-</file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\RepositoryException\InvalidRoomParameterException.java">
-<error line="1" column="9" severity="warning" message="Package name &apos;com.epam.training.ticketservice.repository.RepositoryException&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
-</file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\RepositoryException\InvalidRuntimeException.java">
-<error line="1" column="9" severity="warning" message="Package name &apos;com.epam.training.ticketservice.repository.RepositoryException&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
-<error line="3" column="55" severity="warning" message="WhitespaceAround: &apos;{&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="4" column="36" severity="warning" message="&apos;(&apos; is preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.MethodParamPadCheck"/>
-</file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\RepositoryException\MovieAlreadyExistsException.java">
-<error line="1" column="9" severity="warning" message="Package name &apos;com.epam.training.ticketservice.repository.RepositoryException&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
-<error line="3" column="59" severity="warning" message="WhitespaceAround: &apos;{&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-</file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\RepositoryException\MovieNotFoundException.java">
-<error line="1" column="9" severity="warning" message="Package name &apos;com.epam.training.ticketservice.repository.RepositoryException&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
-<error line="4" column="35" severity="warning" message="&apos;(&apos; is preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.MethodParamPadCheck"/>
-</file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\RepositoryException\OverlappingException.java">
-<error line="1" column="9" severity="warning" message="Package name &apos;com.epam.training.ticketservice.repository.RepositoryException&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
-</file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\RepositoryException\OverlappingInBreakException.java">
-<error line="1" column="9" severity="warning" message="Package name &apos;com.epam.training.ticketservice.repository.RepositoryException&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
-</file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\RepositoryException\RoomAlreadyExistsException.java">
-<error line="1" column="9" severity="warning" message="Package name &apos;com.epam.training.ticketservice.repository.RepositoryException&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
-<error line="3" column="58" severity="warning" message="WhitespaceAround: &apos;{&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-</file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\RepositoryException\RoomNotFoundException.java">
-<error line="1" column="9" severity="warning" message="Package name &apos;com.epam.training.ticketservice.repository.RepositoryException&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
-<error line="4" column="50" severity="warning" message="WhitespaceAround: &apos;{&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-</file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\RepositoryException\ScreeningNotFoundException.java">
-<error line="1" column="9" severity="warning" message="Package name &apos;com.epam.training.ticketservice.repository.RepositoryException&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\RoomRepository.java">
 </file>
 <file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\ScreeningRepository.java">
-<error line="6" severity="warning" message="Using the &apos;.*&apos; form of import should be avoided - com.epam.training.ticketservice.repository.RepositoryException.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
 </file>
 <file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\service\AdminService.java">
-<error line="20" severity="warning" message="Line is longer than 120 characters (found 125)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="39" column="110" severity="warning" message="WhitespaceAround: &apos;{&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="40" column="9" severity="warning" message="WhitespaceAround: &apos;if&apos; is not followed by whitespace. Empty blocks may only be represented as {} when not part of a multi-block statement (4.1.3)" source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
 </file>
 <file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\service\MovieService.java">
-<error line="21" severity="warning" message="Line is longer than 120 characters (found 128)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="31" severity="warning" message="Line is longer than 120 characters (found 126)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
 </file>
 <file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\service\RoomService.java">
-<error line="21" severity="warning" message="Line is longer than 120 characters (found 129)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
 </file>
 <file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\service\ScreeningService.java">
-<error line="7" severity="warning" message="Using the &apos;.*&apos; form of import should be avoided - com.epam.training.ticketservice.repository.RepositoryException.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
-<error line="44" severity="warning" message="Line is longer than 120 characters (found 127)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="85" severity="warning" message="Line is longer than 120 characters (found 132)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+</file>
+<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\resources\application.properties">
 </file>
 </checkstyle>

@@ -4,53 +4,52 @@ import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.domain.Room;
 import com.epam.training.ticketservice.domain.Screening;
 import com.epam.training.ticketservice.repository.MovieRepository;
-import com.epam.training.ticketservice.repository.RepositoryException.*;
+import com.epam.training.ticketservice.exceptions.OverlappingException;
+import com.epam.training.ticketservice.exceptions.OverlappingInBreakException;
+import com.epam.training.ticketservice.exceptions.MovieNotFoundException;
+import com.epam.training.ticketservice.exceptions.RoomNotFoundException;
+import com.epam.training.ticketservice.exceptions.ScreeningNotFoundException;
 import com.epam.training.ticketservice.repository.RoomRepository;
 import com.epam.training.ticketservice.repository.ScreeningRepository;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-
+@AllArgsConstructor
 @Service
+@Slf4j
 public class ScreeningService {
 
-    private ScreeningRepository screeningRepository;
-    private MovieRepository movieRepository;
-    private RoomRepository roomRepository;
+    private final ScreeningRepository screeningRepository;
+    private final MovieRepository movieRepository;
+    private final RoomRepository roomRepository;
 
-    public ScreeningService(ScreeningRepository screeningRepository,
-                            MovieRepository movieRepository,
-                            RoomRepository roomRepository) {
-        this.screeningRepository = screeningRepository;
-        this.movieRepository = movieRepository;
-        this.roomRepository = roomRepository;
-    }
+    public void createScreening(String movieTitle, String roomName, LocalDateTime startDateTime)
+            throws OverlappingException, OverlappingInBreakException,
+            RoomNotFoundException, MovieNotFoundException {
 
-
-    public void createScreening(String movieTitle, String roomName, LocalDateTime startDateTime) throws
-            OverlappingException,
-            OverlappingInBreakException,
-            RoomNotFoundException,
-            MovieNotFoundException {
-        Movie movie = movieRepository.findMovieByTitle(movieTitle);
-        Room room = roomRepository.findRoomByName(roomName);
+        Movie movie = movieRepository.getMovieByTitle(movieTitle);
+        Room room = roomRepository.getRoomByName(roomName);
         LocalDateTime endDateTime = startDateTime.plusMinutes(movie.getRuntime());
 
         if (isThereOverlappingScreening(startDateTime, endDateTime, room.getName())) {
             throw new OverlappingException("There is an overlapping screening");
         } else if (isStartInTheBreakPeriod(startDateTime, endDateTime, room.getName())) {
-            throw new OverlappingInBreakException("This would start in the break period after another screening in this room");
+            throw new OverlappingInBreakException(
+                    "This would start in the break period after another screening in this room"
+            );
         }
         screeningRepository.createScreening(movie, room, startDateTime);
     }
 
-
     public boolean isThereOverlappingScreening(LocalDateTime startDate,
                                                 LocalDateTime endDate,
                                                 String roomName) {
-        return screeningRepository.getAllScreening().stream()
+
+        return screeningRepository.getAllScreenings().stream()
                 .filter(screening -> screening.getRoom().getName().equals(roomName))
                 .anyMatch(screening -> {
                     LocalDateTime screeningStart = screening.getStartDate();
@@ -65,7 +64,8 @@ public class ScreeningService {
     public boolean isStartInTheBreakPeriod(LocalDateTime startDateTime,
                                             LocalDateTime endDateTime,
                                             String roomName) {
-        return screeningRepository.getAllScreening().stream()
+
+        return screeningRepository.getAllScreenings().stream()
                 .filter(screening -> screening.getRoom().getName().equals(roomName))
                 .anyMatch(screening -> {
                     LocalDateTime screeningStart = screening.getStartDate();
@@ -78,15 +78,20 @@ public class ScreeningService {
     }
 
     public boolean isWithinRange(LocalDateTime startDate, LocalDateTime endDate, LocalDateTime checkStartDateTime) {
+
         return (checkStartDateTime.isEqual(startDate) || checkStartDateTime.isEqual(endDate))
                 || (checkStartDateTime.isBefore(endDate) && checkStartDateTime.isAfter(startDate));
     }
 
-    public void deleteScreening(String movieTitle, String roomName, LocalDateTime startDateTime) throws ScreeningNotFoundException {
+    public void deleteScreening(String movieTitle, String roomName, LocalDateTime startDateTime)
+            throws ScreeningNotFoundException {
+
         screeningRepository.deleteScreening(movieTitle, roomName, startDateTime);
     }
 
-    public List<Screening> getAllScreening() {
-        return screeningRepository.getAllScreening();
+    public List<Screening> getAllScreenings() {
+        return screeningRepository.getAllScreenings();
     }
+
+
 }

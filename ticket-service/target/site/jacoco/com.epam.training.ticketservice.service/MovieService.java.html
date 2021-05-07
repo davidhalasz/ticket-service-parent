@@ -2,39 +2,45 @@
 
 import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.repository.MovieRepository;
-import com.epam.training.ticketservice.repository.RepositoryException.InvalidRuntimeException;
-import com.epam.training.ticketservice.repository.RepositoryException.MovieAlreadyExistsException;
-import com.epam.training.ticketservice.repository.RepositoryException.MovieNotFoundException;
+import com.epam.training.ticketservice.exceptions.InvalidRuntimeException;
+import com.epam.training.ticketservice.exceptions.MovieAlreadyExistsException;
+import com.epam.training.ticketservice.exceptions.MovieNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+<span class="fc" id="L14">@Slf4j</span>
 public class MovieService {
 
-    private MovieRepository movieRepository;
+    private final MovieRepository movieRepository;
 
-<span class="fc" id="L17">    public MovieService(MovieRepository movieRepository) {</span>
-<span class="fc" id="L18">        this.movieRepository = movieRepository;</span>
-<span class="fc" id="L19">    }</span>
+<span class="fc" id="L19">    public MovieService(MovieRepository movieRepository) {</span>
+<span class="fc" id="L20">        this.movieRepository = movieRepository;</span>
+<span class="fc" id="L21">    }</span>
 
-    public Movie addMovie(String title, String genre, int runtime) throws MovieAlreadyExistsException, InvalidRuntimeException {
-<span class="fc" id="L22">        Movie movie = new Movie(title, genre, runtime);</span>
-<span class="nc" id="L23">        movieRepository.createMovie(movie);</span>
-<span class="nc" id="L24">        return movie;</span>
+    public Movie addMovie(String title, String genre, int runtime)
+            throws MovieAlreadyExistsException, InvalidRuntimeException {
+
+<span class="fc" id="L26">        Movie movie = new Movie(title, genre, runtime);</span>
+<span class="nc" id="L27">        movieRepository.createMovie(movie);</span>
+<span class="nc" id="L28">        return movie;</span>
     }
 
-    public List&lt;Movie&gt; getAllMovie() {
-<span class="fc" id="L28">        return movieRepository.getAllMovie();</span>
+    public List&lt;Movie&gt; getAllMovies() {
+<span class="fc" id="L32">        return movieRepository.getAllMovies();</span>
     }
 
-    public Movie updateMovie(String title, String genre, int runtime) throws MovieNotFoundException, InvalidRuntimeException {
-<span class="fc" id="L32">        return movieRepository.updateMovie(title, genre, runtime);</span>
-    }
+    public void updateMovie(String title, String genre, int runtime)
+            throws MovieNotFoundException, InvalidRuntimeException {
 
-    public Movie deleteMovie(String title) throws MovieNotFoundException {
-<span class="fc" id="L36">        return movieRepository.deleteMovie(title);</span>
-    }
+<span class="fc" id="L38">        movieRepository.updateMovie(title, genre, runtime);</span>
+<span class="fc" id="L39">    }</span>
+
+    public void deleteMovie(String title) throws MovieNotFoundException {
+<span class="fc" id="L42">        movieRepository.deleteMovie(title);</span>
+<span class="fc" id="L43">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

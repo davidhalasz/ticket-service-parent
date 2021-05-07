@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="hu"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ScreeningEntity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ticket-service</a> &gt; <a href="index.source.html" class="el_package">com.epam.training.ticketservice.dataaccess.entity</a> &gt; <span class="el_source">ScreeningEntity.java</span></div><h1>ScreeningEntity.java</h1><pre class="source lang-java linenums">package com.epam.training.ticketservice.dataaccess.entity;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import com.epam.training.ticketservice.domain.Screening;
-import lombok.*;
-import org.hibernate.annotations.Type;
-
-import javax.persistence.*;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Column;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 
-<span class="nc" id="L14">@NoArgsConstructor(access = AccessLevel.PROTECTED)</span>
+<span class="nc" id="L21">@NoArgsConstructor(access = AccessLevel.PROTECTED)</span>
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {&quot;room_id&quot;, &quot;date_time&quot;})})
 @Entity
 @Getter
@@ -19,32 +26,32 @@ public class ScreeningEntity {
 
     @Id
     @GeneratedValue
-<span class="nc" id="L22">    private UUID uuid;</span>
-<span class="nc" id="L23">    @Setter</span>
+<span class="nc" id="L29">    private UUID uuid;</span>
+<span class="nc" id="L30">    @Setter</span>
     @ManyToOne
     @JoinColumn(name = &quot;movie_id&quot;)
-<span class="nc" id="L26">    private MovieEntity movieEntity;</span>
-<span class="nc" id="L27">    @Setter</span>
+<span class="nc" id="L33">    private MovieEntity movieEntity;</span>
+<span class="nc" id="L34">    @Setter</span>
     @ManyToOne
     @JoinColumn(name = &quot;room_id&quot;)
-<span class="nc" id="L30">    private  RoomEntity roomEntity;</span>
-<span class="nc" id="L31">    @Setter</span>
+<span class="nc" id="L37">    private  RoomEntity roomEntity;</span>
+<span class="nc" id="L38">    @Setter</span>
     @Column(name = &quot;date_time&quot;)
-<span class="nc" id="L33">    private LocalDateTime dateTime;</span>
+<span class="nc" id="L40">    private LocalDateTime dateTime;</span>
 
 
-<span class="nc" id="L36">    public ScreeningEntity(MovieEntity movieEntity, RoomEntity roomEntity, LocalDateTime dateTime) {</span>
-<span class="nc" id="L37">        this.movieEntity = movieEntity;</span>
-<span class="nc" id="L38">        this.roomEntity = roomEntity;</span>
-<span class="nc" id="L39">        this.dateTime = dateTime;</span>
-<span class="nc" id="L40">    }</span>
-
-<span class="nc" id="L42">    public ScreeningEntity(UUID uuid, MovieEntity movieEntity, RoomEntity roomEntity, LocalDateTime dateTime) {</span>
-<span class="nc" id="L43">        this.uuid = uuid;</span>
+<span class="nc" id="L43">    public ScreeningEntity(MovieEntity movieEntity, RoomEntity roomEntity, LocalDateTime dateTime) {</span>
 <span class="nc" id="L44">        this.movieEntity = movieEntity;</span>
 <span class="nc" id="L45">        this.roomEntity = roomEntity;</span>
 <span class="nc" id="L46">        this.dateTime = dateTime;</span>
 <span class="nc" id="L47">    }</span>
+
+<span class="nc" id="L49">    public ScreeningEntity(UUID uuid, MovieEntity movieEntity, RoomEntity roomEntity, LocalDateTime dateTime) {</span>
+<span class="nc" id="L50">        this.uuid = uuid;</span>
+<span class="nc" id="L51">        this.movieEntity = movieEntity;</span>
+<span class="nc" id="L52">        this.roomEntity = roomEntity;</span>
+<span class="nc" id="L53">        this.dateTime = dateTime;</span>
+<span class="nc" id="L54">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

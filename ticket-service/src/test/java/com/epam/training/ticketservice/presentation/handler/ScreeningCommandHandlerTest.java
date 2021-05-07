@@ -3,12 +3,8 @@ package com.epam.training.ticketservice.presentation.handler;
 import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.domain.Room;
 import com.epam.training.ticketservice.domain.Screening;
-import com.epam.training.ticketservice.repository.MovieRepository;
-import com.epam.training.ticketservice.repository.RepositoryException.*;
-import com.epam.training.ticketservice.repository.RoomRepository;
-import com.epam.training.ticketservice.repository.ScreeningRepository;
+import com.epam.training.ticketservice.exceptions.*;
 import com.epam.training.ticketservice.service.AdminService;
-import com.epam.training.ticketservice.service.RoomService;
 import com.epam.training.ticketservice.service.ScreeningService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,16 +12,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.print.attribute.standard.MediaSize;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
@@ -224,20 +216,20 @@ class ScreeningCommandHandlerTest {
     @Test
     void testListScreeningShouldReturnEmptyScreeningMessageWhenScreeningsEmpty() {
         // Given
-        given(screeningService.getAllScreening()).willReturn(List.of());
+        given(screeningService.getAllScreenings()).willReturn(List.of());
 
         // When
         String current = screeningCommandHandler.listScreenings();
 
         // Then
-        verify(screeningService, times(1)).getAllScreening();
+        verify(screeningService, times(1)).getAllScreenings();
         assertThat(current, equalTo(EMPTY_LIST_MSG));
     }
 
     @Test
     void testListScreeningsShouldReturnListOfRooms() {
         // Given
-        when(screeningService.getAllScreening()).thenReturn(screenings);
+        when(screeningService.getAllScreenings()).thenReturn(screenings);
 
         // When
         String actual = screeningCommandHandler.listScreenings();

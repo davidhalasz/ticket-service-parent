@@ -3,14 +3,14 @@ package com.epam.training.ticketservice.repository;
 import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.domain.Room;
 import com.epam.training.ticketservice.domain.Screening;
-import com.epam.training.ticketservice.repository.RepositoryException.*;
+import com.epam.training.ticketservice.exceptions.ScreeningNotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ScreeningRepository {
 
-    List<Screening> getAllScreening();
+    List<Screening> getAllScreenings();
 
     void createScreening(Movie movie, Room room, LocalDateTime startDateTime);
 

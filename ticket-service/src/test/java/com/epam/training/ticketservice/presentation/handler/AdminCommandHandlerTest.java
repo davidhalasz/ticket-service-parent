@@ -1,8 +1,7 @@
 package com.epam.training.ticketservice.presentation.handler;
 
-import com.epam.training.ticketservice.repository.RepositoryException.AdminAccountNotExistsException;
-import com.epam.training.ticketservice.repository.RepositoryException.AdminIsNotLoggedInException;
-import com.epam.training.ticketservice.repository.RepositoryException.InvalidPasswordException;
+import com.epam.training.ticketservice.exceptions.AdminAccountNotExistsException;
+import com.epam.training.ticketservice.exceptions.InvalidPasswordException;
 import com.epam.training.ticketservice.service.AdminService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,7 +14,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 

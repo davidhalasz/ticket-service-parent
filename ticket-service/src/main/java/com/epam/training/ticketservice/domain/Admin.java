@@ -16,11 +16,10 @@ public class Admin {
 
     @Override
     public String toString() {
-        return "Admin{" +
-                "name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", priviliged=" + priviliged +
-                '}';
+        return "Admin{"
+                + "name='" + name + '\''
+                + ", password='" + password + '\''
+                + ", priviliged=" + priviliged + '}';
     }
 
 }

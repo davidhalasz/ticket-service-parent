@@ -1,77 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="hu"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ScreeningCommandHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ticket-service</a> &gt; <a href="index.source.html" class="el_package">com.epam.training.ticketservice.presentation.handler</a> &gt; <span class="el_source">ScreeningCommandHandler.java</span></div><h1>ScreeningCommandHandler.java</h1><pre class="source lang-java linenums">package com.epam.training.ticketservice.presentation.handler;
 
 
-import com.epam.training.ticketservice.domain.Room;
 import com.epam.training.ticketservice.domain.Screening;
-import com.epam.training.ticketservice.repository.RepositoryException.*;
+import com.epam.training.ticketservice.exceptions.OverlappingException;
+import com.epam.training.ticketservice.exceptions.OverlappingInBreakException;
+import com.epam.training.ticketservice.exceptions.MovieNotFoundException;
+import com.epam.training.ticketservice.exceptions.RoomNotFoundException;
+import com.epam.training.ticketservice.exceptions.ScreeningNotFoundException;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.ScreeningService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Command handler for 'screening' command
- */
-
 @ShellComponent
+<span class="fc" id="L20">@Slf4j</span>
 public class ScreeningCommandHandler {
 
     private ScreeningService screeningService;
     private AdminService adminService;
 
-<span class="fc" id="L25">    public ScreeningCommandHandler(ScreeningService screeningService, AdminService adminService) {</span>
-<span class="fc" id="L26">        this.screeningService = screeningService;</span>
-<span class="fc" id="L27">        this.adminService = adminService;</span>
-<span class="fc" id="L28">    }</span>
+<span class="fc" id="L26">    public ScreeningCommandHandler(ScreeningService screeningService, AdminService adminService) {</span>
+<span class="fc" id="L27">        this.screeningService = screeningService;</span>
+<span class="fc" id="L28">        this.adminService = adminService;</span>
+<span class="fc" id="L29">    }</span>
 
     @ShellMethod(value = &quot;Create a new screening&quot;, key = &quot;create screening&quot;)
     public String createScreening(String movieTitle, String roomName, String startDateTime)
-            throws OverlappingException, MovieNotFoundException, RoomNotFoundException, OverlappingInBreakException{
+            throws OverlappingException, MovieNotFoundException,
+            RoomNotFoundException, OverlappingInBreakException {
+
         String result;
         try {
-<span class="fc bfc" id="L35" title="All 2 branches covered.">            if (adminService.loggedAdmin()) {</span>
-<span class="fc" id="L36">                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm&quot;);</span>
-<span class="fc" id="L37">                screeningService.createScreening(movieTitle, roomName, LocalDateTime.parse(startDateTime, dateTimeFormatter));</span>
-<span class="fc" id="L38">                result = &quot;Screening added&quot;;</span>
-<span class="fc" id="L39">            } else {</span>
-<span class="fc" id="L40">                result = &quot;You are not signed in&quot;;</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">            if (adminService.loggedAdmin()) {</span>
+<span class="fc" id="L39">                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm&quot;);</span>
+<span class="fc" id="L40">                screeningService.createScreening(movieTitle, roomName,</span>
+<span class="fc" id="L41">                        LocalDateTime.parse(startDateTime, dateTimeFormatter));</span>
+<span class="fc" id="L42">                result = &quot;Screening added&quot;;</span>
+<span class="fc" id="L43">            } else {</span>
+<span class="fc" id="L44">                result = &quot;You are not signed in&quot;;</span>
             }
-<span class="fc" id="L42">        } catch (OverlappingException | RoomNotFoundException | MovieNotFoundException | OverlappingInBreakException e) {</span>
-<span class="fc" id="L43">            result = e.getMessage();</span>
-<span class="fc" id="L44">        }</span>
-<span class="fc" id="L45">        return result;</span>
+<span class="fc" id="L46">        } catch (OverlappingException | RoomNotFoundException</span>
+                | MovieNotFoundException | OverlappingInBreakException e) {
+<span class="fc" id="L48">            result = e.getMessage();</span>
+<span class="fc" id="L49">        }</span>
+<span class="fc" id="L50">        return result;</span>
     }
 
     @ShellMethod(value = &quot;Delete a new screening&quot;, key = &quot;delete screening&quot;)
-    public String deleteScreening(String movieTitle, String roomName, String startDateTime) throws ScreeningNotFoundException {
+    public String deleteScreening(String movieTitle, String roomName, String startDateTime)
+            throws ScreeningNotFoundException {
+
         String result;
         try {
-<span class="fc bfc" id="L52" title="All 2 branches covered.">            if (adminService.loggedAdmin()) {</span>
-<span class="fc" id="L53">                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm&quot;);</span>
-<span class="fc" id="L54">                screeningService.deleteScreening(movieTitle, roomName, LocalDateTime.parse(startDateTime, dateTimeFormatter));</span>
-<span class="fc" id="L55">                result = &quot;Screening deleted&quot;;</span>
-<span class="fc" id="L56">            } else {</span>
-<span class="fc" id="L57">                result = &quot;You are not signed in&quot;;</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">            if (adminService.loggedAdmin()) {</span>
+<span class="fc" id="L60">                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm&quot;);</span>
+<span class="fc" id="L61">                screeningService.deleteScreening(movieTitle, roomName,</span>
+<span class="fc" id="L62">                        LocalDateTime.parse(startDateTime, dateTimeFormatter));</span>
+<span class="fc" id="L63">                result = &quot;Screening deleted&quot;;</span>
+<span class="fc" id="L64">            } else {</span>
+<span class="fc" id="L65">                result = &quot;You are not signed in&quot;;</span>
             }
-<span class="nc" id="L59">        } catch (ScreeningNotFoundException e) {</span>
-<span class="nc" id="L60">            result = e.getMessage();</span>
-<span class="fc" id="L61">        }</span>
-<span class="fc" id="L62">        return result;</span>
+<span class="nc" id="L67">        } catch (ScreeningNotFoundException e) {</span>
+<span class="nc" id="L68">            result = e.getMessage();</span>
+<span class="fc" id="L69">        }</span>
+<span class="fc" id="L70">        return result;</span>
     }
 
     @ShellMethod(value = &quot;List all new screening&quot;, key = &quot;list screenings&quot;)
     public String listScreenings()  {
-<span class="fc" id="L67">        StringBuilder builder = new StringBuilder();</span>
-<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (screeningService.getAllScreening().isEmpty()) {</span>
-<span class="fc" id="L69">            return &quot;There are no screenings&quot;;</span>
+
+<span class="fc" id="L76">        StringBuilder builder = new StringBuilder();</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (screeningService.getAllScreenings().isEmpty()) {</span>
+<span class="fc" id="L78">            return &quot;There are no screenings&quot;;</span>
         } else {
-<span class="fc bfc" id="L71" title="All 2 branches covered.">            for (Screening screening : screeningService.getAllScreening()) {</span>
-<span class="fc" id="L72">                builder.append(screening);</span>
-<span class="fc" id="L73">            }</span>
-<span class="fc" id="L74">            return builder.toString();</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">            for (Screening screening : screeningService.getAllScreenings()) {</span>
+<span class="fc" id="L81">                builder.append(screening);</span>
+<span class="fc" id="L82">            }</span>
+<span class="fc" id="L83">            return builder.toString();</span>
         }
     }
 }

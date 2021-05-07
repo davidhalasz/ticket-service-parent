@@ -1,9 +1,9 @@
 package com.epam.training.ticketservice.repository;
 
 import com.epam.training.ticketservice.domain.Room;
-import com.epam.training.ticketservice.repository.RepositoryException.InvalidRoomParameterException;
-import com.epam.training.ticketservice.repository.RepositoryException.RoomAlreadyExistsException;
-import com.epam.training.ticketservice.repository.RepositoryException.RoomNotFoundException;
+import com.epam.training.ticketservice.exceptions.InvalidRoomParameterException;
+import com.epam.training.ticketservice.exceptions.RoomAlreadyExistsException;
+import com.epam.training.ticketservice.exceptions.RoomNotFoundException;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public interface RoomRepository {
 
     Room deleteRoom(String name) throws RoomNotFoundException;
 
-    List<Room> getAllRoom();
+    List<Room> getAllRooms();
 
-    Room findRoomByName(String name) throws RoomNotFoundException;
+    Room getRoomByName(String name) throws RoomNotFoundException;
 }

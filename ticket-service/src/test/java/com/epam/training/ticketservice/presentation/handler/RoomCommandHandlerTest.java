@@ -1,7 +1,7 @@
 package com.epam.training.ticketservice.presentation.handler;
 
 import com.epam.training.ticketservice.domain.Room;
-import com.epam.training.ticketservice.repository.RepositoryException.*;
+import com.epam.training.ticketservice.exceptions.*;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.RoomService;
 import org.junit.jupiter.api.Test;
@@ -126,13 +126,13 @@ class RoomCommandHandlerTest {
     @Test
     void testListRoomsShouldReturnEmptyRoomListMessage() {
         // Given
-        given(roomService.getAllRoom()).willReturn(List.of());
+        given(roomService.getAllRooms()).willReturn(List.of());
 
         // When
         String current = roomCommandHandler.listRooms();
 
         // Then
-        verify(roomService, times(1)).getAllRoom();
+        verify(roomService, times(1)).getAllRooms();
         assertThat(current, equalTo(EMPTY_LIST_MSG));
     }
 
@@ -254,7 +254,7 @@ class RoomCommandHandlerTest {
     @Test
     void testListRoomsShouldReturnListOfRooms() {
         // Given
-        when(roomService.getAllRoom()).thenReturn(rooms);
+        when(roomService.getAllRooms()).thenReturn(rooms);
 
         // When
         String actual = roomCommandHandler.listRooms();

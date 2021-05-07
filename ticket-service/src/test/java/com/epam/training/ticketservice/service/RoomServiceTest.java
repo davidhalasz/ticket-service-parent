@@ -1,10 +1,9 @@
 package com.epam.training.ticketservice.service;
 
-import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.domain.Room;
-import com.epam.training.ticketservice.repository.RepositoryException.InvalidRoomParameterException;
-import com.epam.training.ticketservice.repository.RepositoryException.RoomAlreadyExistsException;
-import com.epam.training.ticketservice.repository.RepositoryException.RoomNotFoundException;
+import com.epam.training.ticketservice.exceptions.InvalidRoomParameterException;
+import com.epam.training.ticketservice.exceptions.RoomAlreadyExistsException;
+import com.epam.training.ticketservice.exceptions.RoomNotFoundException;
 import com.epam.training.ticketservice.repository.RoomRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -91,10 +90,10 @@ class RoomServiceTest {
     @Test
     void testGetAllRoomShouldReturnListOfRooms() {
         // Given
-        given(underTest.getAllRoom()).willReturn(ROOMS);
+        given(underTest.getAllRooms()).willReturn(ROOMS);
 
         // When
-        List<Room> current = roomRepository.getAllRoom();
+        List<Room> current = roomRepository.getAllRooms();
 
         // Then
         assertThat(current, equalTo(ROOMS));
@@ -103,13 +102,13 @@ class RoomServiceTest {
     @Test
     void testFindRoomByNameShouldReturnExceptionWhenRoomNotFound() throws RoomNotFoundException {
         // Given
-        given(roomRepository.findRoomByName(anyString()))
+        given(roomRepository.getRoomByName(anyString()))
                 .willThrow(RoomNotFoundException.class);
 
         // Then
         assertThrows(RoomNotFoundException.class, () -> {
             // When
-            roomRepository.findRoomByName(NAME);
+            roomRepository.getRoomByName(NAME);
         });
     }
 
@@ -117,10 +116,10 @@ class RoomServiceTest {
     @Test
     void testFindRoomByNameShouldReturnFoundRoomWhenExistingRoom() throws RoomNotFoundException {
         // Given
-        given(roomRepository.findRoomByName(NAME)).willReturn(ROOM);
+        given(roomRepository.getRoomByName(NAME)).willReturn(ROOM);
 
         // When
-        Room current = roomRepository.findRoomByName(NAME);
+        Room current = roomRepository.getRoomByName(NAME);
 
         // Then
         assertThat(current, equalTo(ROOM));

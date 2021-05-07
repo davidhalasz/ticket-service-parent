@@ -1,8 +1,7 @@
 package com.epam.training.ticketservice.presentation.handler;
 
 import com.epam.training.ticketservice.domain.Movie;
-import com.epam.training.ticketservice.domain.Room;
-import com.epam.training.ticketservice.repository.RepositoryException.*;
+import com.epam.training.ticketservice.exceptions.*;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.MovieService;
 import org.junit.jupiter.api.Test;
@@ -122,13 +121,13 @@ class MovieCommandHandlerTest {
     @Test
     void testlistMoviesShouldReturnEmptyMovieListMessage() {
         // Given
-        given(movieService.getAllMovie()).willReturn(List.of());
+        given(movieService.getAllMovies()).willReturn(List.of());
 
         // When
         String current = movieCommandHandler.listMovies();
 
         // Then
-        verify(movieService, times(1)).getAllMovie();
+        verify(movieService, times(1)).getAllMovies();
         assertThat(current, equalTo(EMPTY_LIST_MSG));
     }
 
@@ -225,7 +224,7 @@ class MovieCommandHandlerTest {
     @Test
     void testListMoviesShouldReturnListOfRooms() {
         // Given
-        when(movieService.getAllMovie()).thenReturn(movies);
+        when(movieService.getAllMovies()).thenReturn(movies);
 
         // When
         String actual = movieCommandHandler.listMovies();

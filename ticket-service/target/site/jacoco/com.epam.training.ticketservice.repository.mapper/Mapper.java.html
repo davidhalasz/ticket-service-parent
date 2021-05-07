@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="hu"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Mapper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ticket-service</a> &gt; <a href="index.source.html" class="el_package">com.epam.training.ticketservice.repository.mapper</a> &gt; <span class="el_source">Mapper.java</span></div><h1>Mapper.java</h1><pre class="source lang-java linenums">package com.epam.training.ticketservice.repository.mapper;
+
+import com.epam.training.ticketservice.dataaccess.entity.AdminEntity;
+import com.epam.training.ticketservice.dataaccess.entity.MovieEntity;
+import com.epam.training.ticketservice.dataaccess.entity.RoomEntity;
+import com.epam.training.ticketservice.dataaccess.entity.ScreeningEntity;
+import com.epam.training.ticketservice.domain.Admin;
+import com.epam.training.ticketservice.domain.Movie;
+import com.epam.training.ticketservice.domain.Room;
+import com.epam.training.ticketservice.domain.Screening;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Component
+<span class="nc" id="L19">@RequiredArgsConstructor</span>
+public class Mapper implements MapperInterface {
+
+    @Override
+    public Admin mapAdmin(AdminEntity adminEntity) {
+<span class="nc" id="L24">        return new Admin(adminEntity.getName(),</span>
+<span class="nc" id="L25">                adminEntity.getPassword(),</span>
+<span class="nc" id="L26">                adminEntity.isPriviliged());</span>
+    }
+
+    @Override
+    public MovieEntity mapperMovie(Movie movie) {
+<span class="nc" id="L31">        return new MovieEntity(movie.getTitle(), movie.getGenre(), movie.getRuntime());</span>
+    }
+
+    @Override
+    public Movie mapMovieEntity(MovieEntity movieEntity) {
+<span class="nc" id="L36">        return new Movie(movieEntity.getTitle(), movieEntity.getGenre(), movieEntity.getRuntime());</span>
+    }
+
+    @Override
+    public List&lt;Movie&gt; mapMovieEntities(List&lt;MovieEntity&gt; movieEntities) {
+<span class="nc" id="L41">        return movieEntities.stream()</span>
+<span class="nc" id="L42">                .map(this::mapMovieEntity)</span>
+<span class="nc" id="L43">                .collect(Collectors.toList());</span>
+    }
+
+    @Override
+    public RoomEntity mapperRoom(Room room) {
+<span class="nc" id="L48">        return new RoomEntity(room.getName(), room.getRows(), room.getColumns());</span>
+    }
+
+    @Override
+    public Room mapRoomEntity(RoomEntity roomEntity) {
+<span class="nc" id="L53">        return new Room(roomEntity.getName(), roomEntity.getRows(), roomEntity.getColumns());</span>
+    }
+
+    @Override
+    public List&lt;Room&gt; mapRoomEntities(List&lt;RoomEntity&gt; roomEntities) {
+<span class="nc" id="L58">        return roomEntities.stream()</span>
+<span class="nc" id="L59">                .map(this::mapRoomEntity)</span>
+<span class="nc" id="L60">                .collect(Collectors.toList());</span>
+    }
+
+    @Override
+    public ScreeningEntity mapperScreening(Movie movie, Room room, LocalDateTime startDateTime) {
+<span class="nc" id="L65">        return new ScreeningEntity(mapperMovie(movie), mapperRoom(room), startDateTime);</span>
+    }
+
+    @Override
+    public List&lt;Screening&gt; mapScreeningEntities(List&lt;ScreeningEntity&gt; screeningEntities) {
+<span class="nc" id="L70">        return screeningEntities.stream()</span>
+<span class="nc" id="L71">                .map(this::mapScreeningEntity)</span>
+<span class="nc" id="L72">                .collect(Collectors.toList());</span>
+    }
+
+    @Override
+    public Screening mapScreeningEntity(ScreeningEntity screeningEntity) {
+<span class="nc" id="L77">        return new Screening(mapMovieEntity(screeningEntity.getMovieEntity()),</span>
+<span class="nc" id="L78">                mapRoomEntity(screeningEntity.getRoomEntity()),</span>
+<span class="nc" id="L79">                screeningEntity.getDateTime());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

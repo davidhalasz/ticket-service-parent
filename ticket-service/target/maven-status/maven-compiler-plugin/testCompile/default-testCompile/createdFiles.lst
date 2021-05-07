@@ -1,3 +1,11 @@
 com\epam\training\ticketservice\service\AdminServiceTest.class
+com\epam\training\ticketservice\service\RoomServiceTest.class
+com\epam\training\ticketservice\repository\impl\JpaRoomRepositoryTest.class
 com\epam\training\ticketservice\presentation\handler\ScreeningCommandHandlerTest.class
+com\epam\training\ticketservice\repository\impl\JpaAdminRepositoryTest.class
+com\epam\training\ticketservice\repository\impl\JpaMovieRepositoryTest.class
+com\epam\training\ticketservice\service\ScreeningServiceTest.class
+com\epam\training\ticketservice\presentation\handler\AdminCommandHandlerTest.class
 com\epam\training\ticketservice\service\MovieServiceTest.class
+com\epam\training\ticketservice\presentation\handler\MovieCommandHandlerTest.class
+com\epam\training\ticketservice\presentation\handler\RoomCommandHandlerTest.class

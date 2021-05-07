@@ -3,21 +3,20 @@ package com.epam.training.ticketservice.presentation.handler;
 import com.epam.training.ticketservice.domain.Movie;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.MovieService;
-import com.epam.training.ticketservice.repository.RepositoryException.InvalidRuntimeException;
-import com.epam.training.ticketservice.repository.RepositoryException.MovieAlreadyExistsException;
-import com.epam.training.ticketservice.repository.RepositoryException.MovieNotFoundException;
+import com.epam.training.ticketservice.exceptions.InvalidRuntimeException;
+import com.epam.training.ticketservice.exceptions.MovieAlreadyExistsException;
+import com.epam.training.ticketservice.exceptions.MovieNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
-/**
- * Command handler for 'movie' command
- */
 
 @ShellComponent
+@Slf4j
 public class MovieCommandHandler {
 
-    private MovieService movieService;
-    private AdminService adminService;
+    private final MovieService movieService;
+    private final AdminService adminService;
 
     public MovieCommandHandler(MovieService movieService, AdminService adminService) {
         this.movieService = movieService;
@@ -26,7 +25,9 @@ public class MovieCommandHandler {
 
 
     @ShellMethod(value = "Create a new movie", key = "create movie")
-    public String createMovie(String title, String genre, int runtime) throws MovieAlreadyExistsException, InvalidRuntimeException {
+    public String createMovie(String title, String genre, int runtime)
+            throws MovieAlreadyExistsException, InvalidRuntimeException {
+
         String result;
         try {
             if (adminService.loggedAdmin()) {
@@ -45,10 +46,10 @@ public class MovieCommandHandler {
     public String listMovies() {
         StringBuilder builder = new StringBuilder();
 
-        if (movieService.getAllMovie().isEmpty()) {
+        if (movieService.getAllMovies().isEmpty()) {
             return "There are no movies at the moment";
         } else {
-            for (Movie value : movieService.getAllMovie()) {
+            for (Movie value : movieService.getAllMovies()) {
                 builder.append(value);
             }
             return builder.toString();
@@ -56,7 +57,9 @@ public class MovieCommandHandler {
     }
 
     @ShellMethod(value = "Update a movie", key = "update movie")
-    public String updateMovie(String title, String genre, int runtime) throws MovieNotFoundException, InvalidRuntimeException {
+    public String updateMovie(String title, String genre, int runtime)
+            throws MovieNotFoundException, InvalidRuntimeException {
+
         String result;
         try {
             if (adminService.loggedAdmin()) {
@@ -72,7 +75,9 @@ public class MovieCommandHandler {
     }
 
     @ShellMethod(value = "Delete a movie.", key = "delete movie")
-    public String deleteMovie(String title) throws MovieNotFoundException {
+    public String deleteMovie(String title)
+            throws MovieNotFoundException {
+
         String result;
         try {
             if (adminService.loggedAdmin()) {
@@ -86,5 +91,4 @@ public class MovieCommandHandler {
         }
         return result;
     }
-
 }

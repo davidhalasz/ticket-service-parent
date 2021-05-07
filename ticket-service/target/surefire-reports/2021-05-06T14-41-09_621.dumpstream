@@ -1,4 +1,0 @@
-# Created at 2021-05-06T14:41:10.376
-Boot Manifest-JAR contains absolute paths in classpath 'D:\6. félév\java\beadando\ticket-service-parent\ticket-service\target\test-classes'
-Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
-

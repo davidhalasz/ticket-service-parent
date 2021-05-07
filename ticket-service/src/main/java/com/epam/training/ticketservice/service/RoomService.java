@@ -1,39 +1,43 @@
 package com.epam.training.ticketservice.service;
 
 import com.epam.training.ticketservice.domain.Room;
-import com.epam.training.ticketservice.repository.RepositoryException.InvalidRoomParameterException;
+import com.epam.training.ticketservice.exceptions.InvalidRoomParameterException;
 import com.epam.training.ticketservice.repository.RoomRepository;
-import com.epam.training.ticketservice.repository.RepositoryException.RoomAlreadyExistsException;
-import com.epam.training.ticketservice.repository.RepositoryException.RoomNotFoundException;
+import com.epam.training.ticketservice.exceptions.RoomAlreadyExistsException;
+import com.epam.training.ticketservice.exceptions.RoomNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class RoomService {
 
-    private RoomRepository roomRepository;
+    private final RoomRepository roomRepository;
 
     public RoomService(RoomRepository roomRepository) {
         this.roomRepository = roomRepository;
     }
 
-    public Room createRoom(String name, int rows, int columns) throws RoomAlreadyExistsException, InvalidRoomParameterException {
+    public void createRoom(String name, int rows, int columns)
+            throws RoomAlreadyExistsException, InvalidRoomParameterException {
+
         Room room = new Room(name, rows, columns);
         roomRepository.createRoom(room);
-        return room;
     }
 
-    public Room updateRoom(String name, int rows, int columns)
+    public void updateRoom(String name, int rows, int columns)
             throws RoomNotFoundException, InvalidRoomParameterException {
-        return roomRepository.updateRoom(name, rows, columns);
+
+        roomRepository.updateRoom(name, rows, columns);
     }
 
     public Room deleteRoom(String name) throws RoomNotFoundException {
         return roomRepository.deleteRoom(name);
     }
 
-    public List<Room> getAllRoom() {
-        return roomRepository.getAllRoom();
+    public List<Room> getAllRooms() {
+        return roomRepository.getAllRooms();
     }
 }

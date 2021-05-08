@@ -29,7 +29,7 @@ public class JpaAdminRepository implements AdminRepository {
         if (adminEntity.isPresent()) {
             return mapper.mapAdmin(adminEntity.get());
         } else {
-            throw new AdminAccountNotExistsException("There is no such name");
+            throw new AdminAccountNotExistsException("Login failed due to incorrect credentials");
         }
     }
 

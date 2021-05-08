@@ -376,3 +376,8 @@
 1620396816008:create screening alma ro "2021-05-05 14:22"
 1620396843401:create screening alma ro "2021-05-05 14:21"
 1620396874582:exit
+1620461900262:describe account
+1620461910544:sign in priviliged admin admin
+1620461915710:describe account
+1620462192025:sign in priviliged admin pass
+1620462198495:exit

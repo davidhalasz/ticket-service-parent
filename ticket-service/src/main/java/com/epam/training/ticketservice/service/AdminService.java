@@ -27,7 +27,7 @@ public class AdminService {
             adminRepository.updatePriviliged(name, true);
             currentAdmin = adminRepository.getAdminByName(name);
         } else {
-            throw new InvalidPasswordException("Invalid password");
+            throw new InvalidPasswordException("Login failed due to incorrect credentials");
         }
         return admin;
     }

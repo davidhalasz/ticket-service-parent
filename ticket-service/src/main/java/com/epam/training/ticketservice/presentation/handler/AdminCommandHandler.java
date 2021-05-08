@@ -45,4 +45,15 @@ public class AdminCommandHandler {
             return e.getMessage();
         }
     }
+
+    @ShellMethod(value = "Describe account", key = "describe account")
+    public String describeAccount() {
+        String result = "";
+        if (adminService.loggedAdmin()) {
+            result = "Signed in with privileged account " + loggedAdmin.getName();
+        } else {
+            result = "You are not signed in";
+        }
+        return result;
+    }
 }

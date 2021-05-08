@@ -195,7 +195,7 @@ class MovieCommandHandlerTest {
 
     @Test
     void testDeleteMovieWhenAdminIsSignedIn()
-            throws MovieNotFoundException {
+            throws MovieNotFoundException, DeleteException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
 
@@ -209,7 +209,9 @@ class MovieCommandHandlerTest {
     }
 
     @Test
-    void testDeleteMovieReturnErrorWhenAdminIsNotSignedIn() throws MovieNotFoundException {
+    void testDeleteMovieReturnErrorWhenAdminIsNotSignedIn()
+            throws MovieNotFoundException, DeleteException {
+
         // Given
         when(adminService.loggedAdmin()).thenReturn(false);
 

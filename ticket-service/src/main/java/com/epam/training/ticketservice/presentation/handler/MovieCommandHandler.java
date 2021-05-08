@@ -1,6 +1,7 @@
 package com.epam.training.ticketservice.presentation.handler;
 
 import com.epam.training.ticketservice.domain.Movie;
+import com.epam.training.ticketservice.exceptions.DeleteException;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.MovieService;
 import com.epam.training.ticketservice.exceptions.InvalidRuntimeException;
@@ -76,7 +77,7 @@ public class MovieCommandHandler {
 
     @ShellMethod(value = "Delete a movie.", key = "delete movie")
     public String deleteMovie(String title)
-            throws MovieNotFoundException {
+            throws MovieNotFoundException, DeleteException {
 
         String result;
         try {
@@ -86,7 +87,7 @@ public class MovieCommandHandler {
             } else {
                 result = "You are not signed in";
             }
-        } catch (MovieNotFoundException e) {
+        } catch (MovieNotFoundException | DeleteException e) {
             result = e.getMessage();
         }
         return result;

@@ -1,10 +1,12 @@
 package com.epam.training.ticketservice.service;
 
 import com.epam.training.ticketservice.domain.Movie;
+import com.epam.training.ticketservice.exceptions.DeleteException;
 import com.epam.training.ticketservice.repository.MovieRepository;
 import com.epam.training.ticketservice.exceptions.InvalidRuntimeException;
 import com.epam.training.ticketservice.exceptions.MovieAlreadyExistsException;
 import com.epam.training.ticketservice.exceptions.MovieNotFoundException;
+import com.epam.training.ticketservice.repository.ScreeningRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -39,13 +41,16 @@ class MovieServiceTest {
     @Mock
     private MovieRepository movieRepository;
 
+    @Mock
+    private ScreeningRepository screeningRepository;
+
     @InjectMocks
     private MovieService movieService;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        underTest = new MovieService(movieRepository);
+        underTest = new MovieService(movieRepository, screeningRepository);
     }
 
     @Test
@@ -141,7 +146,7 @@ class MovieServiceTest {
     }
 
     @Test
-    void testDeleteMovieWithExistingMovie() throws MovieNotFoundException {
+    void testDeleteMovieWithExistingMovie() throws MovieNotFoundException, DeleteException {
         // When
         movieService.deleteMovie(TITLE1);
 

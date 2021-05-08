@@ -408,3 +408,10 @@
 1620464469745:list screenings
 1620464538559:create screening satan ro "2021-03-15 18:41"
 1620464673892:exit
+1620468636584:sign in priviliged admin admin
+1620468648069:create movie alma al 120
+1620468660191:reate room ro 10 10
+1620468668131:create room ro 10 10
+1620468684052:create screening alma ro "2021-05-05 10:00"
+1620468690963:delete movie alma
+1620468739780:exit

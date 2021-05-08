@@ -415,3 +415,10 @@
 1620468684052:create screening alma ro "2021-05-05 10:00"
 1620468690963:delete movie alma
 1620468739780:exit
+1620469507564:sign in priviliged admin admin
+1620469512830:create room ro 10 10
+1620469519196:reate movie alma al 120
+1620469525942:create movie alma al 101
+1620469544697:create screening alma ro "2021-05-05 10:00"
+1620469550750:delete room ro
+1620469574668:exit

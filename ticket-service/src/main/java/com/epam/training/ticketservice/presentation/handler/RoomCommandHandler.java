@@ -2,6 +2,7 @@ package com.epam.training.ticketservice.presentation.handler;
 
 
 import com.epam.training.ticketservice.domain.Room;
+import com.epam.training.ticketservice.exceptions.DeleteException;
 import com.epam.training.ticketservice.exceptions.InvalidRoomParameterException;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.RoomService;
@@ -61,8 +62,7 @@ public class RoomCommandHandler {
     }
 
     @ShellMethod(value = "Delete a room", key = "delete room")
-    public String deleteRoom(String name)
-            throws RoomNotFoundException {
+    public String deleteRoom(String name) {
 
         String result;
         try {
@@ -72,7 +72,7 @@ public class RoomCommandHandler {
             } else {
                 result = "You are not signed in";
             }
-        } catch (RoomNotFoundException e) {
+        } catch (RoomNotFoundException | DeleteException e) {
             result = e.getMessage();
         }
         return result;

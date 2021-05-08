@@ -5,6 +5,7 @@ import com.epam.training.ticketservice.exceptions.InvalidRoomParameterException;
 import com.epam.training.ticketservice.exceptions.RoomAlreadyExistsException;
 import com.epam.training.ticketservice.exceptions.RoomNotFoundException;
 import com.epam.training.ticketservice.repository.RoomRepository;
+import com.epam.training.ticketservice.repository.ScreeningRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -35,13 +36,16 @@ class RoomServiceTest {
     @Mock
     private RoomRepository roomRepository;
 
+    @Mock
+    private ScreeningRepository screeningRepository;
+
     @InjectMocks
     private RoomService roomService;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        underTest = new RoomService(roomRepository);
+        underTest = new RoomService(roomRepository, screeningRepository);
     }
 
     @Test

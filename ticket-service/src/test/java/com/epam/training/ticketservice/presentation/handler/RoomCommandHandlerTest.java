@@ -203,7 +203,7 @@ class RoomCommandHandlerTest {
 
     @Test
     void testDeleteRoomWhenAdminIsSignedIn()
-            throws RoomNotFoundException {
+            throws RoomNotFoundException, DeleteException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
 
@@ -217,7 +217,7 @@ class RoomCommandHandlerTest {
     }
 
     @Test
-    void testDeleteRoomShouldReturnRoomNotFoundException() throws RoomNotFoundException {
+    void testDeleteRoomShouldReturnRoomNotFoundException() throws RoomNotFoundException, DeleteException {
         Exception exception = null;
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);

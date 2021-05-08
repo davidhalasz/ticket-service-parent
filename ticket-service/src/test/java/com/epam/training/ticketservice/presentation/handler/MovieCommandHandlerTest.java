@@ -62,12 +62,12 @@ class MovieCommandHandlerTest {
         when(adminService.loggedAdmin()).thenReturn(true);
 
         // When
-        String current = movieCommandHandler.createMovie(TITLE, GENRE, RUNTIME);
+        String actualResult = movieCommandHandler.createMovie(TITLE, GENRE, RUNTIME);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(movieService, times(1)).addMovie(TITLE, GENRE, RUNTIME);
-        assertThat(current, equalTo(MOVIE_ADDED));
+        assertThat(actualResult, equalTo(MOVIE_ADDED));
     }
 
     @Test
@@ -76,11 +76,11 @@ class MovieCommandHandlerTest {
         when(adminService.loggedAdmin()).thenReturn(false);
 
         // When
-        String current = movieCommandHandler.createMovie(TITLE, GENRE, RUNTIME);
+        String actualResult = movieCommandHandler.createMovie(TITLE, GENRE, RUNTIME);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
-        assertThat(current, equalTo(UNPRIVILIGED_MSG));
+        assertThat(actualResult, equalTo(UNPRIVILIGED_MSG));
     }
 
     @Test
@@ -92,12 +92,12 @@ class MovieCommandHandlerTest {
                 .addMovie(any(), any(), anyInt());
 
         // When
-        String current = movieCommandHandler.createMovie(TITLE, GENRE, RUNTIME);
+        String actualResult = movieCommandHandler.createMovie(TITLE, GENRE, RUNTIME);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(movieService, times(1)).addMovie(TITLE, GENRE, RUNTIME);
-        assertThat(current, equalTo(MOVIE_EXISTS));
+        assertThat(actualResult, equalTo(MOVIE_EXISTS));
     }
 
     @Test
@@ -110,12 +110,12 @@ class MovieCommandHandlerTest {
                 .addMovie(any(), any(), anyInt());
 
         // When
-        String current = movieCommandHandler.createMovie(TITLE, GENRE, RUNTIME);
+        String actualResult = movieCommandHandler.createMovie(TITLE, GENRE, RUNTIME);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(movieService, times(1)).addMovie(TITLE, GENRE, RUNTIME);
-        assertThat(current, equalTo(INVALID_RUNTIME_MSG));
+        assertThat(actualResult, equalTo(INVALID_RUNTIME_MSG));
     }
 
     @Test
@@ -124,11 +124,11 @@ class MovieCommandHandlerTest {
         given(movieService.getAllMovies()).willReturn(List.of());
 
         // When
-        String current = movieCommandHandler.listMovies();
+        String actualResult = movieCommandHandler.listMovies();
 
         // Then
         verify(movieService, times(1)).getAllMovies();
-        assertThat(current, equalTo(EMPTY_LIST_MSG));
+        assertThat(actualResult, equalTo(EMPTY_LIST_MSG));
     }
 
     @Test
@@ -138,12 +138,12 @@ class MovieCommandHandlerTest {
         when(adminService.loggedAdmin()).thenReturn(true);
 
         // When
-        String current = movieCommandHandler.updateMovie(TITLE, GENRE, RUNTIME);
+        String actualResult = movieCommandHandler.updateMovie(TITLE, GENRE, RUNTIME);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(movieService, times(1)).updateMovie(TITLE, GENRE, RUNTIME);
-        assertThat(current, equalTo(MOVIE_UPDATED));
+        assertThat(actualResult, equalTo(MOVIE_UPDATED));
     }
 
     @Test
@@ -152,11 +152,11 @@ class MovieCommandHandlerTest {
         when(adminService.loggedAdmin()).thenReturn(false);
 
         // When
-        String current = movieCommandHandler.updateMovie(TITLE, GENRE, RUNTIME);
+        String actualResult = movieCommandHandler.updateMovie(TITLE, GENRE, RUNTIME);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
-        assertThat(current, equalTo(UNPRIVILIGED_MSG));
+        assertThat(actualResult, equalTo(UNPRIVILIGED_MSG));
     }
 
     @Test
@@ -168,12 +168,12 @@ class MovieCommandHandlerTest {
                 .updateMovie(any(), any(), anyInt());
 
         // When
-        String current = movieCommandHandler.updateMovie(TITLE, GENRE, RUNTIME);
+        String actualResult = movieCommandHandler.updateMovie(TITLE, GENRE, RUNTIME);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(movieService, times(1)).updateMovie(TITLE, GENRE, RUNTIME);
-        assertThat(current, equalTo(MOVIE_NOT_FOUND));
+        assertThat(actualResult, equalTo(MOVIE_NOT_FOUND));
     }
 
     @Test
@@ -185,12 +185,12 @@ class MovieCommandHandlerTest {
                 .updateMovie(any(), any(), anyInt());
 
         // When
-        String current = movieCommandHandler.updateMovie(TITLE, GENRE, RUNTIME);
+        String actualResult = movieCommandHandler.updateMovie(TITLE, GENRE, RUNTIME);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(movieService, times(1)).updateMovie(TITLE, GENRE, RUNTIME);
-        assertThat(current, equalTo(INVALID_RUNTIME_MSG));
+        assertThat(actualResult, equalTo(INVALID_RUNTIME_MSG));
     }
 
     @Test
@@ -200,12 +200,12 @@ class MovieCommandHandlerTest {
         when(adminService.loggedAdmin()).thenReturn(true);
 
         // When
-        String current = movieCommandHandler.deleteMovie(TITLE);
+        String actualResult = movieCommandHandler.deleteMovie(TITLE);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(movieService, times(1)).deleteMovie(TITLE);
-        assertThat(current, equalTo(MOVIE_DELETED));
+        assertThat(actualResult, equalTo(MOVIE_DELETED));
     }
 
     @Test
@@ -214,11 +214,11 @@ class MovieCommandHandlerTest {
         when(adminService.loggedAdmin()).thenReturn(false);
 
         // When
-        String current = movieCommandHandler.deleteMovie(TITLE);
+        String actualResult = movieCommandHandler.deleteMovie(TITLE);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
-        assertThat(current, equalTo(UNPRIVILIGED_MSG));
+        assertThat(actualResult, equalTo(UNPRIVILIGED_MSG));
     }
 
     @Test
@@ -227,14 +227,14 @@ class MovieCommandHandlerTest {
         when(movieService.getAllMovies()).thenReturn(movies);
 
         // When
-        String actual = movieCommandHandler.listMovies();
+        String actualResult = movieCommandHandler.listMovies();
 
         // Then
         StringBuilder builder = new StringBuilder();
         for (Movie movie : movies) {
             builder.append(movie);
         }
-        assertThat(actual, equalTo(builder.toString()));
+        assertThat(actualResult, equalTo(builder.toString()));
     }
 
 }

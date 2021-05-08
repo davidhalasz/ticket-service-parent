@@ -79,12 +79,12 @@ class ScreeningCommandHandlerTest {
         when(adminService.loggedAdmin()).thenReturn(true);
 
         // When
-        String current = screeningCommandHandler.createScreening(TITLE, NAME, DATETIME);
+        String actualResult = screeningCommandHandler.createScreening(TITLE, NAME, DATETIME);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(screeningService, times(1)).createScreening(TITLE, NAME, FORMATTED_DATETIME);
-        assertThat(current, equalTo(SCREENING_ADDED));
+        assertThat(actualResult, equalTo(SCREENING_ADDED));
     }
 
     @Test
@@ -94,11 +94,11 @@ class ScreeningCommandHandlerTest {
         given(adminService.loggedAdmin()).willReturn(false);
 
         // When
-        String current = screeningCommandHandler.createScreening(TITLE, NAME, DATETIME);
+        String actualResult = screeningCommandHandler.createScreening(TITLE, NAME, DATETIME);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
-        assertThat(current, equalTo(UNPRIVILIGED_MSG));
+        assertThat(actualResult, equalTo(UNPRIVILIGED_MSG));
     }
 
     @Test
@@ -114,12 +114,12 @@ class ScreeningCommandHandlerTest {
                 .createScreening(anyString(), anyString(), any());
 
         // When
-        String current = screeningCommandHandler.createScreening(TITLE, NAME, DATETIME);
+        String actualResult = screeningCommandHandler.createScreening(TITLE, NAME, DATETIME);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(screeningService, times(1)).createScreening(TITLE, NAME, FORMATTED_DATETIME);
-        assertThat(current, equalTo(OVERLAPPING_MSG));
+        assertThat(actualResult, equalTo(OVERLAPPING_MSG));
     }
 
     @Test
@@ -135,12 +135,12 @@ class ScreeningCommandHandlerTest {
                 .createScreening(anyString(), anyString(), any());
 
         // When
-        String current = screeningCommandHandler.createScreening(TITLE, NAME, DATETIME);
+        String actualResult = screeningCommandHandler.createScreening(TITLE, NAME, DATETIME);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(screeningService, times(1)).createScreening(TITLE, NAME, FORMATTED_DATETIME);
-        assertThat(current, equalTo(OL_IN_BREAK_MSG));
+        assertThat(actualResult, equalTo(OL_IN_BREAK_MSG));
     }
 
     @Test
@@ -156,12 +156,12 @@ class ScreeningCommandHandlerTest {
                 .createScreening(anyString(), anyString(), any());
 
         // When
-        String current = screeningCommandHandler.createScreening(TITLE, NAME, DATETIME);
+        String actualResult = screeningCommandHandler.createScreening(TITLE, NAME, DATETIME);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(screeningService, times(1)).createScreening(TITLE, NAME, FORMATTED_DATETIME);
-        assertThat(current, equalTo(MOVIE_NOT_FOUND));
+        assertThat(actualResult, equalTo(MOVIE_NOT_FOUND));
     }
 
     @Test
@@ -177,12 +177,12 @@ class ScreeningCommandHandlerTest {
                 .createScreening(anyString(), anyString(), any());
 
         // When
-        String current = screeningCommandHandler.createScreening(TITLE, NAME, DATETIME);
+        String actualResult = screeningCommandHandler.createScreening(TITLE, NAME, DATETIME);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(screeningService, times(1)).createScreening(TITLE, NAME, FORMATTED_DATETIME);
-        assertThat(current, equalTo(ROOM_NOT_FOUND));
+        assertThat(actualResult, equalTo(ROOM_NOT_FOUND));
     }
 
     @Test
@@ -192,11 +192,11 @@ class ScreeningCommandHandlerTest {
         given(adminService.loggedAdmin()).willReturn(true);
 
         // When
-        String current = screeningCommandHandler.deleteScreening(TITLE, NAME, DATETIME);
+        String actualResult = screeningCommandHandler.deleteScreening(TITLE, NAME, DATETIME);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
-        assertThat(current, equalTo(SCREENING_DELETED));
+        assertThat(actualResult, equalTo(SCREENING_DELETED));
     }
 
     @Test
@@ -206,11 +206,11 @@ class ScreeningCommandHandlerTest {
         when(adminService.loggedAdmin()).thenReturn(false);
 
         // When
-        String current = screeningCommandHandler.deleteScreening(TITLE, NAME, DATETIME);
+        String actualResult = screeningCommandHandler.deleteScreening(TITLE, NAME, DATETIME);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
-        assertThat(current, equalTo(UNPRIVILIGED_MSG));
+        assertThat(actualResult, equalTo(UNPRIVILIGED_MSG));
     }
 
     @Test
@@ -219,11 +219,11 @@ class ScreeningCommandHandlerTest {
         given(screeningService.getAllScreenings()).willReturn(List.of());
 
         // When
-        String current = screeningCommandHandler.listScreenings();
+        String actualResult = screeningCommandHandler.listScreenings();
 
         // Then
         verify(screeningService, times(1)).getAllScreenings();
-        assertThat(current, equalTo(EMPTY_LIST_MSG));
+        assertThat(actualResult, equalTo(EMPTY_LIST_MSG));
     }
 
     @Test
@@ -232,14 +232,14 @@ class ScreeningCommandHandlerTest {
         when(screeningService.getAllScreenings()).thenReturn(screenings);
 
         // When
-        String actual = screeningCommandHandler.listScreenings();
+        String actualResult = screeningCommandHandler.listScreenings();
 
         // Then
         StringBuilder builder = new StringBuilder();
         for (Screening screening : screenings) {
             builder.append(screening);
         }
-        assertThat(actual, equalTo(builder.toString()));
+        assertThat(actualResult, equalTo(builder.toString()));
     }
 
 }

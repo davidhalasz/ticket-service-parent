@@ -56,10 +56,10 @@ class AdminServiceTest {
         given(adminRepository.getAdminByName(NAME)).willReturn(PRIVILIGED_ADMIN);
 
         // When
-        Admin result = underTest.checkAccount(NAME, PASSWORD);
+        Admin actualResult = underTest.checkAccount(NAME, PASSWORD);
 
         // Then
-        assertThat(result, equalTo(PRIVILIGED_ADMIN));
+        assertThat(actualResult, equalTo(PRIVILIGED_ADMIN));
     }
 
     @Test

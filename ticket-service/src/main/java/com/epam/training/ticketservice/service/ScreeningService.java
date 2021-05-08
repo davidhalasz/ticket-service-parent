@@ -70,9 +70,9 @@ public class ScreeningService {
                 .anyMatch(screening -> {
                     LocalDateTime screeningStart = screening.getStartDate();
                     LocalDateTime screeningEnd = screening.getStartDate()
-                            .plusMinutes((screening.getMovie().getRuntime()) + 10);
-                    return isWithinRange(screeningStart, screeningEnd, startDateTime)
-                            || isWithinRange(screeningStart, screeningEnd, endDateTime);
+                            .plusMinutes((screening.getMovie().getRuntime()));
+                    return isWithinRange(screeningStart, screeningEnd, startDateTime.plusMinutes(-10))
+                            || isWithinRange(screeningStart, screeningEnd, endDateTime.plusMinutes(10));
 
                 });
     }

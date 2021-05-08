@@ -93,10 +93,10 @@ class RoomServiceTest {
         given(underTest.getAllRooms()).willReturn(ROOMS);
 
         // When
-        List<Room> current = roomRepository.getAllRooms();
+        List<Room> actualResult = roomRepository.getAllRooms();
 
         // Then
-        assertThat(current, equalTo(ROOMS));
+        assertThat(actualResult, equalTo(ROOMS));
     }
 
     @Test
@@ -119,11 +119,10 @@ class RoomServiceTest {
         given(roomRepository.getRoomByName(NAME)).willReturn(ROOM);
 
         // When
-        Room current = roomRepository.getRoomByName(NAME);
+        Room actualResult = roomRepository.getRoomByName(NAME);
 
         // Then
-        assertThat(current, equalTo(ROOM));
+        assertThat(actualResult, equalTo(ROOM));
     }
-
 
 }

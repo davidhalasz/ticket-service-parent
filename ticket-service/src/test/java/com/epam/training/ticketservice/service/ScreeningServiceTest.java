@@ -134,10 +134,10 @@ class ScreeningServiceTest {
         given(screeningRepository.getAllScreenings()).willReturn(SCREENINGS);
 
         // When
-        List<Screening> current = underTest.getAllScreenings();
+        List<Screening> actualResult = underTest.getAllScreenings();
 
         // Then
-        assertThat(current, equalTo(SCREENINGS));
+        assertThat(actualResult, equalTo(SCREENINGS));
     }
 
 }

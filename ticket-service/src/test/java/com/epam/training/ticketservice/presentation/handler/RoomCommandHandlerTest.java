@@ -65,12 +65,12 @@ class RoomCommandHandlerTest {
         when(adminService.loggedAdmin()).thenReturn(true);
 
         // When
-        String current = roomCommandHandler.createRoom(NAME, ROWS, COLUMNS);
+        String actualResult = roomCommandHandler.createRoom(NAME, ROWS, COLUMNS);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(roomService, times(1)).createRoom(NAME, ROWS, COLUMNS);
-        assertThat(current, equalTo(ROOM_ADDED));
+        assertThat(actualResult, equalTo(ROOM_ADDED));
     }
 
     @Test
@@ -80,11 +80,11 @@ class RoomCommandHandlerTest {
         when(adminService.loggedAdmin()).thenReturn(false);
 
         // When
-        String current = roomCommandHandler.createRoom(NAME, ROWS, COLUMNS);
+        String actualResult = roomCommandHandler.createRoom(NAME, ROWS, COLUMNS);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
-        assertThat(current, equalTo(UNPRIVILIGED_MSG));
+        assertThat(actualResult, equalTo(UNPRIVILIGED_MSG));
     }
 
     @Test
@@ -97,12 +97,12 @@ class RoomCommandHandlerTest {
                 .createRoom(anyString(), anyInt(), anyInt());
 
         // When
-        String current = roomCommandHandler.createRoom(NAME, ROWS, COLUMNS);
+        String actualResult = roomCommandHandler.createRoom(NAME, ROWS, COLUMNS);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(roomService, times(1)).createRoom(NAME, ROWS, COLUMNS);
-        assertThat(current, equalTo(ROOM_EXISTS_MSG));
+        assertThat(actualResult, equalTo(ROOM_EXISTS_MSG));
     }
 
     @Test
@@ -115,12 +115,12 @@ class RoomCommandHandlerTest {
                 .createRoom(anyString(), anyInt(), anyInt());
 
         // When
-        String current = roomCommandHandler.createRoom(NAME, ROWS, COLUMNS);
+        String actualResult = roomCommandHandler.createRoom(NAME, ROWS, COLUMNS);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(roomService, times(1)).createRoom(NAME, ROWS, COLUMNS);
-        assertThat(current, equalTo(INVALID_PARAMETER));
+        assertThat(actualResult, equalTo(INVALID_PARAMETER));
     }
 
     @Test
@@ -129,11 +129,11 @@ class RoomCommandHandlerTest {
         given(roomService.getAllRooms()).willReturn(List.of());
 
         // When
-        String current = roomCommandHandler.listRooms();
+        String actualResult = roomCommandHandler.listRooms();
 
         // Then
         verify(roomService, times(1)).getAllRooms();
-        assertThat(current, equalTo(EMPTY_LIST_MSG));
+        assertThat(actualResult, equalTo(EMPTY_LIST_MSG));
     }
 
     @Test
@@ -143,12 +143,12 @@ class RoomCommandHandlerTest {
         when(adminService.loggedAdmin()).thenReturn(true);
 
         // When
-        String current = roomCommandHandler.updateRoom(NAME, ROWS, COLUMNS);
+        String actualResult = roomCommandHandler.updateRoom(NAME, ROWS, COLUMNS);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(roomService, times(1)).updateRoom(NAME, ROWS, COLUMNS);
-        assertThat(current, equalTo(ROOM_UPDATED));
+        assertThat(actualResult, equalTo(ROOM_UPDATED));
     }
 
     @Test
@@ -158,11 +158,11 @@ class RoomCommandHandlerTest {
         when(adminService.loggedAdmin()).thenReturn(false);
 
         // When
-        String current = roomCommandHandler.updateRoom(NAME, ROWS, COLUMNS);
+        String actualResult = roomCommandHandler.updateRoom(NAME, ROWS, COLUMNS);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
-        assertThat(current, equalTo(UNPRIVILIGED_MSG));
+        assertThat(actualResult, equalTo(UNPRIVILIGED_MSG));
     }
 
     @Test
@@ -175,12 +175,12 @@ class RoomCommandHandlerTest {
                 .updateRoom(anyString(), anyInt(), anyInt());
 
         // When
-        String current = roomCommandHandler.updateRoom(NAME, ROWS, COLUMNS);
+        String actualResult = roomCommandHandler.updateRoom(NAME, ROWS, COLUMNS);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(roomService, times(1)).updateRoom(NAME, ROWS, COLUMNS);
-        assertThat(current, equalTo(ROOM_NOT_FOUND));
+        assertThat(actualResult, equalTo(ROOM_NOT_FOUND));
     }
 
     @Test
@@ -193,12 +193,12 @@ class RoomCommandHandlerTest {
                 .updateRoom(anyString(), anyInt(), anyInt());
 
         // When
-        String current = roomCommandHandler.updateRoom(NAME, ROWS, COLUMNS);
+        String actualResult = roomCommandHandler.updateRoom(NAME, ROWS, COLUMNS);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(roomService, times(1)).updateRoom(NAME, ROWS, COLUMNS);
-        assertThat(current, equalTo(INVALID_PARAMETER));
+        assertThat(actualResult, equalTo(INVALID_PARAMETER));
     }
 
     @Test
@@ -208,12 +208,12 @@ class RoomCommandHandlerTest {
         when(adminService.loggedAdmin()).thenReturn(true);
 
         // When
-        String current = roomCommandHandler.deleteRoom(NAME);
+        String actualResult = roomCommandHandler.deleteRoom(NAME);
 
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(roomService, times(1)).deleteRoom(NAME);
-        assertThat(current, equalTo(ROOM_DELETED));
+        assertThat(actualResult, equalTo(ROOM_DELETED));
     }
 
     @Test

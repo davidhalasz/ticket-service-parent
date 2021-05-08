@@ -381,3 +381,30 @@
 1620461915710:describe account
 1620462192025:sign in priviliged admin pass
 1620462198495:exit
+1620463251993:sign in priviliged admin admin
+1620463313530:create movie satan drama 450
+1620463319435:create room ro 10 10
+1620463357921:create room ro2 10 10
+1620463408965:create screening satan ro "2021-03-15 10:45"
+1620463488846:create screening satan ro "2021-03-15 10:50"
+1620463529306:create screening satan ro2 "2021-03-15 10:50"
+1620463643070:delete screening satan ro "2021-03-15 10:45"
+1620463690971:create screening satan ro "2021-03-15 11:00"
+1620463754627:create screening satan ro "2021-03-15 18:39"
+1620463843591:exit
+1620463972289:sign in priviliged admin admin
+1620463982050:create room ro 10 10
+1620463995447:create movie satan 450
+1620464017227:create movie satan drama 450
+1620464045278:create screening satan ro "2021-03-15 11:00"
+1620464067924:create satan ro "2021-03-15 18:39"
+1620464089428:create screening satan ro "2021-03-15 11:00"
+1620464297201:sign in priviliged admin admin
+1620464305011:create room ro 10 10
+1620464314811:create movie satan drama 450
+1620464373645:create screening satan ro "2021-03-15 11:00"
+1620464396903:create screening satan ro "2021-03-15 18:39"
+1620464451484:create screening satan ro "2021-03-15 18:40"
+1620464469745:list screenings
+1620464538559:create screening satan ro "2021-03-15 18:41"
+1620464673892:exit

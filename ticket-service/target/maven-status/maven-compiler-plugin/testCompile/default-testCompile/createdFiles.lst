@@ -1,3 +1,4 @@
+com\epam\training\ticketservice\repository\impl\JpaScreeningRepositoryTest.class
 com\epam\training\ticketservice\service\AdminServiceTest.class
 com\epam\training\ticketservice\service\RoomServiceTest.class
 com\epam\training\ticketservice\repository\impl\JpaRoomRepositoryTest.class

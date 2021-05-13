@@ -29,16 +29,15 @@ public class JpaAdminRepository implements AdminRepository {
 <span class="pc bpc" id="L29" title="1 of 2 branches missed.">        if (adminEntity.isPresent()) {</span>
 <span class="nc" id="L30">            return mapper.mapAdmin(adminEntity.get());</span>
         } else {
-<span class="fc" id="L32">            throw new AdminAccountNotExistsException(&quot;There is no such name&quot;);</span>
+<span class="fc" id="L32">            throw new AdminAccountNotExistsException(&quot;Login failed due to incorrect credentials&quot;);</span>
         }
     }
 
     @Override
-    public void updatePriviliged(String name, boolean priviliged) {
-
-<span class="nc" id="L39">        AdminEntity adminEntity = adminDao.findByName(name);</span>
-<span class="nc" id="L40">        adminEntity.setPriviliged(priviliged);</span>
-<span class="nc" id="L41">        adminDao.save(adminEntity);</span>
-<span class="nc" id="L42">    }</span>
+    public void updatePrivileged(String name, boolean privileged) {
+<span class="nc" id="L38">        AdminEntity adminEntity = adminDao.findByName(name);</span>
+<span class="nc" id="L39">        adminEntity.setPriviliged(privileged);</span>
+<span class="nc" id="L40">        adminDao.save(adminEntity);</span>
+<span class="nc" id="L41">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -15,9 +15,9 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.List;
 
-<span class="nc" id="L18">@RequiredArgsConstructor</span>
+<span class="fc" id="L18">@RequiredArgsConstructor</span>
 @Repository
-<span class="nc" id="L20">@Slf4j</span>
+<span class="fc" id="L20">@Slf4j</span>
 public class JpaScreeningRepository implements ScreeningRepository {
 
     private final ScreeningDao screeningDao;
@@ -27,9 +27,9 @@ public class JpaScreeningRepository implements ScreeningRepository {
     public void createScreening(Movie movie, Room room,
                                 LocalDateTime startDateTime) {
 
-<span class="nc" id="L30">        ScreeningEntity screeningEntity = mapper.mapperScreening(movie, room, startDateTime);</span>
-<span class="nc" id="L31">        screeningDao.save(screeningEntity);</span>
-<span class="nc" id="L32">    }</span>
+<span class="fc" id="L30">        ScreeningEntity screeningEntity = mapper.mapperScreening(movie, room, startDateTime);</span>
+<span class="fc" id="L31">        screeningDao.save(screeningEntity);</span>
+<span class="fc" id="L32">    }</span>
 
     @Override
     public void deleteScreening(String movieTitle, String roomName, LocalDateTime startDateTime)
@@ -40,14 +40,14 @@ public class JpaScreeningRepository implements ScreeningRepository {
 <span class="nc bnc" id="L40" title="All 2 branches missed.">                        &amp;&amp; currentScreening.getRoomEntity().getName().equals(roomName)</span>
 <span class="nc bnc" id="L41" title="All 2 branches missed.">                        &amp;&amp; currentScreening.getDateTime().equals(startDateTime))</span>
 <span class="nc" id="L42">                .findFirst()</span>
-<span class="nc" id="L43">                .orElseThrow(() -&gt; new ScreeningNotFoundException(&quot;There is no such screening&quot;));</span>
+<span class="nc" id="L43">                .orElseThrow(() -&gt; new ScreeningNotFoundException(&quot;There are no screenings&quot;));</span>
 <span class="nc" id="L44">        screeningDao.delete(screeningEntity);</span>
 <span class="nc" id="L45">    }</span>
 
     @Override
     public List&lt;Screening&gt; getAllScreenings() {
-<span class="nc" id="L49">        List&lt;ScreeningEntity&gt; screeningEntities = screeningDao.findAll();</span>
-<span class="nc" id="L50">        return mapper.mapScreeningEntities(screeningEntities);</span>
+<span class="fc" id="L49">        List&lt;ScreeningEntity&gt; screeningEntities = screeningDao.findAll();</span>
+<span class="fc" id="L50">        return mapper.mapScreeningEntities(screeningEntities);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

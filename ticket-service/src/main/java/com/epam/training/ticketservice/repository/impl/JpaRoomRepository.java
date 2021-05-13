@@ -33,7 +33,8 @@ public class JpaRoomRepository implements RoomRepository {
         } else if (room.getRows() < 1 || room.getColumns() < 1) {
             throw new InvalidRoomParameterException("Room's rows and columns cannot be null");
         } else {
-            roomDao.save(mapper.mapperRoom(room));
+            RoomEntity roomEntity = mapper.mapperRoom(room);
+            roomDao.save(roomEntity);
         }
     }
 

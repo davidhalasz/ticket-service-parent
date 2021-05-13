@@ -34,10 +34,9 @@ public class JpaAdminRepository implements AdminRepository {
     }
 
     @Override
-    public void updatePriviliged(String name, boolean priviliged) {
-
+    public void updatePrivileged(String name, boolean privileged) {
         AdminEntity adminEntity = adminDao.findByName(name);
-        adminEntity.setPriviliged(priviliged);
+        adminEntity.setPriviliged(privileged);
         adminDao.save(adminEntity);
     }
 }

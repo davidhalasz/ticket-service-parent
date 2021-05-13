@@ -35,11 +35,7 @@ public class JpaMovieRepository implements MovieRepository {
             throw new InvalidRuntimeException("Runtime is invalid");
         }
 
-        MovieEntity newMovie = new MovieEntity(
-                movie.getTitle(),
-                movie.getGenre(),
-                movie.getRuntime()
-        );
+        MovieEntity newMovie = mapper.mapperMovie(movie);
         movieDao.save(newMovie);
     }
 

@@ -1,46 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="hu"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MovieService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ticket-service</a> &gt; <a href="index.source.html" class="el_package">com.epam.training.ticketservice.service</a> &gt; <span class="el_source">MovieService.java</span></div><h1>MovieService.java</h1><pre class="source lang-java linenums">package com.epam.training.ticketservice.service;
 
 import com.epam.training.ticketservice.domain.Movie;
+import com.epam.training.ticketservice.domain.Screening;
+import com.epam.training.ticketservice.exceptions.DeleteException;
 import com.epam.training.ticketservice.repository.MovieRepository;
 import com.epam.training.ticketservice.exceptions.InvalidRuntimeException;
 import com.epam.training.ticketservice.exceptions.MovieAlreadyExistsException;
 import com.epam.training.ticketservice.exceptions.MovieNotFoundException;
+import com.epam.training.ticketservice.repository.ScreeningRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-<span class="fc" id="L14">@Slf4j</span>
+<span class="fc" id="L17">@Slf4j</span>
 public class MovieService {
 
     private final MovieRepository movieRepository;
+    private final ScreeningRepository screeningRepository;
 
-<span class="fc" id="L19">    public MovieService(MovieRepository movieRepository) {</span>
-<span class="fc" id="L20">        this.movieRepository = movieRepository;</span>
-<span class="fc" id="L21">    }</span>
+<span class="fc" id="L23">    public MovieService(MovieRepository movieRepository, ScreeningRepository screeningRepository) {</span>
+<span class="fc" id="L24">        this.movieRepository = movieRepository;</span>
+<span class="fc" id="L25">        this.screeningRepository = screeningRepository;</span>
+<span class="fc" id="L26">    }</span>
 
     public Movie addMovie(String title, String genre, int runtime)
             throws MovieAlreadyExistsException, InvalidRuntimeException {
 
-<span class="fc" id="L26">        Movie movie = new Movie(title, genre, runtime);</span>
-<span class="nc" id="L27">        movieRepository.createMovie(movie);</span>
-<span class="nc" id="L28">        return movie;</span>
+<span class="fc" id="L31">        Movie movie = new Movie(title, genre, runtime);</span>
+<span class="nc" id="L32">        movieRepository.createMovie(movie);</span>
+<span class="nc" id="L33">        return movie;</span>
     }
 
     public List&lt;Movie&gt; getAllMovies() {
-<span class="fc" id="L32">        return movieRepository.getAllMovies();</span>
+<span class="fc" id="L37">        return movieRepository.getAllMovies();</span>
     }
 
     public void updateMovie(String title, String genre, int runtime)
             throws MovieNotFoundException, InvalidRuntimeException {
 
-<span class="fc" id="L38">        movieRepository.updateMovie(title, genre, runtime);</span>
-<span class="fc" id="L39">    }</span>
+<span class="fc" id="L43">        movieRepository.updateMovie(title, genre, runtime);</span>
+<span class="fc" id="L44">    }</span>
 
-    public void deleteMovie(String title) throws MovieNotFoundException {
-<span class="fc" id="L42">        movieRepository.deleteMovie(title);</span>
-<span class="fc" id="L43">    }</span>
+    public void deleteMovie(String title) throws MovieNotFoundException, DeleteException {
+<span class="fc" id="L47">        List&lt;Screening&gt; screenings = screeningRepository.getAllScreenings();</span>
+<span class="fc" id="L48">        Screening screening = screenings.stream()</span>
+<span class="fc" id="L49">                .filter(currentScreening -&gt; currentScreening.getMovie().getTitle().equals(title))</span>
+<span class="fc" id="L50">                .findFirst()</span>
+<span class="fc" id="L51">                .orElse(null);</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (screening != null) {</span>
+<span class="fc" id="L53">            throw new DeleteException(&quot;You cannot delete this movie &quot;</span>
+                    + &quot;because there is a screening with title like this.&quot;);
+        }
+<span class="fc" id="L56">        movieRepository.deleteMovie(title);</span>
+<span class="fc" id="L57">    }</span>
 
+    public Movie getMovie(String title) throws MovieNotFoundException {
+<span class="nc" id="L60">        return movieRepository.getMovieByTitle(title);</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,12 +1,13 @@
 package com.epam.training.ticketservice.presentation.handler;
 
 import com.epam.training.ticketservice.domain.Movie;
+import com.epam.training.ticketservice.exceptions.MovieAlreadyExistsException;
+import com.epam.training.ticketservice.exceptions.InvalidRuntimeException;
+import com.epam.training.ticketservice.exceptions.AdminAccountNotExistsException;
+import com.epam.training.ticketservice.exceptions.MovieNotFoundException;
 import com.epam.training.ticketservice.exceptions.DeleteException;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.MovieService;
-import com.epam.training.ticketservice.exceptions.InvalidRuntimeException;
-import com.epam.training.ticketservice.exceptions.MovieAlreadyExistsException;
-import com.epam.training.ticketservice.exceptions.MovieNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -26,18 +27,18 @@ public class MovieCommandHandler {
 
 
     @ShellMethod(value = "Create a new movie", key = "create movie")
-    public String createMovie(String title, String genre, int runtime)
-            throws MovieAlreadyExistsException, InvalidRuntimeException {
+    public String createMovie(String title, String genre, int runtime) {
 
-        String result;
+        String result = "";
         try {
             if (adminService.loggedAdmin()) {
                 movieService.addMovie(title, genre, runtime);
-                result = "Movie added";
+                result = movieService.getMovie(title).toString();
             } else {
                 result = "You are not signed in";
             }
-        } catch (MovieAlreadyExistsException | InvalidRuntimeException e) {
+        } catch (MovieAlreadyExistsException | InvalidRuntimeException
+                | AdminAccountNotExistsException | MovieNotFoundException e) {
             result = e.getMessage();
         }
         return result;
@@ -58,8 +59,7 @@ public class MovieCommandHandler {
     }
 
     @ShellMethod(value = "Update a movie", key = "update movie")
-    public String updateMovie(String title, String genre, int runtime)
-            throws MovieNotFoundException, InvalidRuntimeException {
+    public String updateMovie(String title, String genre, int runtime) {
 
         String result;
         try {
@@ -69,15 +69,14 @@ public class MovieCommandHandler {
             } else {
                 result = "You are not signed in";
             }
-        } catch (MovieNotFoundException | InvalidRuntimeException e) {
+        } catch (MovieNotFoundException | InvalidRuntimeException | AdminAccountNotExistsException e) {
             result = e.getMessage();
         }
         return result;
     }
 
     @ShellMethod(value = "Delete a movie.", key = "delete movie")
-    public String deleteMovie(String title)
-            throws MovieNotFoundException, DeleteException {
+    public String deleteMovie(String title) {
 
         String result;
         try {
@@ -87,7 +86,7 @@ public class MovieCommandHandler {
             } else {
                 result = "You are not signed in";
             }
-        } catch (MovieNotFoundException | DeleteException e) {
+        } catch (MovieNotFoundException | DeleteException | AdminAccountNotExistsException e) {
             result = e.getMessage();
         }
         return result;

@@ -1,5 +1,7 @@
 package com.epam.training.ticketservice.service;
 
+import com.epam.training.ticketservice.dataaccess.dao.AdminDao;
+import com.epam.training.ticketservice.dataaccess.entity.AdminEntity;
 import com.epam.training.ticketservice.domain.Admin;
 import com.epam.training.ticketservice.repository.AdminRepository;
 import com.epam.training.ticketservice.exceptions.AdminAccountNotExistsException;
@@ -13,9 +15,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 
@@ -28,15 +31,18 @@ class AdminServiceTest {
     private AdminService underTest;
     private final static String NAME = "admin";
     private final static String PASSWORD = "admin";
-    private static final Admin ADMIN = new Admin(NAME, PASSWORD, false);
-    private static final Admin PRIVILIGED_ADMIN = new Admin(NAME, PASSWORD, true);
+    private static final Admin ADMIN_FALSE = new Admin(NAME, PASSWORD, false);
+    private static final Admin PRIVILEGED_ADMIN = new Admin(NAME, PASSWORD, true);
     private final static String INVALID_NAME = "Skywalker";
     private final static String INVALID_PSW = "psw";
     private final static Admin INVALID_ADMIN = new Admin(NAME, INVALID_PSW, false);
     private static final Admin NULL_ADMIN = null;
+    private final static List<Admin> admins = List.of(PRIVILEGED_ADMIN, PRIVILEGED_ADMIN);
+    private final static AdminEntity adminEntity = new AdminEntity(NAME, PASSWORD, true);
 
     @Mock
     private AdminRepository adminRepository;
+
 
     @InjectMocks
     private AdminService adminService;
@@ -53,13 +59,13 @@ class AdminServiceTest {
             throws AdminAccountNotExistsException, InvalidPasswordException {
 
         // Given
-        given(adminRepository.getAdminByName(NAME)).willReturn(PRIVILIGED_ADMIN);
+        given(adminRepository.getAdminByName(NAME)).willReturn(PRIVILEGED_ADMIN);
 
         // When
         Admin actualResult = underTest.checkAccount(NAME, PASSWORD);
 
         // Then
-        assertThat(actualResult, equalTo(PRIVILIGED_ADMIN));
+        assertThat(actualResult, equalTo(PRIVILEGED_ADMIN));
     }
 
     @Test
@@ -115,32 +121,33 @@ class AdminServiceTest {
     }
 
     @Test
-    void testSignOutShouldReturnExceptionWhenAccountIsNotExist()
+    void testSignOutShouldReturnNullPointerExceptionWhenAdminIsNotExists()
             throws AdminIsNotLoggedInException, AdminAccountNotExistsException {
 
-        // Given
-        doThrow(AdminAccountNotExistsException.class)
-                .when(adminRepository)
-                .getAdminByName(anyString());
+        Exception exception = null;
+
+        // When
+        try {
+            adminService.signOut(INVALID_ADMIN);
+        } catch (NullPointerException e) {
+            exception = e;
+        }
 
         // Then
-        assertThrows(AdminAccountNotExistsException.class, () ->{
-            // When
-            adminService.signOut(INVALID_ADMIN);
-        });
+        assertNotNull(exception);
     }
 
     @Test
-    void testSignOutShouldBeSuccessful()
-            throws AdminAccountNotExistsException, AdminIsNotLoggedInException {
-
+    void testSignOutShouldBeSuccess() throws AdminAccountNotExistsException, AdminIsNotLoggedInException {
         // Given
-        when(adminRepository.getAdminByName(anyString())).thenReturn(ADMIN);
+        given(adminRepository.getAdminByName(NAME)).willReturn(PRIVILEGED_ADMIN);
 
         // When
-        adminService.signOut(ADMIN);
+        underTest.signOut(PRIVILEGED_ADMIN);
 
         // Then
-        verify(adminRepository, times(1)).updatePriviliged(NAME, false);
+        verify(adminRepository, times(1)).updatePrivileged(PRIVILEGED_ADMIN.getName(), false);
+
     }
+    
 }

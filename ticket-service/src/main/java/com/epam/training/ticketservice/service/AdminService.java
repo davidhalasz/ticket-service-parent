@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class AdminService {
 
-    private AdminRepository adminRepository;
+    private final AdminRepository adminRepository;
     private Admin currentAdmin;
 
     public AdminService(AdminRepository adminRepository) {
@@ -24,7 +24,7 @@ public class AdminService {
 
         Admin admin = adminRepository.getAdminByName(name);
         if (admin.getPassword().matches(password)) {
-            adminRepository.updatePriviliged(name, true);
+            adminRepository.updatePrivileged(name, true);
             currentAdmin = adminRepository.getAdminByName(name);
         } else {
             throw new InvalidPasswordException("Login failed due to incorrect credentials");
@@ -32,9 +32,9 @@ public class AdminService {
         return admin;
     }
 
-    public boolean loggedAdmin() {
-
+    public boolean loggedAdmin() throws AdminAccountNotExistsException {
         if (currentAdmin != null) {
+            currentAdmin = adminRepository.getAdminByName(currentAdmin.getName());
             return currentAdmin.isPriviliged();
         } else {
             return false;
@@ -47,7 +47,7 @@ public class AdminService {
         if (loggedAdmin != null) {
             try {
                 Admin admin = adminRepository.getAdminByName(loggedAdmin.getName());
-                adminRepository.updatePriviliged(admin.getName(), false);
+                adminRepository.updatePrivileged(admin.getName(), false);
             } catch (AdminAccountNotExistsException e) {
                 throw new AdminAccountNotExistsException("Account not exists");
             }

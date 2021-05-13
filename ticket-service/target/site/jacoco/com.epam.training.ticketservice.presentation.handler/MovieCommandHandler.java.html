@@ -1,82 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="hu"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MovieCommandHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ticket-service</a> &gt; <a href="index.source.html" class="el_package">com.epam.training.ticketservice.presentation.handler</a> &gt; <span class="el_source">MovieCommandHandler.java</span></div><h1>MovieCommandHandler.java</h1><pre class="source lang-java linenums">package com.epam.training.ticketservice.presentation.handler;
 
 import com.epam.training.ticketservice.domain.Movie;
+import com.epam.training.ticketservice.exceptions.MovieAlreadyExistsException;
+import com.epam.training.ticketservice.exceptions.InvalidRuntimeException;
+import com.epam.training.ticketservice.exceptions.AdminAccountNotExistsException;
+import com.epam.training.ticketservice.exceptions.MovieNotFoundException;
+import com.epam.training.ticketservice.exceptions.DeleteException;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.MovieService;
-import com.epam.training.ticketservice.exceptions.InvalidRuntimeException;
-import com.epam.training.ticketservice.exceptions.MovieAlreadyExistsException;
-import com.epam.training.ticketservice.exceptions.MovieNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
 
 @ShellComponent
-<span class="fc" id="L15">@Slf4j</span>
+<span class="fc" id="L17">@Slf4j</span>
 public class MovieCommandHandler {
 
     private final MovieService movieService;
     private final AdminService adminService;
 
-<span class="fc" id="L21">    public MovieCommandHandler(MovieService movieService, AdminService adminService) {</span>
-<span class="fc" id="L22">        this.movieService = movieService;</span>
-<span class="fc" id="L23">        this.adminService = adminService;</span>
-<span class="fc" id="L24">    }</span>
+<span class="fc" id="L23">    public MovieCommandHandler(MovieService movieService, AdminService adminService) {</span>
+<span class="fc" id="L24">        this.movieService = movieService;</span>
+<span class="fc" id="L25">        this.adminService = adminService;</span>
+<span class="fc" id="L26">    }</span>
 
 
     @ShellMethod(value = &quot;Create a new movie&quot;, key = &quot;create movie&quot;)
-    public String createMovie(String title, String genre, int runtime)
-            throws MovieAlreadyExistsException, InvalidRuntimeException {
+    public String createMovie(String title, String genre, int runtime) {
 
-        String result;
+<span class="fc" id="L32">        String result = &quot;&quot;;</span>
         try {
-<span class="fc bfc" id="L33" title="All 2 branches covered.">            if (adminService.loggedAdmin()) {</span>
-<span class="fc" id="L34">                movieService.addMovie(title, genre, runtime);</span>
-<span class="fc" id="L35">                result = &quot;Movie added&quot;;</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            if (adminService.loggedAdmin()) {</span>
+<span class="fc" id="L35">                movieService.addMovie(title, genre, runtime);</span>
+<span class="fc" id="L36">                result = movieService.getMovie(title).toString();</span>
             } else {
-<span class="fc" id="L37">                result = &quot;You are not signed in&quot;;</span>
+<span class="fc" id="L38">                result = &quot;You are not signed in&quot;;</span>
             }
-<span class="fc" id="L39">        } catch (MovieAlreadyExistsException | InvalidRuntimeException e) {</span>
-<span class="fc" id="L40">            result = e.getMessage();</span>
-<span class="fc" id="L41">        }</span>
-<span class="fc" id="L42">        return result;</span>
+<span class="fc" id="L40">        } catch (MovieAlreadyExistsException | InvalidRuntimeException</span>
+                | AdminAccountNotExistsException | MovieNotFoundException e) {
+<span class="fc" id="L42">            result = e.getMessage();</span>
+<span class="fc" id="L43">        }</span>
+<span class="fc" id="L44">        return result;</span>
     }
 
     @ShellMethod(value = &quot;List all movie&quot;, key = &quot;list movies&quot;)
     public String listMovies() {
-<span class="fc" id="L47">        StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L49">        StringBuilder builder = new StringBuilder();</span>
 
-<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (movieService.getAllMovies().isEmpty()) {</span>
-<span class="fc" id="L50">            return &quot;There are no movies at the moment&quot;;</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (movieService.getAllMovies().isEmpty()) {</span>
+<span class="fc" id="L52">            return &quot;There are no movies at the moment&quot;;</span>
         } else {
-<span class="fc bfc" id="L52" title="All 2 branches covered.">            for (Movie value : movieService.getAllMovies()) {</span>
-<span class="fc" id="L53">                builder.append(value);</span>
-<span class="fc" id="L54">            }</span>
-<span class="fc" id="L55">            return builder.toString();</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">            for (Movie value : movieService.getAllMovies()) {</span>
+<span class="fc" id="L55">                builder.append(value);</span>
+<span class="fc" id="L56">            }</span>
+<span class="fc" id="L57">            return builder.toString();</span>
         }
     }
 
     @ShellMethod(value = &quot;Update a movie&quot;, key = &quot;update movie&quot;)
-    public String updateMovie(String title, String genre, int runtime)
-            throws MovieNotFoundException, InvalidRuntimeException {
+    public String updateMovie(String title, String genre, int runtime) {
 
         String result;
         try {
-<span class="fc bfc" id="L65" title="All 2 branches covered.">            if (adminService.loggedAdmin()) {</span>
-<span class="fc" id="L66">                movieService.updateMovie(title, genre, runtime);</span>
-<span class="fc" id="L67">                result = &quot;Movie updated&quot;;</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">            if (adminService.loggedAdmin()) {</span>
+<span class="fc" id="L67">                movieService.updateMovie(title, genre, runtime);</span>
+<span class="fc" id="L68">                result = &quot;Movie updated&quot;;</span>
             } else {
-<span class="fc" id="L69">                result = &quot;You are not signed in&quot;;</span>
+<span class="fc" id="L70">                result = &quot;You are not signed in&quot;;</span>
             }
-<span class="fc" id="L71">        } catch (MovieNotFoundException | InvalidRuntimeException e) {</span>
-<span class="fc" id="L72">            result = e.getMessage();</span>
-<span class="fc" id="L73">        }</span>
-<span class="fc" id="L74">        return result;</span>
+<span class="fc" id="L72">        } catch (MovieNotFoundException | InvalidRuntimeException | AdminAccountNotExistsException e) {</span>
+<span class="fc" id="L73">            result = e.getMessage();</span>
+<span class="fc" id="L74">        }</span>
+<span class="fc" id="L75">        return result;</span>
     }
 
     @ShellMethod(value = &quot;Delete a movie.&quot;, key = &quot;delete movie&quot;)
-    public String deleteMovie(String title)
-            throws MovieNotFoundException {
+    public String deleteMovie(String title) {
 
         String result;
         try {
@@ -86,7 +86,7 @@ public class MovieCommandHandler {
             } else {
 <span class="fc" id="L87">                result = &quot;You are not signed in&quot;;</span>
             }
-<span class="nc" id="L89">        } catch (MovieNotFoundException e) {</span>
+<span class="nc" id="L89">        } catch (MovieNotFoundException | DeleteException | AdminAccountNotExistsException e) {</span>
 <span class="nc" id="L90">            result = e.getMessage();</span>
 <span class="fc" id="L91">        }</span>
 <span class="fc" id="L92">        return result;</span>

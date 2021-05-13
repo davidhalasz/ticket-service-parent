@@ -20,14 +20,13 @@ public class AdminCommandHandler {
         this.adminService = adminService;
     }
 
-    @ShellMethod(value = "Admin sign in", key = "sign in priviliged")
-    public String adminLogIn(String name, String password)
-            throws AdminAccountNotExistsException, InvalidPasswordException {
+    @ShellMethod(value = "Admin sign in", key = "sign in privileged")
+    public String adminLogIn(String name, String password) {
 
         String result;
         try {
             loggedAdmin = adminService.checkAccount(name, password);
-            result = "Signed in with privileged account " + name;
+            result = "Signed in with privileged account '" + name + "'";
         } catch (AdminAccountNotExistsException | InvalidPasswordException e) {
             result = e.getMessage();
         }
@@ -35,8 +34,7 @@ public class AdminCommandHandler {
     }
 
     @ShellMethod(value = "Admin sign out", key = "sign out")
-    public String adminLogout()
-            throws AdminIsNotLoggedInException, AdminAccountNotExistsException {
+    public String adminLogout() {
 
         try {
             adminService.signOut(loggedAdmin);
@@ -47,7 +45,7 @@ public class AdminCommandHandler {
     }
 
     @ShellMethod(value = "Describe account", key = "describe account")
-    public String describeAccount() {
+    public String describeAccount() throws AdminAccountNotExistsException {
         String result = "";
         if (adminService.loggedAdmin()) {
             result = "Signed in with privileged account " + loggedAdmin.getName();

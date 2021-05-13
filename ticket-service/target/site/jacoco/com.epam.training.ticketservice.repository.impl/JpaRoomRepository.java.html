@@ -28,61 +28,62 @@ public class JpaRoomRepository implements RoomRepository {
     public void createRoom(Room room)
             throws RoomAlreadyExistsException, InvalidRoomParameterException {
 
-<span class="nc bnc" id="L31" title="All 2 branches missed.">        if (isRoomExists(room.getName())) {</span>
-<span class="nc" id="L32">            throw new RoomAlreadyExistsException(&quot;Room already exists&quot;);</span>
-<span class="nc bnc" id="L33" title="All 4 branches missed.">        } else if (room.getRows() &lt; 1 || room.getColumns() &lt; 1) {</span>
-<span class="nc" id="L34">            throw new InvalidRoomParameterException(&quot;Room's rows and columns cannot be null&quot;);</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        if (isRoomExists(room.getName())) {</span>
+<span class="fc" id="L32">            throw new RoomAlreadyExistsException(&quot;Room already exists&quot;);</span>
+<span class="pc bpc" id="L33" title="1 of 4 branches missed.">        } else if (room.getRows() &lt; 1 || room.getColumns() &lt; 1) {</span>
+<span class="fc" id="L34">            throw new InvalidRoomParameterException(&quot;Room's rows and columns cannot be null&quot;);</span>
         } else {
-<span class="nc" id="L36">            roomDao.save(mapper.mapperRoom(room));</span>
+<span class="fc" id="L36">            RoomEntity roomEntity = mapper.mapperRoom(room);</span>
+<span class="fc" id="L37">            roomDao.save(roomEntity);</span>
         }
-<span class="nc" id="L38">    }</span>
+<span class="fc" id="L39">    }</span>
 
     @Override
     public Room updateRoom(String name, int rows, int columns)
             throws RoomNotFoundException, InvalidRoomParameterException {
 
-<span class="nc bnc" id="L44" title="All 2 branches missed.">        if (!isRoomExists(name)) {</span>
-<span class="nc" id="L45">            throw new RoomNotFoundException(&quot;Room not found&quot;);</span>
-<span class="nc bnc" id="L46" title="All 4 branches missed.">        } else if (rows &lt; 1 || columns &lt; 1) {</span>
-<span class="nc" id="L47">            throw new InvalidRoomParameterException(&quot;Room's rows and columns cannot be null&quot;);</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (!isRoomExists(name)) {</span>
+<span class="fc" id="L46">            throw new RoomNotFoundException(&quot;Room not found&quot;);</span>
+<span class="pc bpc" id="L47" title="1 of 4 branches missed.">        } else if (rows &lt; 1 || columns &lt; 1) {</span>
+<span class="fc" id="L48">            throw new InvalidRoomParameterException(&quot;Room's rows and columns cannot be null&quot;);</span>
         } else  {
-<span class="nc" id="L49">            RoomEntity roomEntity = roomDao.findByName(name);</span>
-<span class="nc" id="L50">            roomEntity.setRows(rows);</span>
-<span class="nc" id="L51">            roomEntity.setColumns(columns);</span>
-<span class="nc" id="L52">            roomDao.save(roomEntity);</span>
+<span class="fc" id="L50">            RoomEntity roomEntity = roomDao.findByName(name);</span>
+<span class="fc" id="L51">            roomEntity.setRows(rows);</span>
+<span class="fc" id="L52">            roomEntity.setColumns(columns);</span>
+<span class="fc" id="L53">            roomDao.save(roomEntity);</span>
         }
-<span class="nc" id="L54">        return null;</span>
+<span class="fc" id="L55">        return null;</span>
     }
 
     @Override
     public Room deleteRoom(String name) throws RoomNotFoundException {
-<span class="pc bpc" id="L59" title="1 of 2 branches missed.">        if (!isRoomExists(name)) {</span>
-<span class="nc" id="L60">            throw new RoomNotFoundException(&quot;Room not found&quot;);</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (!isRoomExists(name)) {</span>
+<span class="fc" id="L61">            throw new RoomNotFoundException(&quot;Room not found&quot;);</span>
         } else  {
-<span class="fc" id="L62">            RoomEntity roomEntity = roomDao.findByName(name);</span>
-<span class="fc" id="L63">            roomDao.delete(roomEntity);</span>
+<span class="fc" id="L63">            RoomEntity roomEntity = roomDao.findByName(name);</span>
+<span class="fc" id="L64">            roomDao.delete(roomEntity);</span>
         }
-<span class="fc" id="L65">        return null;</span>
+<span class="fc" id="L66">        return null;</span>
     }
 
     @Override
     public List&lt;Room&gt; getAllRooms() {
-<span class="fc" id="L70">        List&lt;RoomEntity&gt; roomEntities = roomDao.findAll();</span>
-<span class="fc" id="L71">        return mapper.mapRoomEntities(roomEntities);</span>
+<span class="fc" id="L71">        List&lt;RoomEntity&gt; roomEntities = roomDao.findAll();</span>
+<span class="fc" id="L72">        return mapper.mapRoomEntities(roomEntities);</span>
     }
 
     @Override
     public Room getRoomByName(String name) throws RoomNotFoundException {
-<span class="pc bpc" id="L76" title="1 of 2 branches missed.">        if (isRoomExists(name)) {</span>
-<span class="fc" id="L77">            return mapper.mapRoomEntity(roomDao.findByName(name));</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (isRoomExists(name)) {</span>
+<span class="fc" id="L78">            return mapper.mapRoomEntity(roomDao.findByName(name));</span>
         } else {
-<span class="nc" id="L79">            throw new RoomNotFoundException(&quot;There is no such room&quot;);</span>
+<span class="fc" id="L80">            throw new RoomNotFoundException(&quot;There is no such room&quot;);</span>
         }
     }
 
     public boolean isRoomExists(String name) {
-<span class="fc" id="L84">        Optional&lt;RoomEntity&gt; roomEntity = Optional.ofNullable(roomDao.findByName(name));</span>
-<span class="fc" id="L85">        return roomEntity.isPresent();</span>
+<span class="fc" id="L85">        Optional&lt;RoomEntity&gt; roomEntity = Optional.ofNullable(roomDao.findByName(name));</span>
+<span class="fc" id="L86">        return roomEntity.isPresent();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

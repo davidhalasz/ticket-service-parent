@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 <span class="fc" id="L12">@Slf4j</span>
 public class AdminService {
 
-    private AdminRepository adminRepository;
+    private final AdminRepository adminRepository;
     private Admin currentAdmin;
 
 <span class="fc" id="L18">    public AdminService(AdminRepository adminRepository) {</span>
@@ -24,17 +24,17 @@ public class AdminService {
 
 <span class="fc" id="L25">        Admin admin = adminRepository.getAdminByName(name);</span>
 <span class="fc bfc" id="L26" title="All 2 branches covered.">        if (admin.getPassword().matches(password)) {</span>
-<span class="fc" id="L27">            adminRepository.updatePriviliged(name, true);</span>
+<span class="fc" id="L27">            adminRepository.updatePrivileged(name, true);</span>
 <span class="fc" id="L28">            currentAdmin = adminRepository.getAdminByName(name);</span>
         } else {
-<span class="fc" id="L30">            throw new InvalidPasswordException(&quot;Invalid password&quot;);</span>
+<span class="fc" id="L30">            throw new InvalidPasswordException(&quot;Login failed due to incorrect credentials&quot;);</span>
         }
 <span class="fc" id="L32">        return admin;</span>
     }
 
-    public boolean loggedAdmin() {
-
-<span class="nc bnc" id="L37" title="All 2 branches missed.">        if (currentAdmin != null) {</span>
+    public boolean loggedAdmin() throws AdminAccountNotExistsException {
+<span class="nc bnc" id="L36" title="All 2 branches missed.">        if (currentAdmin != null) {</span>
+<span class="nc" id="L37">            currentAdmin = adminRepository.getAdminByName(currentAdmin.getName());</span>
 <span class="nc" id="L38">            return currentAdmin.isPriviliged();</span>
         } else {
 <span class="nc" id="L40">            return false;</span>
@@ -47,9 +47,9 @@ public class AdminService {
 <span class="fc bfc" id="L47" title="All 2 branches covered.">        if (loggedAdmin != null) {</span>
             try {
 <span class="fc" id="L49">                Admin admin = adminRepository.getAdminByName(loggedAdmin.getName());</span>
-<span class="fc" id="L50">                adminRepository.updatePriviliged(admin.getName(), false);</span>
-<span class="fc" id="L51">            } catch (AdminAccountNotExistsException e) {</span>
-<span class="fc" id="L52">                throw new AdminAccountNotExistsException(&quot;Account not exists&quot;);</span>
+<span class="fc" id="L50">                adminRepository.updatePrivileged(admin.getName(), false);</span>
+<span class="nc" id="L51">            } catch (AdminAccountNotExistsException e) {</span>
+<span class="nc" id="L52">                throw new AdminAccountNotExistsException(&quot;Account not exists&quot;);</span>
 <span class="fc" id="L53">            }</span>
         } else {
 <span class="fc" id="L55">            throw new AdminIsNotLoggedInException(&quot;You are not logged in&quot;);</span>

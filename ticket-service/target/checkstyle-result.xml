@@ -1,99 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="8.29">
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\configuration\JpaConfiguration.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\configuration\JpaConfiguration.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\dao\AdminDao.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\dao\AdminDao.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\dao\MovieDao.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\dao\MovieDao.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\dao\RoomDao.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\dao\RoomDao.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\dao\ScreeningDao.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\dao\ScreeningDao.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\entity\AdminEntity.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\entity\AdminEntity.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\entity\MovieEntity.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\entity\MovieEntity.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\entity\RoomEntity.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\entity\RoomEntity.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\entity\ScreeningEntity.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\entity\ScreeningEntity.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\init\AdminInitializer.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\dataaccess\init\AdminInitializer.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\domain\Admin.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\domain\Admin.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\domain\Movie.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\domain\Movie.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\domain\Room.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\domain\Room.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\domain\Screening.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\domain\Screening.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\AdminAccountNotExistsException.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\AdminAccountNotExistsException.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\AdminIsNotLoggedInException.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\AdminIsNotLoggedInException.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\InvalidPasswordException.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\DeleteException.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\InvalidRoomParameterException.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\InvalidPasswordException.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\InvalidRuntimeException.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\InvalidRoomParameterException.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\MovieAlreadyExistsException.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\InvalidRuntimeException.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\MovieNotFoundException.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\MovieAlreadyExistsException.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\OverlappingException.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\MovieNotFoundException.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\OverlappingInBreakException.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\OverlappingException.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\RoomAlreadyExistsException.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\OverlappingInBreakException.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\RoomNotFoundException.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\RoomAlreadyExistsException.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\ScreeningNotFoundException.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\RoomNotFoundException.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\CliApplication.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\exceptions\ScreeningNotFoundException.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\configuration\CliConfiguration.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\CliApplication.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\handler\AdminCommandHandler.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\configuration\CliConfiguration.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\handler\MovieCommandHandler.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\handler\AdminCommandHandler.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\handler\RoomCommandHandler.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\handler\MovieCommandHandler.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\handler\ScreeningCommandHandler.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\handler\RoomCommandHandler.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\TicketServicePromptProvider.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\handler\ScreeningCommandHandler.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\AdminRepository.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\presentation\TicketServicePromptProvider.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\impl\JpaAdminRepository.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\AdminRepository.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\impl\JpaMovieRepository.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\impl\JpaAdminRepository.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\impl\JpaRoomRepository.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\impl\JpaMovieRepository.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\impl\JpaScreeningRepository.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\impl\JpaRoomRepository.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\mapper\Mapper.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\impl\JpaScreeningRepository.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\mapper\MapperInterface.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\mapper\Mapper.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\MovieRepository.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\mapper\MapperInterface.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\RoomRepository.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\MovieRepository.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\ScreeningRepository.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\RoomRepository.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\service\AdminService.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\repository\ScreeningRepository.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\service\MovieService.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\service\AdminService.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\service\RoomService.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\service\MovieService.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\service\ScreeningService.java">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\service\RoomService.java">
 </file>
-<file name="D:\6. félév\java\beadando\ticket-service-parent\ticket-service\src\main\resources\application.properties">
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\java\com\epam\training\ticketservice\service\ScreeningService.java">
+</file>
+<file name="D:\6. félév\java\ultimate\ticket-service-parent\ticket-service\src\main\resources\application.properties">
 </file>
 </checkstyle>

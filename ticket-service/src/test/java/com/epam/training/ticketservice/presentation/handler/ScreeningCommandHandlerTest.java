@@ -34,7 +34,6 @@ class ScreeningCommandHandlerTest {
 
 
     private final static String UNPRIVILIGED_MSG = "You are not signed in";
-    private final static String SCREENING_ADDED = "Screening added";
     private final static String SCREENING_UPDATED = "Screening updated";
     private final static String SCREENING_DELETED = "Screening deleted";
     private final static String INVALID_RUNTIME_MSG = "Runtime cannot be null";
@@ -74,7 +73,7 @@ class ScreeningCommandHandlerTest {
             throws OverlappingException,
             OverlappingInBreakException,
             RoomNotFoundException,
-            MovieNotFoundException {
+            MovieNotFoundException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
 
@@ -84,12 +83,11 @@ class ScreeningCommandHandlerTest {
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(screeningService, times(1)).createScreening(TITLE, NAME, FORMATTED_DATETIME);
-        assertThat(actualResult, equalTo(SCREENING_ADDED));
     }
 
     @Test
     void testCreateScreeningReturnErrorWhenAdminIsNotSignedIn()
-            throws OverlappingException, OverlappingInBreakException, RoomNotFoundException, MovieNotFoundException {
+            throws OverlappingException, OverlappingInBreakException, RoomNotFoundException, MovieNotFoundException, AdminAccountNotExistsException {
         // Given
         given(adminService.loggedAdmin()).willReturn(false);
 
@@ -106,7 +104,7 @@ class ScreeningCommandHandlerTest {
             throws OverlappingException,
             OverlappingInBreakException,
             MovieNotFoundException,
-            RoomNotFoundException {
+            RoomNotFoundException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
         doThrow(OVERLAPPING_EXCEPTION)
@@ -127,7 +125,7 @@ class ScreeningCommandHandlerTest {
             throws OverlappingException,
             OverlappingInBreakException,
             MovieNotFoundException,
-            RoomNotFoundException {
+            RoomNotFoundException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
         doThrow(OVERLAPPING_IN_BREAK_EXCEPTION)
@@ -148,7 +146,7 @@ class ScreeningCommandHandlerTest {
             throws OverlappingException,
             OverlappingInBreakException,
             MovieNotFoundException,
-            RoomNotFoundException {
+            RoomNotFoundException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
         doThrow(MOVIE_NOT_FOUND_EXCEPTION)
@@ -169,7 +167,7 @@ class ScreeningCommandHandlerTest {
             throws OverlappingException,
             OverlappingInBreakException,
             MovieNotFoundException,
-            RoomNotFoundException {
+            RoomNotFoundException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
         doThrow(ROOM_NOT_FOUND_EXCEPTION)
@@ -187,7 +185,7 @@ class ScreeningCommandHandlerTest {
 
     @Test
     void testDeleteScreeningShouldReturnDeletedScreening()
-            throws ScreeningNotFoundException {
+            throws ScreeningNotFoundException, AdminAccountNotExistsException {
         // Given
         given(adminService.loggedAdmin()).willReturn(true);
 
@@ -201,7 +199,7 @@ class ScreeningCommandHandlerTest {
 
     @Test
     void testDeleteScreeningShouldReturnUnsignedMessageWhenAdminIsNotLoggedIn()
-            throws ScreeningNotFoundException {
+            throws ScreeningNotFoundException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(false);
 

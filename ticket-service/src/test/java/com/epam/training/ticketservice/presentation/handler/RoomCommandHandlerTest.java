@@ -33,7 +33,6 @@ class RoomCommandHandlerTest {
 
 
     private final static String UNPRIVILIGED_MSG = "You are not signed in";
-    private final static String ROOM_ADDED = "Room added";
     private final static String ROOM_UPDATED = "Room updated";
     private final static String ROOM_DELETED = "Room deleted";
     private final static String INVALID_PARAMETER = "Room's rows and columns cannot be null";
@@ -60,9 +59,10 @@ class RoomCommandHandlerTest {
 
     @Test
     void testCreateRoomWhenAdminIsSignedIn()
-            throws RoomAlreadyExistsException, InvalidRoomParameterException {
+            throws RoomAlreadyExistsException, InvalidRoomParameterException, AdminAccountNotExistsException, RoomNotFoundException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
+        given(roomService.getRoom(NAME)).willReturn(room);
 
         // When
         String actualResult = roomCommandHandler.createRoom(NAME, ROWS, COLUMNS);
@@ -70,12 +70,12 @@ class RoomCommandHandlerTest {
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(roomService, times(1)).createRoom(NAME, ROWS, COLUMNS);
-        assertThat(actualResult, equalTo(ROOM_ADDED));
+        assertThat(actualResult, equalTo(room.toString()));
     }
 
     @Test
     void testCreateRoomReturnErrorWhenAdminIsNotSignedIn()
-            throws RoomAlreadyExistsException, InvalidRoomParameterException {
+            throws RoomAlreadyExistsException, InvalidRoomParameterException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(false);
 
@@ -89,7 +89,7 @@ class RoomCommandHandlerTest {
 
     @Test
     void testCreateRoomShouldReturnExceptionWhenRoomAlreadyExists()
-            throws RoomAlreadyExistsException, InvalidRoomParameterException {
+            throws RoomAlreadyExistsException, InvalidRoomParameterException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
         doThrow(ROOM_ALREADY_EXISTS_EXCEPTION)
@@ -107,7 +107,7 @@ class RoomCommandHandlerTest {
 
     @Test
     void testCreateRoomShouldReturnExceptionWhenRoomColumnsOrRowsIsInvalid()
-            throws RoomAlreadyExistsException, InvalidRoomParameterException {
+            throws RoomAlreadyExistsException, InvalidRoomParameterException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
         doThrow(INVALID_ROOM_PARAMETER_EXCEPTION)
@@ -138,7 +138,7 @@ class RoomCommandHandlerTest {
 
     @Test
     void testUpdateRoomWhenAdminIsSignedIn()
-            throws RoomNotFoundException, InvalidRoomParameterException {
+            throws RoomNotFoundException, InvalidRoomParameterException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
 
@@ -153,7 +153,7 @@ class RoomCommandHandlerTest {
 
     @Test
     void testUpdateRoomReturnErrorWhenAdminIsNotSignedIn()
-            throws RoomNotFoundException, InvalidRoomParameterException {
+            throws RoomNotFoundException, InvalidRoomParameterException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(false);
 
@@ -167,7 +167,7 @@ class RoomCommandHandlerTest {
 
     @Test
     void testUpdateRoomShouldReturnExceptionWhenRoomIsNotExist()
-            throws RoomNotFoundException, InvalidRoomParameterException {
+            throws RoomNotFoundException, InvalidRoomParameterException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
         doThrow(ROOM_NOT_FOUND_EXCEPTION)
@@ -185,7 +185,7 @@ class RoomCommandHandlerTest {
 
     @Test
     void testUpdateRoomShouldReturnExceptionWhenRowsOrColumnsIsInvalid()
-            throws InvalidRoomParameterException, RoomNotFoundException {
+            throws InvalidRoomParameterException, RoomNotFoundException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
         doThrow(INVALID_ROOM_PARAMETER_EXCEPTION)
@@ -203,7 +203,7 @@ class RoomCommandHandlerTest {
 
     @Test
     void testDeleteRoomWhenAdminIsSignedIn()
-            throws RoomNotFoundException, DeleteException {
+            throws RoomNotFoundException, DeleteException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
 
@@ -216,30 +216,10 @@ class RoomCommandHandlerTest {
         assertThat(actualResult, equalTo(ROOM_DELETED));
     }
 
-    @Test
-    void testDeleteRoomShouldReturnRoomNotFoundException() throws RoomNotFoundException, DeleteException {
-        Exception exception = null;
-        // Given
-        when(adminService.loggedAdmin()).thenReturn(true);
-        when(roomService.deleteRoom(anyString())).thenThrow(RoomNotFoundException.class);
-
-
-        // When
-        try {
-            adminService.loggedAdmin();
-            roomService.deleteRoom(NAME);
-        } catch (RoomNotFoundException e) {
-            exception = e;
-        }
-
-        // Then
-        assertNotNull(exception);
-
-    }
 
     @Test
     void testDeleteRoomReturnErrorWhenAdminIsNotSignedIn()
-            throws RoomNotFoundException {
+            throws RoomNotFoundException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(false);
 

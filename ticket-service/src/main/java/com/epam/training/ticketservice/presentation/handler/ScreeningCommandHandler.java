@@ -6,6 +6,7 @@ import com.epam.training.ticketservice.exceptions.OverlappingException;
 import com.epam.training.ticketservice.exceptions.OverlappingInBreakException;
 import com.epam.training.ticketservice.exceptions.MovieNotFoundException;
 import com.epam.training.ticketservice.exceptions.RoomNotFoundException;
+import com.epam.training.ticketservice.exceptions.AdminAccountNotExistsException;
 import com.epam.training.ticketservice.exceptions.ScreeningNotFoundException;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.ScreeningService;
@@ -29,30 +30,26 @@ public class ScreeningCommandHandler {
     }
 
     @ShellMethod(value = "Create a new screening", key = "create screening")
-    public String createScreening(String movieTitle, String roomName, String startDateTime)
-            throws OverlappingException, MovieNotFoundException,
-            RoomNotFoundException, OverlappingInBreakException {
+    public String createScreening(String movieTitle, String roomName, String startDateTime) {
 
-        String result;
+        String result = "";
         try {
             if (adminService.loggedAdmin()) {
                 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 screeningService.createScreening(movieTitle, roomName,
                         LocalDateTime.parse(startDateTime, dateTimeFormatter));
-                result = "Screening added";
             } else {
                 result = "You are not signed in";
             }
         } catch (OverlappingException | RoomNotFoundException
-                | MovieNotFoundException | OverlappingInBreakException e) {
+                | MovieNotFoundException | OverlappingInBreakException | AdminAccountNotExistsException e) {
             result = e.getMessage();
         }
         return result;
     }
 
     @ShellMethod(value = "Delete a new screening", key = "delete screening")
-    public String deleteScreening(String movieTitle, String roomName, String startDateTime)
-            throws ScreeningNotFoundException {
+    public String deleteScreening(String movieTitle, String roomName, String startDateTime) {
 
         String result;
         try {
@@ -64,7 +61,7 @@ public class ScreeningCommandHandler {
             } else {
                 result = "You are not signed in";
             }
-        } catch (ScreeningNotFoundException e) {
+        } catch (ScreeningNotFoundException | AdminAccountNotExistsException e) {
             result = e.getMessage();
         }
         return result;

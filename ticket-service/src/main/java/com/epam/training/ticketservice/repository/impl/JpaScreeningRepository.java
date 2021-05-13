@@ -40,7 +40,7 @@ public class JpaScreeningRepository implements ScreeningRepository {
                         && currentScreening.getRoomEntity().getName().equals(roomName)
                         && currentScreening.getDateTime().equals(startDateTime))
                 .findFirst()
-                .orElseThrow(() -> new ScreeningNotFoundException("There is no such screening"));
+                .orElseThrow(() -> new ScreeningNotFoundException("There are no screenings"));
         screeningDao.delete(screeningEntity);
     }
 

@@ -34,12 +34,6 @@ class JpaAdminRepositoryTest {
     private static final AdminEntity ADMIN_ENTITY = new AdminEntity(NAME, PASSWORD, false);
 
 
-    private Admin mapAdmin(AdminEntity adminEntity) {
-        return new Admin(adminEntity.getName(),
-                adminEntity.getPassword(),
-                adminEntity.isPriviliged());
-    }
-
     @Test
     public void testGetAdminByNameShouldReturnsExceptionWhenAccountNotFound()
             throws AdminAccountNotExistsException {

@@ -31,7 +31,6 @@ class MovieCommandHandlerTest {
 
 
     private final static String UNPRIVILIGED_MSG = "You are not signed in";
-    private final static String MOVIE_ADDED = "Movie added";
     private final static String MOVIE_UPDATED = "Movie updated";
     private final static String MOVIE_DELETED = "Movie deleted";
     private final static String INVALID_RUNTIME_MSG = "Runtime cannot be null";
@@ -57,9 +56,10 @@ class MovieCommandHandlerTest {
 
     @Test
     void testCreateMovieWhenAdminIsSignedIn()
-            throws MovieAlreadyExistsException, InvalidRuntimeException {
+            throws MovieAlreadyExistsException, InvalidRuntimeException, AdminAccountNotExistsException, MovieNotFoundException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
+        given(movieService.getMovie(TITLE)).willReturn(movie);
 
         // When
         String actualResult = movieCommandHandler.createMovie(TITLE, GENRE, RUNTIME);
@@ -67,11 +67,11 @@ class MovieCommandHandlerTest {
         // Then
         verify(adminService, times(1)).loggedAdmin();
         verify(movieService, times(1)).addMovie(TITLE, GENRE, RUNTIME);
-        assertThat(actualResult, equalTo(MOVIE_ADDED));
+        assertThat(actualResult, equalTo(movie.toString()));
     }
 
     @Test
-    void testCreateMovieReturnErrorWhenAdminIsNotSignedIn() throws MovieAlreadyExistsException, InvalidRuntimeException {
+    void testCreateMovieReturnErrorWhenAdminIsNotSignedIn() throws MovieAlreadyExistsException, InvalidRuntimeException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(false);
 
@@ -84,7 +84,7 @@ class MovieCommandHandlerTest {
     }
 
     @Test
-    void testCreateMovieShouldReturnExceptionWhenMovieAlreadyExists() throws MovieAlreadyExistsException, InvalidRuntimeException {
+    void testCreateMovieShouldReturnExceptionWhenMovieAlreadyExists() throws MovieAlreadyExistsException, InvalidRuntimeException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
         doThrow(MOVIE_ALREADY_EXISTS_EXCEPTION)
@@ -102,7 +102,7 @@ class MovieCommandHandlerTest {
 
     @Test
     void testCreateMovieShouldReturnExceptionWhenMovieRuntimeIsInvalid()
-            throws MovieAlreadyExistsException, InvalidRuntimeException {
+            throws MovieAlreadyExistsException, InvalidRuntimeException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
         doThrow(INVALID_RUNTIME_EXCEPTION)
@@ -133,7 +133,7 @@ class MovieCommandHandlerTest {
 
     @Test
     void testUpdateMovieWhenAdminIsSignedIn()
-            throws MovieAlreadyExistsException, InvalidRuntimeException, MovieNotFoundException {
+            throws MovieAlreadyExistsException, InvalidRuntimeException, MovieNotFoundException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
 
@@ -147,7 +147,7 @@ class MovieCommandHandlerTest {
     }
 
     @Test
-    void testUpdateMovieReturnErrorWhenAdminIsNotSignedIn() throws InvalidRuntimeException, MovieNotFoundException {
+    void testUpdateMovieReturnErrorWhenAdminIsNotSignedIn() throws InvalidRuntimeException, MovieNotFoundException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(false);
 
@@ -160,7 +160,7 @@ class MovieCommandHandlerTest {
     }
 
     @Test
-    void testUpdateMovieShouldReturnExceptionWhenMovieIsNotExist() throws InvalidRuntimeException, MovieNotFoundException {
+    void testUpdateMovieShouldReturnExceptionWhenMovieIsNotExist() throws InvalidRuntimeException, MovieNotFoundException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
         doThrow(MOVIE_NOT_FOUND_EXCEPTION)
@@ -177,7 +177,7 @@ class MovieCommandHandlerTest {
     }
 
     @Test
-    void testUpdateMovieShouldReturnExceptionWhenRuntimeIsInvalid() throws InvalidRuntimeException, MovieNotFoundException {
+    void testUpdateMovieShouldReturnExceptionWhenRuntimeIsInvalid() throws InvalidRuntimeException, MovieNotFoundException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
         doThrow(INVALID_RUNTIME_EXCEPTION)
@@ -195,7 +195,7 @@ class MovieCommandHandlerTest {
 
     @Test
     void testDeleteMovieWhenAdminIsSignedIn()
-            throws MovieNotFoundException, DeleteException {
+            throws MovieNotFoundException, DeleteException, AdminAccountNotExistsException {
         // Given
         when(adminService.loggedAdmin()).thenReturn(true);
 
@@ -210,7 +210,7 @@ class MovieCommandHandlerTest {
 
     @Test
     void testDeleteMovieReturnErrorWhenAdminIsNotSignedIn()
-            throws MovieNotFoundException, DeleteException {
+            throws MovieNotFoundException, DeleteException, AdminAccountNotExistsException {
 
         // Given
         when(adminService.loggedAdmin()).thenReturn(false);

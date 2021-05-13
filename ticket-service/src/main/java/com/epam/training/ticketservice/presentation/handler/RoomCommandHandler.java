@@ -2,12 +2,13 @@ package com.epam.training.ticketservice.presentation.handler;
 
 
 import com.epam.training.ticketservice.domain.Room;
-import com.epam.training.ticketservice.exceptions.DeleteException;
+import com.epam.training.ticketservice.exceptions.RoomNotFoundException;
 import com.epam.training.ticketservice.exceptions.InvalidRoomParameterException;
+import com.epam.training.ticketservice.exceptions.AdminAccountNotExistsException;
+import com.epam.training.ticketservice.exceptions.RoomAlreadyExistsException;
+import com.epam.training.ticketservice.exceptions.DeleteException;
 import com.epam.training.ticketservice.service.AdminService;
 import com.epam.training.ticketservice.service.RoomService;
-import com.epam.training.ticketservice.exceptions.RoomAlreadyExistsException;
-import com.epam.training.ticketservice.exceptions.RoomNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -26,26 +27,25 @@ public class RoomCommandHandler {
     }
 
     @ShellMethod(value = "Create a new room", key = "create room")
-    public String createRoom(String name, int rows, int columns)
-            throws RoomAlreadyExistsException, InvalidRoomParameterException {
+    public String createRoom(String name, int rows, int columns) {
 
-        String result;
+        String result = "";
         try {
             if (adminService.loggedAdmin()) {
                 roomService.createRoom(name, rows, columns);
-                result = "Room added";
+                result = roomService.getRoom(name).toString();
             } else {
                 result = "You are not signed in";
             }
-        } catch (RoomAlreadyExistsException | InvalidRoomParameterException e) {
+        } catch (RoomAlreadyExistsException | InvalidRoomParameterException
+                | AdminAccountNotExistsException | RoomNotFoundException e) {
             result = e.getMessage();
         }
         return result;
     }
 
     @ShellMethod(value = "Update a room", key = "update room")
-    public String updateRoom(String name, int rows, int columns)
-            throws RoomNotFoundException, InvalidRoomParameterException {
+    public String updateRoom(String name, int rows, int columns) {
 
         String result;
         try {
@@ -55,7 +55,7 @@ public class RoomCommandHandler {
             } else {
                 result = "You are not signed in";
             }
-        } catch (RoomNotFoundException | InvalidRoomParameterException e) {
+        } catch (RoomNotFoundException | InvalidRoomParameterException | AdminAccountNotExistsException e) {
             result = e.getMessage();
         }
         return result;
@@ -72,7 +72,7 @@ public class RoomCommandHandler {
             } else {
                 result = "You are not signed in";
             }
-        } catch (RoomNotFoundException | DeleteException e) {
+        } catch (RoomNotFoundException | DeleteException | AdminAccountNotExistsException e) {
             result = e.getMessage();
         }
         return result;

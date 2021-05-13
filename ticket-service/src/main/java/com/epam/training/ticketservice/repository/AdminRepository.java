@@ -7,5 +7,5 @@ public interface AdminRepository {
 
     Admin getAdminByName(String name) throws AdminAccountNotExistsException;
 
-    void updatePriviliged(String name, boolean priviliged);
+    void updatePrivileged(String name, boolean priviliged);
 }

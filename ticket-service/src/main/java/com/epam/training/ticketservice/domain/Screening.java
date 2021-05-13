@@ -31,7 +31,7 @@ public class Screening {
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return movie.getTitle() + " ("
                 + movie.getGenre() + ", "
                 + movie.getRuntime() + " minutes), "

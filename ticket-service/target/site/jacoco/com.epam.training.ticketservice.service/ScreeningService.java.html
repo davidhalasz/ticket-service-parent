@@ -70,9 +70,9 @@ public class ScreeningService {
 <span class="nc" id="L70">                .anyMatch(screening -&gt; {</span>
 <span class="nc" id="L71">                    LocalDateTime screeningStart = screening.getStartDate();</span>
 <span class="nc" id="L72">                    LocalDateTime screeningEnd = screening.getStartDate()</span>
-<span class="nc" id="L73">                            .plusMinutes((screening.getMovie().getRuntime()) + 10);</span>
-<span class="nc bnc" id="L74" title="All 2 branches missed.">                    return isWithinRange(screeningStart, screeningEnd, startDateTime)</span>
-<span class="nc bnc" id="L75" title="All 2 branches missed.">                            || isWithinRange(screeningStart, screeningEnd, endDateTime);</span>
+<span class="nc" id="L73">                            .plusMinutes((screening.getMovie().getRuntime()));</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">                    return isWithinRange(screeningStart, screeningEnd, startDateTime.plusMinutes(-10))</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">                            || isWithinRange(screeningStart, screeningEnd, endDateTime.plusMinutes(10));</span>
 
                 });
     }

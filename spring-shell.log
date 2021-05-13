@@ -422,3 +422,32 @@
 1620469544697:create screening alma ro "2021-05-05 10:00"
 1620469550750:delete room ro
 1620469574668:exit
+1620471819671:sign in priviliged admin admin
+1620471825471:create room ro 10 10
+1620471830961:create movie alma al 120
+1620471848934:create screening alma ro "2021-05-05 10:00"
+1620471854224:delete room ro
+1620907123357:sign in priviliged admin admin
+1620907126743:exit
+1620909810074:describe account
+1620909830238:sign in priviliged admin admin
+1620909841677:sign in privileged admin admin
+1620909848961:describe account
+1620909857218:sign out
+1620909866547:describe account
+1620909888194:exit
+1620910197801:describe account
+1620910219326:sign in privilegedaccount admin admin
+1620910232141:sign in privileged account admin admin
+1620910245230:sign in privileged admin admin
+1620910254767:describe account
+1620910261855:sign out
+1620910272361:describe account
+1620910932949:sign in privileged admin admin
+1620910958346:describe account
+1620910962574:sign out
+1620910967590:describe account
+1620910972363:exit
+1620913966873:sign in privileged admin admin
+1620913992612:delete screening movie al "2021-05-05 10:00"
+1620914002141:exit

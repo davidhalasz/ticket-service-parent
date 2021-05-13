@@ -38,18 +38,23 @@ public class RoomService {
         roomRepository.updateRoom(name, rows, columns);
     }
 
-    public Room deleteRoom(String name) throws RoomNotFoundException, DeleteException {
+    public void deleteRoom(String name) throws RoomNotFoundException, DeleteException {
         List<Screening> screenings = screeningRepository.getAllScreenings();
         Screening screening = screenings.stream()
                 .filter(currentScreening -> currentScreening.getRoom().getName().equals(name))
                 .findFirst()
                 .orElse(null);
-        if(screening != null) {
+        if (screening != null) {
             throw new DeleteException("You cannot delete this room because there is a screening in this room.");
         }
-        return roomRepository.deleteRoom(name);
+        roomRepository.deleteRoom(name);
     }
+
     public List<Room> getAllRooms() {
         return roomRepository.getAllRooms();
+    }
+
+    public Room getRoom(String name) throws RoomNotFoundException {
+        return roomRepository.getRoomByName(name);
     }
 }

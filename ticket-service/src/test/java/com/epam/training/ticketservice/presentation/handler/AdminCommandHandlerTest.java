@@ -27,9 +27,8 @@ class AdminCommandHandlerTest {
 
     private final static String NAME = "admin";
     private final static String PASSWORD = "pasw";
-    private final static String SUCCES_SIGN_IN = "Signed in with privileged account " + NAME;
+    private final static String SUCCES_SIGN_IN = "Signed in with privileged account '" + NAME +"'";
     private final static String FAIL_SIGN_IN = null;
-    private final static String LOGOUT = "Logged out";
 
     @Test
     void testAdminLoginIsSuccessfulWhenLogInWhitCorrectNameAndPassword()
@@ -48,7 +47,7 @@ class AdminCommandHandlerTest {
     }
 
     @Test
-    void testAdminLoginReturnExceptionWhenLogInWhitInorrectName()
+    void testAdminLoginReturnExceptionWhenLogInWhitIncorrectName()
             throws AdminAccountNotExistsException, InvalidPasswordException {
         //When
         doThrow(AdminAccountNotExistsException.class)

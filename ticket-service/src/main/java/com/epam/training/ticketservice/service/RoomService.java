@@ -39,14 +39,17 @@ public class RoomService {
     }
 
     public void deleteRoom(String name) throws RoomNotFoundException, DeleteException {
+        /*
         List<Screening> screenings = screeningRepository.getAllScreenings();
         Screening screening = screenings.stream()
                 .filter(currentScreening -> currentScreening.getRoom().getName().equals(name))
                 .findFirst()
                 .orElse(null);
+
         if (screening != null) {
             throw new DeleteException("You cannot delete this room because there is a screening in this room.");
         }
+         */
         roomRepository.deleteRoom(name);
     }
 

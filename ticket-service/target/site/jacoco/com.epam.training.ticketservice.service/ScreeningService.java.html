@@ -68,29 +68,33 @@ public class ScreeningService {
 <span class="nc" id="L68">        return screeningRepository.getAllScreenings().stream()</span>
 <span class="nc" id="L69">                .filter(screening -&gt; screening.getRoom().getName().equals(roomName))</span>
 <span class="nc" id="L70">                .anyMatch(screening -&gt; {</span>
-<span class="nc" id="L71">                    LocalDateTime screeningStart = screening.getStartDate();</span>
+<span class="nc" id="L71">                    LocalDateTime screeningStart = screening.getStartDate().plusMinutes(10);</span>
 <span class="nc" id="L72">                    LocalDateTime screeningEnd = screening.getStartDate()</span>
-<span class="nc" id="L73">                            .plusMinutes((screening.getMovie().getRuntime()));</span>
-<span class="nc bnc" id="L74" title="All 2 branches missed.">                    return isWithinRange(screeningStart, screeningEnd, startDateTime.plusMinutes(-10))</span>
-<span class="nc bnc" id="L75" title="All 2 branches missed.">                            || isWithinRange(screeningStart, screeningEnd, endDateTime.plusMinutes(10));</span>
-
+<span class="nc" id="L73">                            .plusMinutes((screening.getMovie().getRuntime())).plusMinutes(10);</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">                    return checkBreakTime(screeningStart, screeningEnd, startDateTime)</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">                            || checkBreakTime(screeningStart, screeningEnd, endDateTime);</span>
                 });
     }
 
     public boolean isWithinRange(LocalDateTime startDate, LocalDateTime endDate, LocalDateTime checkStartDateTime) {
 
-<span class="nc bnc" id="L82" title="All 4 branches missed.">        return (checkStartDateTime.isEqual(startDate) || checkStartDateTime.isEqual(endDate))</span>
-<span class="nc bnc" id="L83" title="All 4 branches missed.">                || (checkStartDateTime.isBefore(endDate) &amp;&amp; checkStartDateTime.isAfter(startDate));</span>
+<span class="nc bnc" id="L81" title="All 4 branches missed.">        return (checkStartDateTime.isEqual(startDate) || checkStartDateTime.isEqual(endDate))</span>
+<span class="nc bnc" id="L82" title="All 4 branches missed.">                || (checkStartDateTime.isBefore(endDate) &amp;&amp; checkStartDateTime.isAfter(startDate));</span>
+    }
+
+    private boolean checkBreakTime(LocalDateTime startDate, LocalDateTime endDate,
+                                            LocalDateTime checkDateTime) {
+<span class="nc bnc" id="L87" title="All 4 branches missed.">        return checkDateTime.isAfter(startDate) &amp;&amp; checkDateTime.isBefore(endDate);</span>
     }
 
     public void deleteScreening(String movieTitle, String roomName, LocalDateTime startDateTime)
             throws ScreeningNotFoundException {
 
-<span class="nc" id="L89">        screeningRepository.deleteScreening(movieTitle, roomName, startDateTime);</span>
-<span class="nc" id="L90">    }</span>
+<span class="nc" id="L93">        screeningRepository.deleteScreening(movieTitle, roomName, startDateTime);</span>
+<span class="nc" id="L94">    }</span>
 
     public List&lt;Screening&gt; getAllScreenings() {
-<span class="fc" id="L93">        return screeningRepository.getAllScreenings();</span>
+<span class="fc" id="L97">        return screeningRepository.getAllScreenings();</span>
     }
 
 

@@ -44,15 +44,18 @@ public class MovieService {
     }
 
     public void deleteMovie(String title) throws MovieNotFoundException, DeleteException {
+        /*
         List<Screening> screenings = screeningRepository.getAllScreenings();
         Screening screening = screenings.stream()
                 .filter(currentScreening -> currentScreening.getMovie().getTitle().equals(title))
                 .findFirst()
                 .orElse(null);
+
         if (screening != null) {
             throw new DeleteException("You cannot delete this movie "
                     + "because there is a screening with title like this.");
         }
+         */
         movieRepository.deleteMovie(title);
     }
 

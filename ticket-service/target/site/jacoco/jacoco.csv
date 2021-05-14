@@ -9,13 +9,13 @@ ticket-service,com.epam.training.ticketservice.repository.impl,JpaAdminRepositor
 ticket-service,com.epam.training.ticketservice.repository.impl,JpaMovieRepository,27,104,3,9,5,27,4,10,1,7
 ticket-service,com.epam.training.ticketservice.repository.impl,JpaScreeningRepository,45,35,6,0,8,7,6,4,3,4
 ticket-service,com.epam.training.ticketservice.presentation.handler,AdminCommandHandler,27,30,2,0,9,11,3,3,2,3
-ticket-service,com.epam.training.ticketservice.presentation.handler,ScreeningCommandHandler,4,94,0,8,2,32,0,9,0,5
+ticket-service,com.epam.training.ticketservice.presentation.handler,ScreeningCommandHandler,4,97,0,8,2,33,0,9,0,5
 ticket-service,com.epam.training.ticketservice.presentation.handler,MovieCommandHandler,4,111,0,10,2,35,0,11,0,6
 ticket-service,com.epam.training.ticketservice.presentation.handler,RoomCommandHandler,4,110,0,10,2,35,0,11,0,6
 ticket-service,com.epam.training.ticketservice.exceptions,MovieAlreadyExistsException,0,4,0,0,0,2,0,1,0,1
 ticket-service,com.epam.training.ticketservice.exceptions,MovieNotFoundException,0,4,0,0,0,2,0,1,0,1
 ticket-service,com.epam.training.ticketservice.exceptions,RoomNotFoundException,0,4,0,0,0,2,0,1,0,1
-ticket-service,com.epam.training.ticketservice.exceptions,DeleteException,0,4,0,0,0,2,0,1,0,1
+ticket-service,com.epam.training.ticketservice.exceptions,DeleteException,4,0,0,0,2,0,1,0,1,0
 ticket-service,com.epam.training.ticketservice.exceptions,AdminAccountNotExistsException,0,4,0,0,0,2,0,1,0,1
 ticket-service,com.epam.training.ticketservice.exceptions,OverlappingException,0,4,0,0,0,2,0,1,0,1
 ticket-service,com.epam.training.ticketservice.exceptions,AdminIsNotLoggedInException,0,4,0,0,0,2,0,1,0,1
@@ -25,7 +25,7 @@ ticket-service,com.epam.training.ticketservice.exceptions,InvalidPasswordExcepti
 ticket-service,com.epam.training.ticketservice.exceptions,InvalidRuntimeException,0,4,0,0,0,2,0,1,0,1
 ticket-service,com.epam.training.ticketservice.exceptions,ScreeningNotFoundException,0,4,0,0,0,2,0,1,0,1
 ticket-service,com.epam.training.ticketservice.exceptions,OverlappingInBreakException,0,4,0,0,0,2,0,1,0,1
-ticket-service,com.epam.training.ticketservice.domain,Screening,21,42,0,0,8,14,3,4,3,4
+ticket-service,com.epam.training.ticketservice.domain,Screening,27,36,0,0,10,12,5,2,5,2
 ticket-service,com.epam.training.ticketservice.domain,Room,0,34,0,0,0,9,0,5,0,5
 ticket-service,com.epam.training.ticketservice.domain,Movie,0,29,0,0,0,9,0,5,0,5
 ticket-service,com.epam.training.ticketservice.domain,Admin,11,18,0,0,2,7,2,3,2,3
@@ -34,7 +34,7 @@ ticket-service,com.epam.training.ticketservice.presentation,TicketServicePromptP
 ticket-service,com.epam.training.ticketservice.dataaccess.init,AdminInitializer,19,0,0,0,6,0,2,0,2,0
 ticket-service,com.epam.training.ticketservice.presentation.configuration,CliConfiguration,3,0,0,0,1,0,1,0,1,0
 ticket-service,com.epam.training.ticketservice.dataaccess.configuration,JpaConfiguration,3,0,0,0,1,0,1,0,1,0
-ticket-service,com.epam.training.ticketservice.service,MovieService,11,63,0,2,3,18,1,8,1,7
+ticket-service,com.epam.training.ticketservice.service,MovieService,11,36,0,0,3,11,1,6,1,6
 ticket-service,com.epam.training.ticketservice.service,AdminService,23,60,2,4,6,16,2,6,1,4
-ticket-service,com.epam.training.ticketservice.service,ScreeningService,165,25,20,0,28,4,18,4,8,4
-ticket-service,com.epam.training.ticketservice.service,RoomService,18,57,0,2,5,16,2,7,2,6
+ticket-service,com.epam.training.ticketservice.service,ScreeningService,177,25,24,0,29,4,21,4,9,4
+ticket-service,com.epam.training.ticketservice.service,RoomService,24,24,0,0,7,7,3,4,3,4

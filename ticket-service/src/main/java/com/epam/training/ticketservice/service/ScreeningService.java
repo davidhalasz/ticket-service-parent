@@ -68,12 +68,11 @@ public class ScreeningService {
         return screeningRepository.getAllScreenings().stream()
                 .filter(screening -> screening.getRoom().getName().equals(roomName))
                 .anyMatch(screening -> {
-                    LocalDateTime screeningStart = screening.getStartDate();
+                    LocalDateTime screeningStart = screening.getStartDate().plusMinutes(10);
                     LocalDateTime screeningEnd = screening.getStartDate()
-                            .plusMinutes((screening.getMovie().getRuntime()));
-                    return isWithinRange(screeningStart, screeningEnd, startDateTime.plusMinutes(-10))
-                            || isWithinRange(screeningStart, screeningEnd, endDateTime.plusMinutes(10));
-
+                            .plusMinutes((screening.getMovie().getRuntime())).plusMinutes(10);
+                    return checkBreakTime(screeningStart, screeningEnd, startDateTime)
+                            || checkBreakTime(screeningStart, screeningEnd, endDateTime);
                 });
     }
 
@@ -81,6 +80,11 @@ public class ScreeningService {
 
         return (checkStartDateTime.isEqual(startDate) || checkStartDateTime.isEqual(endDate))
                 || (checkStartDateTime.isBefore(endDate) && checkStartDateTime.isAfter(startDate));
+    }
+
+    private boolean checkBreakTime(LocalDateTime startDate, LocalDateTime endDate,
+                                            LocalDateTime checkDateTime) {
+        return checkDateTime.isAfter(startDate) && checkDateTime.isBefore(endDate);
     }
 
     public void deleteScreening(String movieTitle, String roomName, LocalDateTime startDateTime)

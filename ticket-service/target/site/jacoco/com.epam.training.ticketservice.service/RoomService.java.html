@@ -39,23 +39,26 @@ public class RoomService {
 <span class="nc" id="L39">    }</span>
 
     public void deleteRoom(String name) throws RoomNotFoundException, DeleteException {
-<span class="fc" id="L42">        List&lt;Screening&gt; screenings = screeningRepository.getAllScreenings();</span>
-<span class="fc" id="L43">        Screening screening = screenings.stream()</span>
-<span class="fc" id="L44">                .filter(currentScreening -&gt; currentScreening.getRoom().getName().equals(name))</span>
-<span class="fc" id="L45">                .findFirst()</span>
-<span class="fc" id="L46">                .orElse(null);</span>
-<span class="fc bfc" id="L47" title="All 2 branches covered.">        if (screening != null) {</span>
-<span class="fc" id="L48">            throw new DeleteException(&quot;You cannot delete this room because there is a screening in this room.&quot;);</span>
+        /*
+        List&lt;Screening&gt; screenings = screeningRepository.getAllScreenings();
+        Screening screening = screenings.stream()
+                .filter(currentScreening -&gt; currentScreening.getRoom().getName().equals(name))
+                .findFirst()
+                .orElse(null);
+
+        if (screening != null) {
+            throw new DeleteException(&quot;You cannot delete this room because there is a screening in this room.&quot;);
         }
-<span class="fc" id="L50">        roomRepository.deleteRoom(name);</span>
-<span class="fc" id="L51">    }</span>
+         */
+<span class="nc" id="L53">        roomRepository.deleteRoom(name);</span>
+<span class="nc" id="L54">    }</span>
 
     public List&lt;Room&gt; getAllRooms() {
-<span class="fc" id="L54">        return roomRepository.getAllRooms();</span>
+<span class="fc" id="L57">        return roomRepository.getAllRooms();</span>
     }
 
     public Room getRoom(String name) throws RoomNotFoundException {
-<span class="nc" id="L58">        return roomRepository.getRoomByName(name);</span>
+<span class="nc" id="L61">        return roomRepository.getRoomByName(name);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

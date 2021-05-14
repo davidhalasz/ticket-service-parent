@@ -44,20 +44,23 @@ public class MovieService {
 <span class="fc" id="L44">    }</span>
 
     public void deleteMovie(String title) throws MovieNotFoundException, DeleteException {
-<span class="fc" id="L47">        List&lt;Screening&gt; screenings = screeningRepository.getAllScreenings();</span>
-<span class="fc" id="L48">        Screening screening = screenings.stream()</span>
-<span class="fc" id="L49">                .filter(currentScreening -&gt; currentScreening.getMovie().getTitle().equals(title))</span>
-<span class="fc" id="L50">                .findFirst()</span>
-<span class="fc" id="L51">                .orElse(null);</span>
-<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (screening != null) {</span>
-<span class="fc" id="L53">            throw new DeleteException(&quot;You cannot delete this movie &quot;</span>
+        /*
+        List&lt;Screening&gt; screenings = screeningRepository.getAllScreenings();
+        Screening screening = screenings.stream()
+                .filter(currentScreening -&gt; currentScreening.getMovie().getTitle().equals(title))
+                .findFirst()
+                .orElse(null);
+
+        if (screening != null) {
+            throw new DeleteException(&quot;You cannot delete this movie &quot;
                     + &quot;because there is a screening with title like this.&quot;);
         }
-<span class="fc" id="L56">        movieRepository.deleteMovie(title);</span>
-<span class="fc" id="L57">    }</span>
+         */
+<span class="fc" id="L59">        movieRepository.deleteMovie(title);</span>
+<span class="fc" id="L60">    }</span>
 
     public Movie getMovie(String title) throws MovieNotFoundException {
-<span class="nc" id="L60">        return movieRepository.getMovieByTitle(title);</span>
+<span class="nc" id="L63">        return movieRepository.getMovieByTitle(title);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

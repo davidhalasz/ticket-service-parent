@@ -451,3 +451,7 @@
 1620913966873:sign in privileged admin admin
 1620913992612:delete screening movie al "2021-05-05 10:00"
 1620914002141:exit
+1620936821590:create room al 10 10
+1620936833002:sign in privileged admin admin
+1620936840671:describe account
+1620936853619:exit

@@ -42,7 +42,8 @@ public class ScreeningCommandHandler {
                 result = "You are not signed in";
             }
         } catch (OverlappingException | RoomNotFoundException
-                | MovieNotFoundException | OverlappingInBreakException | AdminAccountNotExistsException e) {
+                | MovieNotFoundException | OverlappingInBreakException
+                | AdminAccountNotExistsException e) {
             result = e.getMessage();
         }
         return result;
@@ -69,15 +70,16 @@ public class ScreeningCommandHandler {
 
     @ShellMethod(value = "List all new screening", key = "list screenings")
     public String listScreenings()  {
-
+        String result;
         StringBuilder builder = new StringBuilder();
         if (screeningService.getAllScreenings().isEmpty()) {
-            return "There are no screenings";
+            result = "There are no screenings";
         } else {
             for (Screening screening : screeningService.getAllScreenings()) {
                 builder.append(screening);
             }
-            return builder.toString();
+            result = builder.toString();
         }
+        return result;
     }
 }
